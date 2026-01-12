@@ -75,6 +75,7 @@ export const Header = () => {
                         exit={{ opacity: 0, y: -20 }}
                         className="md:hidden fixed top-24 left-4 right-4 bg-white/95 backdrop-blur-xl border border-black/10 rounded-2xl z-[120] p-6 shadow-2xl text-black"
                     >
+                        
                         <nav className="flex flex-col items-start gap-4 font-sans text-lg uppercase font-bold tracking-wider">
                             <Link href="/catalog" onClick={() => setIsMenuOpen(false)} className="w-full py-2 border-b border-gray-100">Catalog</Link>
                             <Link href="/shop/hoodies" onClick={() => setIsMenuOpen(false)} className="w-full py-2 border-b border-gray-100">Hoodies</Link>
@@ -88,3 +89,4 @@ export const Header = () => {
         </>
     );
 };
+
