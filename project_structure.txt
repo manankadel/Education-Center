@@ -1,0 +1,144 @@
+.gitignore
+README.md
+code_dump.txt
+dump_project.py
+eslint.config.mjs
+middleware.ts
+next.config.mjs
+package.json
+postcss.config.mjs
+project_structure.txt
+public/
+  assets/
+    audio/
+  audio/
+    typing.wav
+src/
+  app/
+    (main)/
+      account/
+        addresses/
+          page.tsx
+        layout.tsx
+        login/
+          page.tsx
+        orders/
+          [id]/
+            page.tsx
+          [id]~491283e907dd18cbc4530c065275389f64fae78f
+          page.tsx
+        page.tsx
+        profile/
+          page.tsx
+      cart/
+        page.tsx
+      catalog/
+        page.tsx
+      home/
+        page.tsx
+      layout.tsx
+      login/
+        page.tsx
+      privacy/
+        page.tsx
+      products/
+        [handle]/
+          page.tsx
+      reach-out/
+        page.tsx
+      refunds/
+        page.tsx
+      shipping/
+        page.tsx
+      terms/
+        page.tsx
+    api/
+      access/
+        route.ts
+      account/
+        addAddress/
+          route.ts
+        updateProfile/
+          route.ts
+      auth/
+        login/
+          route.ts
+        logout/
+          route.ts
+        register/
+          route.ts
+      contact/
+        route.ts
+      waitlist/
+        route.ts
+    fonts.ts
+    globals.css
+    layout.tsx
+    page.tsx
+  assets/
+    fonts/
+  components/
+    core/
+      AppHeightProvider.tsx
+      AtmosphericBackground.tsx
+      BackgroundMusicPlayer.tsx
+      ElementalGradient.tsx
+      FloatingParticlesBackground.tsx
+      Footer.tsx
+      FullScreenImageViewer.tsx
+      GlitchTextureBackground.tsx
+      GlobalSoundEffects.tsx
+      Header.tsx
+      InteractiveLiquidBackground.tsx
+      LiquidGradient.tsx
+      LiquidGrainBackground.tsx
+      MotionPermissionPrompt.tsx
+      PolicyPageLayout.tsx
+      SubtleSmokeBackground.tsx
+    modules/
+      CountdownTimer.tsx
+      GatewayAnimation.tsx
+      WaitlistForm.tsx
+      account/
+        Addresses.tsx
+        LoginRegister.tsx
+        OrderDetails.tsx
+        OrderHistory.tsx
+        ProfileDetails.tsx
+      auth/
+        AuthForm.tsx
+      catalog/
+        CatalogClientWrapper.tsx
+        CatalogControls.tsx
+        GridView.tsx
+        ImmersiveView.tsx
+        ProductMonolith.tsx
+        Viewfinder.tsx
+      glitch/
+        GlitchCanvas.tsx
+      homepage/
+        BrandManifesto.tsx
+        FeaturedProducts.tsx
+        GlitchMarquee.tsx
+        HeroSection.tsx
+        InteractiveMarquee.tsx
+      products/
+        InteractiveProductCard.tsx
+        ProductCard.tsx
+        ProductDetails.tsx
+  hooks/
+    useCartNotification.tsx
+    useGyroscope.ts
+    useMediaQuery.ts
+    useSound.ts
+  lib/
+    constants.ts
+    shopify.ts
+    utils/
+      formatPrice.ts
+  middleware.ts
+  types/
+    global.d.ts
+    shopify.d.ts
+tailwind.config.ts
+tsconfig.json
