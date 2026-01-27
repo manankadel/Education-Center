@@ -12,13 +12,7 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'wantsandneeds.com', // <--- ADDED THIS
-        port: '',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'cdn.jsdelivr.net',
+        hostname: 'wantsandneeds.com',
         port: '',
         pathname: '/**',
       },

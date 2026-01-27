@@ -1,10 +1,7 @@
 {
   "/page": "app/page.js",
-  "/(main)/home/page": "app/(main)/home/page.js",
-  "/(main)/reach-out/page": "app/(main)/reach-out/page.js",
-  "/(main)/shop/[category]/page": "app/(main)/shop/[category]/page.js",
   "/(main)/catalog/page": "app/(main)/catalog/page.js",
-  "/(main)/track-order/page": "app/(main)/track-order/page.js",
-  "/(main)/login/page": "app/(main)/login/page.js",
-  "/(main)/products/[handle]/page": "app/(main)/products/[handle]/page.js"
+  "/(main)/home/page": "app/(main)/home/page.js",
+  "/(main)/shop/[category]/page": "app/(main)/shop/[category]/page.js",
+  "/icon.png/route": "app/icon.png/route.js"
 }

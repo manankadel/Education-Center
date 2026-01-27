@@ -1,49 +1,23 @@
 
 
+### ./.env.local ###
+
+# --- SECURITY (Required for the password gate to work) ---
+SITE_ACCESS_PASSWORD=12345677
+SESSION_SECRET=pitch_demo_secret_key_12345
+
+# --- SHOPIFY CONFIGURATION (Required for the site to load) ---
+# You MUST replace these with valid keys. 
+# If you don't have them, the site will keep crashing.
+
+NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN=wants-and-needs-pvt.myshopify.com
+NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN=fed0d47d638429f0c7abcfd5c819bd05
+SHOPIFY_ADMIN_ACCESS_TOKEN=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
+
 ### ./.gitignore ###
 
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
-/node_modules
-/.pnp
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
-
-# testing
-/coverage
-
-# next.js
-/.next/
-/out/
-
-# production
-/build
-
-# misc
-.DS_Store
-*.pem
-
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnpm-debug.log*
-
-# env files (can opt-in for committing if needed)
-.env*
-.env.local
-
-# vercel
-.vercel
-
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+node_modules
+node_modules
 
 
 ### ./README.md ###
@@ -168,6 +142,141 @@ const eslintConfig = [
 export default eslintConfig;
 
 
+### ./listings/1/Back_BH.webp ###
+
+
+
+### ./listings/1/Back_BH.webp ###
+
+[Error reading file: 'utf-8' codec can't decode byte 0xae in position 5: invalid start byte]
+
+
+### ./listings/1/Front_BH.webp ###
+
+
+
+### ./listings/1/Front_BH.webp ###
+
+[Error reading file: 'utf-8' codec can't decode byte 0xa4 in position 24: invalid start byte]
+
+
+### ./listings/1/GroundShot_BH.webp ###
+
+
+
+### ./listings/1/GroundShot_BH.webp ###
+
+[Error reading file: 'utf-8' codec can't decode byte 0xa6 in position 4: invalid start byte]
+
+
+### ./listings/1/HunterFront_BH.webp ###
+
+
+
+### ./listings/1/HunterFront_BH.webp ###
+
+[Error reading file: 'utf-8' codec can't decode byte 0xfb in position 5: invalid start byte]
+
+
+### ./listings/1/PeytonFront_BH.webp ###
+
+
+
+### ./listings/1/PeytonFront_BH.webp ###
+
+[Error reading file: 'utf-8' codec can't decode byte 0x99 in position 5: invalid start byte]
+
+
+### ./listings/1/PeytonSide_BH.webp ###
+
+
+
+### ./listings/1/PeytonSide_BH.webp ###
+
+[Error reading file: 'utf-8' codec can't decode byte 0x90 in position 5: invalid start byte]
+
+
+### ./listings/1/PeytonSleeve_BH.webp ###
+
+
+
+### ./listings/1/PeytonSleeve_BH.webp ###
+
+[Error reading file: 'utf-8' codec can't decode byte 0xa4 in position 24: invalid start byte]
+
+
+### ./listings/2/BackPocketBS.webp ###
+
+
+
+### ./listings/2/BackPocketBS.webp ###
+
+[Error reading file: 'utf-8' codec can't decode byte 0xa4 in position 24: invalid start byte]
+
+
+### ./listings/2/Back_BS.webp ###
+
+
+
+### ./listings/2/Back_BS.webp ###
+
+[Error reading file: 'utf-8' codec can't decode byte 0x84 in position 4: invalid start byte]
+
+
+### ./listings/2/FrontBS.webp ###
+
+
+
+### ./listings/2/FrontBS.webp ###
+
+[Error reading file: 'utf-8' codec can't decode byte 0xb9 in position 5: invalid start byte]
+
+
+### ./listings/2/FullFrontBS.webp ###
+
+
+
+### ./listings/2/FullFrontBS.webp ###
+
+[Error reading file: 'utf-8' codec can't decode byte 0x90 in position 4: invalid start byte]
+
+
+### ./listings/2/GroundShotBS.webp ###
+
+
+
+### ./listings/2/GroundShotBS.webp ###
+
+[Error reading file: 'utf-8' codec can't decode byte 0xd6 in position 4: invalid continuation byte]
+
+
+### ./listings/2/HunterFrontBS.webp ###
+
+
+
+### ./listings/2/HunterFrontBS.webp ###
+
+[Error reading file: 'utf-8' codec can't decode byte 0xec in position 4: invalid continuation byte]
+
+
+### ./listings/2/SideBS.webp ###
+
+
+
+### ./listings/2/SideBS.webp ###
+
+[Error reading file: 'utf-8' codec can't decode byte 0xe6 in position 4: invalid continuation byte]
+
+
+### ./listings/Logos_35.webp ###
+
+
+
+### ./listings/Logos_35.webp ###
+
+[Error reading file: 'utf-8' codec can't decode bytes in position 4-5: invalid continuation byte]
+
+
 ### ./middleware.ts ###
 
 // src/middleware.ts
@@ -233,6 +342,15 @@ export const config = {
 }
 
 
+### ./next-env.d.ts ###
+
+/// <reference types="next" />
+/// <reference types="next/image-types/global" />
+
+// NOTE: This file should not be edited
+// see https://nextjs.org/docs/basic-features/typescript for more information.
+
+
 ### ./next.config.mjs ###
 
 /** @type {import('next').NextConfig} */
@@ -247,33 +365,23 @@ const nextConfig = {
         port: '',
         pathname: '/**',
       },
-      // --- ADD THIS BLOCK TO ALLOW THE CDN FOR YOUR IMAGES ---
+      {
+        protocol: 'https',
+        hostname: 'wantsandneeds.com', // <--- ADDED THIS
+        port: '',
+        pathname: '/**',
+      },
       {
         protocol: 'https',
         hostname: 'cdn.jsdelivr.net',
         port: '',
-        pathname: '/gh/manankadel/swambasic/**', // Allows images from your specific repo
+        pathname: '/**',
       },
     ],
-  },
-
-  async headers() {
-    return [
-      {
-        source: '/:all*(svg|jpg|jpeg|png|gif|webp|mp4|webm|mp3|wav|ogg|woff2|woff|ttf)',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
-    ];
   },
 };
 
 export default nextConfig;
-
 
 ### ./package.json ###
 
@@ -572,7 +680,6 @@ import { useCart, type Cart } from '@shopify/hydrogen-react';
 import { useState } from 'react';
 import { formatPrice } from '@/lib/utils/formatPrice';
 
-
 type ArrayElement<T> = T extends readonly (infer U)[] ? U : T;
 type CartLine = ArrayElement<Cart['lines']>;
 type CartStatus = 'uninitialized' | 'fetching' | 'idle' | 'creating' | 'updating';
@@ -587,41 +694,35 @@ const CartLineItem = ({
     status: CartStatus
 }) => {
     return (
-        <div className="flex gap-6 items-center">
-            <div className="w-24 h-32 bg-white/5 rounded-md flex-shrink-0 overflow-hidden">
+        <div className="flex gap-6 items-center py-6 border-b border-gray-100 last:border-0">
+            <div className="w-20 h-28 bg-gray-50 rounded-sm flex-shrink-0 overflow-hidden relative">
                 {line?.merchandise?.image && (
                     <Image
                         src={line.merchandise.image.url ?? ""}
                         alt={line.merchandise.image.altText || line.merchandise.product?.title || ""}
-                        width={96}
-                        height={128}
-                        className="w-full h-full object-cover"
+                        fill
+                        className="object-cover"
                     />
                 )}
             </div>
             <div className="flex-grow">
-                <h3 className="font-sans font-semibold">{line?.merchandise?.product?.title ?? ""}</h3>
-                <p className="font-sans text-sm text-white/50">
+                <h3 className="font-display text-lg text-black">{line?.merchandise?.product?.title ?? ""}</h3>
+                <p className="font-sans text-xs text-gray-500 uppercase tracking-wide mt-1">
                     {line?.merchandise?.title}
                 </p>
                 <button 
-                    onClick={() => {
-                        if (line?.id) {
-                            linesRemove([line.id]);
-                        }
-                    }}
+                    onClick={() => { if (line?.id) linesRemove([line.id]); }}
                     disabled={status === 'updating'}
-                    className="text-xs font-sans text-white/50 hover:text-red-400 transition-colors mt-2 disabled:opacity-50"
+                    className="text-xs font-sans text-gray-400 hover:text-red-600 transition-colors mt-4 disabled:opacity-50 underline"
                 >
                     Remove
                 </button>
             </div>
-            <div className="font-mono text-center">
-                {line ? `x${line.quantity}` : null}
+            <div className="font-sans text-sm text-gray-600">
+                {line ? `Qty ${line.quantity}` : null}
             </div>
-            <div className="font-mono text-lg text-right">
+            <div className="font-sans text-sm font-medium text-black text-right min-w-[80px]">
                 {formatPrice(line?.cost?.totalAmount?.amount ?? "0", line?.cost?.totalAmount?.currencyCode)}
-
             </div>
         </div>
     );
@@ -633,26 +734,24 @@ const CartPage = () => {
   const isApplyingDiscount = status === 'updating';
 
   const handleApplyDiscount = () => {
-    if (discountCode) {
-      discountCodesUpdate([discountCode]);
-    }
+    if (discountCode) discountCodesUpdate([discountCode]);
   };
 
   if (status === 'uninitialized' || status === 'fetching') {
       return (
-          <main className="min-h-screen bg-black flex flex-col items-center justify-center text-center px-6">
-              <h1 className="font-display text-5xl font-bold">Loading Cart...</h1>
+          <main className="min-h-screen bg-white flex flex-col items-center justify-center text-center px-6">
+              <h1 className="font-display text-2xl animate-pulse">Loading Cart...</h1>
           </main>
       );
   }
 
   if (!lines || lines.length === 0 || !cost) {
     return (
-      <main className="min-h-screen bg-black flex flex-col items-center justify-center text-center px-6">
-        <h1 className="font-display text-5xl font-bold">The Canvas Is Blank.</h1>
+      <main className="min-h-screen bg-white flex flex-col items-center justify-center text-center px-6">
+        <h1 className="font-display text-3xl md:text-4xl mb-6">Your Bag is Empty.</h1>
         <Link href="/catalog">
-          <button className="mt-8 px-8 py-4 bg-white text-black font-sans font-bold uppercase tracking-widest rounded-full">
-            Discover The Collection
+          <button className="px-8 py-3 bg-black text-white font-sans text-xs font-bold uppercase tracking-widest hover:bg-gray-800 transition-colors">
+            Start Shopping
           </button>
         </Link>
       </main>
@@ -664,44 +763,46 @@ const CartPage = () => {
   const discountAmount = subtotal - total;
 
   return (
-    <main className="min-h-screen bg-black pt-40 pb-24 px-6 md:px-12">
-      <div className="max-w-7xl mx-auto">
-        <h1 className="font-display text-5xl font-bold mb-12">Your Cart</h1>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
-          <div className="lg:col-span-2 flex flex-col gap-6">
+    <main className="min-h-screen bg-white pt-32 pb-24 px-6 md:px-12">
+      <div className="max-w-[1200px] mx-auto">
+        <h1 className="font-display text-4xl mb-12 border-b border-black pb-6">Shopping Bag</h1>
+        
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-24">
+          <div className="lg:col-span-2 flex flex-col">
             {lines.map(line => (
               line ? <CartLineItem key={line.id} line={line} linesRemove={linesRemove} status={status} /> : null
             ))}
           </div>
+          
           <div className="lg:col-span-1">
-             <div className="lg:sticky top-40 p-6 rounded-xl border border-white/10 bg-black/20 backdrop-blur-sm">
-              <h2 className="font-display text-2xl font-bold">Summary</h2>
+             <div className="lg:sticky top-32 p-8 bg-gray-50 rounded-sm">
+              <h2 className="font-display text-xl mb-6">Order Summary</h2>
               
-              <div className="mt-6 flex gap-2">
+              <div className="mb-6 flex gap-2">
                 <input
                   type="text"
                   value={discountCode}
                   onChange={(e) => setDiscountCode(e.target.value.toUpperCase())}
-                  placeholder="Discount code"
-                  className="flex-grow px-4 py-2 bg-white/5 border border-white/20 rounded-md focus:outline-none focus:border-white/50 transition-colors font-sans"
+                  placeholder="GIFT CARD OR CODE"
+                  className="flex-grow px-4 py-3 bg-white border border-gray-200 text-xs focus:outline-none focus:border-black transition-colors font-sans"
                 />
                 <button
                   onClick={handleApplyDiscount}
                   disabled={isApplyingDiscount || !discountCode}
-                  className="px-4 py-2 bg-white/10 text-white font-sans font-semibold rounded-md hover:bg-white/20 transition-colors disabled:opacity-50"
+                  className="px-4 py-2 bg-black text-white text-xs font-bold uppercase tracking-wider hover:bg-gray-800 transition-colors disabled:opacity-50"
                 >
                   Apply
                 </button>
               </div>
 
-              <div className="mt-6 space-y-2 font-mono text-sm text-white/80">
+              <div className="space-y-4 font-sans text-sm text-gray-600 mb-6 border-b border-gray-200 pb-6">
                 <div className="flex justify-between">
                   <span>Subtotal</span>
-                  <span>{formatPrice(cost.subtotalAmount?.amount ?? '0', cost.subtotalAmount?.currencyCode ?? 'INR')}</span>
+                  <span className="text-black">{formatPrice(cost.subtotalAmount?.amount ?? '0', cost.subtotalAmount?.currencyCode ?? 'INR')}</span>
                 </div>
 
                 {discountAmount > 0 && (
-                  <div className="flex justify-between text-green-400">
+                  <div className="flex justify-between text-green-600">
                     <span>Discount ({discountCodes?.[0]?.code})</span>
                     <span>-{formatPrice(discountAmount, cost.subtotalAmount?.currencyCode ?? 'INR')}</span>
                   </div>
@@ -709,16 +810,16 @@ const CartPage = () => {
                 
                 <div className="flex justify-between">
                   <span>Shipping</span>
-                  <span className="text-xs">Calculated at next step</span>
+                  <span className="text-xs text-gray-400">Calculated at checkout</span>
                 </div>
               </div>
-              <div className="mt-6 border-t border-white/10 pt-4 flex justify-between font-mono font-bold">
+              
+              <div className="flex justify-between font-display text-lg font-bold mb-8">
                 <span>Total</span>
                 <span>{formatPrice(cost.totalAmount?.amount ?? '0', cost.totalAmount?.currencyCode ?? 'INR')}</span>
               </div>
               
-              {/* This will now use the correct URL from the Shopify API */}
-              <a href={checkoutUrl} className="block text-center mt-6 w-full py-4 bg-white text-black font-sans font-bold uppercase tracking-widest rounded-full">
+              <a href={checkoutUrl} className="block text-center w-full py-4 bg-black text-white font-sans text-xs font-bold uppercase tracking-widest hover:bg-gray-800 transition-colors">
                 Proceed to Checkout
               </a>
             </div>
@@ -735,19 +836,18 @@ export default CartPage;
 
 // src/app/(main)/catalog/page.tsx
 
-import { getProductsDetailed } from '@/lib/shopify'; // <-- Use the detailed function
+import { getProductsDetailed } from '@/lib/shopify'; 
 import { CatalogClientWrapper } from '@/components/modules/catalog/CatalogClientWrapper';
 import { ShopifyProductDetailed } from '@/types/shopify';
 
 export const dynamic = 'force-dynamic';
 
 export default async function CatalogPage() {
-  
-  // This now fetches the DETAILED products that the wrapper needs.
-  const products: ShopifyProductDetailed[] = await getProductsDetailed(10); 
+  const products: ShopifyProductDetailed[] = await getProductsDetailed(20); 
 
   return (
-    <main className="relative min-h-screen w-full">
+    // Force Black Background
+    <main className="relative min-h-screen w-full bg-black text-white">
         <CatalogClientWrapper products={products} />
     </main>
   );
@@ -763,33 +863,35 @@ import { HeroSection } from "@/components/modules/homepage/HeroSection";
 import { FeaturedProducts } from "@/components/modules/homepage/FeaturedProducts";
 import { motion } from "framer-motion";
 import { BrandManifesto } from "@/components/modules/homepage/BrandManifesto";
-// import GlitchMarquee  from "@/components/modules/homepage/GlitchMarquee"; // <-- Import the new, correct component
+import TerminalFooter from "@/components/modules/homepage/GlitchMarquee";
+import { GyroSection } from "@/components/modules/homepage/GyroSection"; // Import new section
 
 const HomePage = () => {
   return (
-    <main>
-        <HeroSection />
+    <main className="bg-white min-h-screen">
+      <HeroSection />
 
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.8 }}
+        viewport={{ once: true, amount: 0.1 }}
+        transition={{ duration: 1.0 }}
       >
         <FeaturedProducts />
       </motion.div>
       
+      {/* New Interactive Gyro Section */}
+      <GyroSection />
+
       <BrandManifesto />
       
-      {/* --- THIS IS THE FIX: The new interactive art piece is here --- */}
-     {/* <GlitchMarquee /> */}
+      <TerminalFooter />
       
     </main>
   );
 };
 
 export default HomePage;
-
 
 ### ./src/app/(main)/layout.tsx ###
 
@@ -825,39 +927,12 @@ export default function MainLayout({ children }: { children: React.ReactNode; })
 
 // src/app/(main)/login/page.tsx
 "use client";
-import { useState } from 'react';
 import { AuthForm } from '@/components/modules/auth/AuthForm';
-import { FloatingParticlesBackground } from '@/components/core/FloatingParticlesBackground';
-import { MotionPermissionPrompt } from '@/components/core/MotionPermissionPrompt';
-import { useGyroscope } from '@/hooks/useGyroscope';
 
 const LoginPage = () => {
-    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-    const { smoothedGyroData } = useGyroscope();
-
-    const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
-        const { clientWidth, clientHeight } = event.currentTarget;
-        const x = (event.clientX / clientWidth) * 2 - 1;
-        const y = -((event.clientY / clientHeight) * 2 - 1);
-        setMousePosition({ x, y });
-    };
-
     return (
-        <div 
-            // FIX: Changed "items-end" to "items-center" to vertically center the card
-            className="min-h-screen bg-black flex items-center justify-center overflow-hidden relative p-4"
-            onMouseMove={handleMouseMove}
-        >
-            <FloatingParticlesBackground 
-                mousePosition={mousePosition} 
-                gyroData={smoothedGyroData} 
-            />
-            
-            <MotionPermissionPrompt />
-            
-            <main className="w-full z-20">
-                <AuthForm />
-            </main>
+        <div className="min-h-screen bg-white flex items-center justify-center p-4 pt-32">
+            <AuthForm />
         </div>
     );
 };
@@ -938,108 +1013,118 @@ export default function PrivacyPage() {
 "use client";
 
 import { useState, useMemo, useEffect } from 'react';
-import { notFound, useRouter } from 'next/navigation';
-import { motion, AnimatePresence } from 'framer-motion';
+import { notFound } from 'next/navigation';
 import { useCart } from '@shopify/hydrogen-react';
 import { ShopifyProductDetailed } from '@/types/shopify';
 import { getProductByHandle } from '@/lib/shopify';
 import Image from 'next/image';
 import { useCartNotification } from '@/hooks/useCartNotification';
-import { FullScreenImageViewer } from '@/components/core/FullScreenImageViewer';
 import { formatPrice } from '@/lib/utils/formatPrice';
-
-const getOptimizedShopifyImageUrl = (url: string, size: number) => { if (!url) return ''; try { const urlObj = new URL(url); const extension = urlObj.pathname.split('.').pop(); const pathWithoutExtension = urlObj.pathname.substring(0, urlObj.pathname.lastIndexOf('.')); return `${urlObj.origin}${pathWithoutExtension}_${size}x.${extension}`; } catch (e) { return url; } };
-const ExpandIcon = () => ( <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg> );
 
 const ProductDetailsClient = ({ product }: { product: ShopifyProductDetailed }) => {
     const { linesAdd, status: cartStatus } = useCart();
     const { showNotification } = useCartNotification();
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [selectedVariantId, setSelectedVariantId] = useState(product.variants.edges.find(v => v.node.availableForSale)?.node.id || product.variants.edges[0]?.node.id);
-    const [fullScreenImage, setFullScreenImage] = useState<string | null>(null);
 
     const imageGallery = useMemo(() => { if (!product?.featuredImage) return []; const otherImages = product.images?.edges.map(edge => edge.node) || []; return [product.featuredImage, ...otherImages.filter(img => img.url !== product.featuredImage.url)]; }, [product]);
     const selectedVariant = useMemo(() => product.variants.edges.find(edge => edge.node.id === selectedVariantId)?.node, [product, selectedVariantId]);
     const isAddingToCart = cartStatus === 'updating';
 
-    const handleAddToCart = () => { if (selectedVariant) { linesAdd([{ merchandiseId: selectedVariant.id, quantity: 1 }]); showNotification(`${product.title} added to cart`); } };
+    const handleAddToCart = () => { if (selectedVariant) { linesAdd([{ merchandiseId: selectedVariant.id, quantity: 1 }]); showNotification(`${product.title} added to bag`); } };
 
     return (
-        <>
-            <FullScreenImageViewer imageUrl={fullScreenImage} onClose={() => setFullScreenImage(null)} />
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
-                <div className="w-full flex flex-col gap-4">
-                    <div className="relative w-full aspect-square">
-                        <AnimatePresence mode="wait">
-                            <motion.div key={currentImageIndex} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }} className="w-full h-full">
-                                {imageGallery[currentImageIndex] && (
-                                    <Image
-                                        src={getOptimizedShopifyImageUrl(imageGallery[currentImageIndex].url, 800)}
-                                        alt={imageGallery[currentImageIndex].altText || product.title}
-                                        fill
-                                        className="object-contain rounded-lg"
-                                        priority
-                                    />
-                                )}
-                            </motion.div>
-                        </AnimatePresence>
-                        <button onClick={() => setFullScreenImage(imageGallery[currentImageIndex].url)} className="absolute top-3 right-3 p-2 rounded-full bg-black/30 backdrop-blur-sm text-white/70 hover:text-white"> <ExpandIcon /> </button>
-                    </div>
-                    <div className="flex justify-center items-center gap-3">
-                        {imageGallery.map((image, index) => (
-                            <button key={image.url} onClick={() => setCurrentImageIndex(index)} className={`w-16 h-20 rounded-md overflow-hidden border-2 transition-colors ${currentImageIndex === index ? 'border-white' : 'border-transparent hover:border-white/50'}`}>
-                                <Image src={getOptimizedShopifyImageUrl(image.url, 100)} alt={`Thumbnail ${index + 1}`} width={64} height={80} className="object-cover w-full h-full" />
-                            </button>
-                        ))}
-                    </div>
-                </div>
-                <div className="flex flex-col">
-                    <h1 className="font-display text-4xl md:text-5xl font-bold">{product.title}</h1>
-                    {selectedVariant && (
-                        <div className="inline-block my-4">
-                            <p className="font-mono text-xl text-white/90 bg-white/5 px-3 py-1 rounded-md">
-                                {formatPrice(selectedVariant.price.amount, selectedVariant.price.currencyCode)}
-                            </p>
-                        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24 items-start">
+            {/* Gallery Section */}
+            <div className="flex flex-col gap-4 sticky top-32">
+                <div className="relative w-full aspect-[4/5] bg-[#f5f5f5]">
+                    {imageGallery[currentImageIndex] && (
+                        <Image
+                            src={imageGallery[currentImageIndex].url}
+                            alt={imageGallery[currentImageIndex].altText || product.title}
+                            fill
+                            className="object-cover"
+                            priority
+                        />
                     )}
-                    <div className="font-sans text-white/70 space-y-4 prose prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
-                    <div className="mt-8 pt-8 border-t border-white/10">
-                        <h2 className="font-sans text-sm uppercase tracking-wider text-white/50"> Size </h2>
-                        <div className="flex flex-wrap gap-3 mt-4">
-                            {product.variants?.edges.map(({ node: variant }) => ( <button key={variant.id} onClick={() => setSelectedVariantId(variant.id)} disabled={!variant.availableForSale} className={`px-4 py-2 rounded-md font-sans text-sm font-semibold border transition-colors duration-200 ${selectedVariantId === variant.id ? 'bg-white text-black border-white' : 'bg-transparent text-white border-white/20'} ${!variant.availableForSale ? 'opacity-30 cursor-not-allowed line-through' : 'hover:border-white/70'}`}> {variant.title} </button> ))}
-                        </div>
-                        <button onClick={handleAddToCart} disabled={!selectedVariant?.availableForSale || isAddingToCart} className="w-full mt-8 py-4 bg-white text-black font-sans font-bold uppercase tracking-widest disabled:opacity-50 enabled:hover:bg-white/80 transition-all rounded-full">
-                            {isAddingToCart ? 'Adding...' : !selectedVariant?.availableForSale ? 'Sold Out' : 'Add to Cart'}
+                </div>
+                {/* Thumbnails */}
+                <div className="flex gap-4 overflow-x-auto pb-2 hide-scrollbar">
+                    {imageGallery.map((image, index) => (
+                        <button 
+                            key={index} 
+                            onClick={() => setCurrentImageIndex(index)} 
+                            className={`w-20 h-24 flex-shrink-0 relative border transition-all ${currentImageIndex === index ? 'border-black opacity-100' : 'border-transparent opacity-50 hover:opacity-100'}`}
+                        >
+                            <Image src={image.url} alt="" fill className="object-cover" />
                         </button>
-                    </div>
+                    ))}
                 </div>
             </div>
-        </>
+
+            {/* Info Section */}
+            <div className="flex flex-col pt-4 md:pt-0">
+                <h1 className="font-display text-4xl md:text-5xl text-black mb-4">{product.title}</h1>
+                
+                <div className="font-sans text-xl text-gray-600 mb-8">
+                    {selectedVariant ? formatPrice(selectedVariant.price.amount, selectedVariant.price.currencyCode) : 'Unavailable'}
+                </div>
+
+                <div className="prose prose-sm prose-gray max-w-none font-sans text-gray-600 mb-10 leading-relaxed" dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
+
+                <div className="border-t border-gray-100 pt-8">
+                    <h3 className="font-sans text-xs font-bold uppercase tracking-widest text-black mb-4">Select Size</h3>
+                    <div className="flex flex-wrap gap-3 mb-8">
+                        {product.variants?.edges.map(({ node: variant }) => ( 
+                            <button 
+                                key={variant.id} 
+                                onClick={() => setSelectedVariantId(variant.id)} 
+                                disabled={!variant.availableForSale} 
+                                className={`
+                                    min-w-[3rem] h-10 px-4 flex items-center justify-center border text-xs font-sans font-bold uppercase tracking-wider transition-all
+                                    ${selectedVariantId === variant.id ? 'bg-black text-white border-black' : 'bg-white text-black border-gray-200 hover:border-black'}
+                                    ${!variant.availableForSale ? 'opacity-40 cursor-not-allowed line-through bg-gray-50' : ''}
+                                `}
+                            > 
+                                {variant.title} 
+                            </button> 
+                        ))}
+                    </div>
+
+                    <button 
+                        onClick={handleAddToCart} 
+                        disabled={!selectedVariant?.availableForSale || isAddingToCart} 
+                        className="w-full py-4 bg-black text-white font-sans text-xs font-bold uppercase tracking-[0.2em] hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                        {isAddingToCart ? 'Adding...' : !selectedVariant?.availableForSale ? 'Sold Out' : 'Add to Bag'}
+                    </button>
+                    
+                    <p className="mt-4 text-center font-sans text-[10px] text-gray-400 uppercase tracking-widest">
+                        Free shipping on all orders over ₹5,000
+                    </p>
+                </div>
+            </div>
+        </div>
     );
 };
 
-// This is the server component that fetches the data
 export default function ProductPage({ params }: { params: { handle: string } }) {
     const [product, setProduct] = useState<ShopifyProductDetailed | null>(null);
 
     useEffect(() => {
         const fetchProduct = async () => {
             const fetchedProduct = await getProductByHandle(params.handle);
-            if (!fetchedProduct) {
-                notFound();
-            }
+            if (!fetchedProduct) notFound();
             setProduct(fetchedProduct);
         };
         fetchProduct();
     }, [params.handle]);
 
-    if (!product) {
-        return <div className="min-h-screen bg-black flex items-center justify-center text-white">Loading...</div>;
-    }
+    if (!product) return <div className="min-h-screen bg-white flex items-center justify-center text-black font-sans text-xs uppercase tracking-widest">Loading...</div>;
 
     return (
-        <main className="min-h-screen bg-black pt-40 pb-24 px-6 md:px-12">
-            <div className="max-w-7xl mx-auto">
+        <main className="min-h-screen bg-white pt-32 pb-24 px-6 md:px-12">
+            <div className="max-w-[1400px] mx-auto">
                 <ProductDetailsClient product={product} />
             </div>
         </main>
@@ -1051,27 +1136,9 @@ export default function ProductPage({ params }: { params: { handle: string } }) 
 // src/app/(main)/reach-out/page.tsx
 "use client";
 
-import { motion, useMotionValue, useTransform } from 'framer-motion';
 import { useState } from 'react';
-import { FloatingParticlesBackground } from '@/components/core/FloatingParticlesBackground';
-
-const containerVariants = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.3 } } };
-const itemVariants = { hidden: { y: 20, opacity: 0 }, visible: { y: 0, opacity: 1, transition: { duration: 0.8, ease: 'easeOut' } } };
 
 export default function ReachOutPage() {
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const rotateX = useTransform(mouseY, [-0.5, 0.5], ['7deg', '-7deg']);
-  const rotateY = useTransform(mouseX, [-0.5, 0.5], ['-7deg', '7deg']);
-  
-  const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
-    const { clientWidth, clientHeight } = event.currentTarget;
-    const x = (event.clientX / clientWidth) - 0.5;
-    const y = (event.clientY / clientHeight) - 0.5;
-    mouseX.set(x);
-    mouseY.set(y);
-  };
-  
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [formStatus, setFormStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [statusMessage, setStatusMessage] = useState('');
@@ -1083,8 +1150,6 @@ export default function ReachOutPage() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       setFormStatus('loading');
-      setStatusMessage('');
-
       try {
           const response = await fetch('/api/contact', {
               method: 'POST',
@@ -1092,11 +1157,10 @@ export default function ReachOutPage() {
               body: JSON.stringify(formData),
           });
           const result = await response.json();
-          if (!response.ok) throw new Error(result.error || 'Something went wrong.');
-          
+          if (!response.ok) throw new Error(result.error);
           setFormStatus('success');
-          setStatusMessage(result.message);
-          setFormData({ name: '', email: '', message: '' }); // Clear form
+          setStatusMessage("Message sent.");
+          setFormData({ name: '', email: '', message: '' });
       } catch (error: any) {
           setFormStatus('error');
           setStatusMessage(error.message);
@@ -1104,53 +1168,41 @@ export default function ReachOutPage() {
   };
 
   return (
-    <main className="relative min-h-screen w-full flex items-center justify-center overflow-hidden p-4 pt-32 pb-12" onMouseMove={handleMouseMove}>
-      <FloatingParticlesBackground mousePosition={{ x: 0, y: 0 }} gyroData={{ x: 0, y: 0 }} />
-      
-      <motion.div className="w-full max-w-xl z-10" style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }} variants={containerVariants} initial="hidden" animate="visible">
-        <div className="rounded-2xl border border-white/10 bg-black/20 backdrop-blur-2xl shadow-2xl shadow-black/50 p-8 md:p-12">
-            <motion.h1 variants={itemVariants} className="font-display text-4xl md:text-5xl font-bold mb-2"> Let's Connect </motion.h1>
-            <motion.p variants={itemVariants} className="font-sans text-base text-white/60 mb-8 max-w-md"> For inquiries, collaborations, or conversations. </motion.p>
+    <main className="min-h-screen bg-white flex items-center justify-center p-4 pt-32">
+      <div className="w-full max-w-md bg-white border border-gray-200 shadow-xl p-8 md:p-12">
+            <h1 className="font-display text-3xl md:text-4xl font-black uppercase text-center mb-2 text-black">Reach Out</h1>
+            <p className="font-sans text-xs text-gray-500 uppercase tracking-widest text-center mb-8">Inquiries & Support</p>
             
-            <motion.form variants={itemVariants} className="space-y-6" onSubmit={handleSubmit}>
+            <form className="space-y-6" onSubmit={handleSubmit}>
                 <div className="flex flex-col">
-                  <label htmlFor="name" className="font-sans text-xs uppercase tracking-widest text-white/50 mb-2">Name</label>
-                  <input type="text" id="name" name="name" value={formData.name} onChange={handleInputChange} required className="bg-black/20 border border-white/10 rounded-lg p-3 font-sans focus:outline-none focus:border-white/50 transition-colors" />
-                </div>
-                <div className="flex flex-col">
-                  <label htmlFor="email" className="font-sans text-xs uppercase tracking-widest text-white/50 mb-2">Email</label>
-                  <input type="email" id="email" name="email" value={formData.email} onChange={handleInputChange} required className="bg-black/20 border border-white/10 rounded-lg p-3 font-sans focus:outline-none focus:border-white/50 transition-colors" />
+                  <label htmlFor="name" className="font-sans text-xs font-bold uppercase tracking-widest text-black mb-2">Name</label>
+                  <input type="text" id="name" name="name" value={formData.name} onChange={handleInputChange} required className="w-full px-4 py-3 bg-white text-black border border-black focus:outline-none focus:ring-2 focus:ring-black transition-all font-sans" />
                 </div>
                 <div className="flex flex-col">
-                  <label htmlFor="message" className="font-sans text-xs uppercase tracking-widest text-white/50 mb-2">Message</label>
-                  <textarea id="message" name="message" value={formData.message} onChange={handleInputChange} required rows={4} className="bg-black/20 border border-white/10 rounded-lg p-3 font-sans focus:outline-none focus:border-white/50 transition-colors resize-none"></textarea>
+                  <label htmlFor="email" className="font-sans text-xs font-bold uppercase tracking-widest text-black mb-2">Email</label>
+                  <input type="email" id="email" name="email" value={formData.email} onChange={handleInputChange} required className="w-full px-4 py-3 bg-white text-black border border-black focus:outline-none focus:ring-2 focus:ring-black transition-all font-sans" />
                 </div>
-                <div>
-                  <button type="submit" disabled={formStatus === 'loading'} className="w-full mt-2 py-3 bg-white text-black font-sans font-bold uppercase tracking-widest rounded-full hover:bg-white/80 active:scale-95 transition-all disabled:opacity-50">
-                    {formStatus === 'loading' ? 'Sending...' : 'Send'}
-                  </button>
+                <div className="flex flex-col">
+                  <label htmlFor="message" className="font-sans text-xs font-bold uppercase tracking-widest text-black mb-2">Message</label>
+                  <textarea id="message" name="message" value={formData.message} onChange={handleInputChange} required rows={4} className="w-full px-4 py-3 bg-white text-black border border-black focus:outline-none focus:ring-2 focus:ring-black transition-all font-sans resize-none"></textarea>
                 </div>
-            </motion.form>
+                
+                <button type="submit" disabled={formStatus === 'loading'} className="w-full mt-2 py-4 bg-black text-white font-sans font-bold uppercase tracking-widest hover:bg-gray-800 transition-colors disabled:opacity-50">
+                    {formStatus === 'loading' ? 'Sending...' : 'Send Message'}
+                </button>
+            </form>
              {statusMessage && (
-                <p className={`mt-4 text-center text-sm ${formStatus === 'error' ? 'text-red-400' : 'text-green-400'}`}>
+                <p className={`mt-4 text-center text-sm font-bold ${formStatus === 'error' ? 'text-red-600' : 'text-green-600'}`}>
                     {statusMessage}
                 </p>
             )}
-        </div>
-        
-        {/* --- FIX: Updated contact details with phone number --- */}
-        <motion.div variants={itemVariants} className="flex flex-col sm:flex-row justify-center items-center gap-2 sm:gap-6 mt-8 text-center">
-            <div>
-              <h3 className="font-sans text-xs uppercase tracking-widest text-white/50">Inquiries</h3>
-              <a href="mailto:swambasic@gmail.com" className="font-sans text-sm text-white hover:underline">swambasic@gmail.com</a>
+            
+            <div className="mt-8 pt-8 border-t border-gray-100 flex justify-between text-xs font-sans uppercase tracking-widest text-gray-500">
+                <a href="mailto:info@wantsandneeds.com" className="hover:text-black">Email Us</a>
+                {/* Updated to a generic placeholder or remove if no phone */}
+                <a href="#" className="hover:text-black">Customer Support</a>
             </div>
-            <div className="text-white/30 hidden sm:block">|</div>
-            <div>
-              <h3 className="font-sans text-xs uppercase tracking-widest text-white/50">Support</h3>
-              <a href="tel:+917357571888" className="font-sans text-sm text-white hover:underline">+91 73575 71888</a>
-            </div>
-        </motion.div>
-      </motion.div>
+      </div>
     </main>
   );
 }
@@ -1191,6 +1243,54 @@ export default function ShippingPage() {
       <p>Our standard delivery timeframe is 3–7 business days, depending on your location. In some cases, delivery may be faster or slightly delayed due to weather, high demand, or courier constraints.</p>
       <p>We coordinate closely with our courier partners to ensure minimal delays and timely updates.</p>
     </PolicyPageLayout>
+  );
+}
+
+### ./src/app/(main)/shop/[category]/page.tsx ###
+
+// src/app/(main)/shop/[category]/page.tsx
+
+import { getProductsDetailed } from '@/lib/shopify';
+import { ShopifyProductDetailed } from '@/types/shopify';
+import { InteractiveProductCard } from '@/components/modules/products/InteractiveProductCard';
+import Link from 'next/link';
+
+export default async function CategoryPage({ params }: { params: { category: string } }) {
+  const category = params.category;
+  
+  // Fetch all products
+  const allProducts = await getProductsDetailed(50);
+  
+  // Filter by category keyword
+  const filteredProducts = allProducts.filter(p => 
+    p.title.toLowerCase().includes(category.toLowerCase()) || 
+    p.handle.toLowerCase().includes(category.toLowerCase())
+  );
+
+  return (
+    <main className="min-h-screen bg-black pt-32 pb-24 px-6 md:px-12">
+        <div className="max-w-[1400px] mx-auto">
+            {/* ORIGINAL NAV BAR RESTORED */}
+            <div className="mb-12 flex gap-6 overflow-x-auto pb-4 border-b border-white/10">
+                <Link href="/catalog" className="text-white font-sans text-xs font-bold uppercase tracking-widest border-b-2 border-white pb-1">All</Link>
+                {/* Removed unwanted category links */}
+            </div>
+
+            <h1 className="font-display text-4xl font-bold text-white uppercase mb-8">{category.toUpperCase()}</h1>
+
+            {filteredProducts.length > 0 ? (
+                <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-12">
+                    {filteredProducts.map((product) => (
+                        <InteractiveProductCard key={product.id} product={product} />
+                    ))}
+                </div>
+            ) : (
+                <div className="text-center py-20">
+                    <p className="text-gray-400 font-sans uppercase tracking-widest">No products found.</p>
+                </div>
+            )}
+        </div>
+    </main>
   );
 }
 
@@ -1252,6 +1352,115 @@ export default function TermsPage() {
       <h2>8. Limitation of Liability</h2>
       <p>SWAMBASIC will not be liable for any indirect, incidental, or consequential damages arising from the use of our website or products.</p>
     </PolicyPageLayout>
+  );
+}
+
+### ./src/app/(main)/track-order/page.tsx ###
+
+// src/app/(main)/track-order/page.tsx
+
+"use client";
+
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+
+export default function TrackOrderPage() {
+  const [orderName, setOrderName] = useState('');
+  const [email, setEmail] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [orderData, setOrderData] = useState<any>(null);
+  const [error, setError] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setError('');
+    setOrderData(null);
+
+    // Normalize order name (ensure it has #)
+    const normalizedName = orderName.startsWith('#') ? orderName : `#${orderName}`;
+
+    try {
+        const res = await fetch('/api/order/track', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ orderName: normalizedName, email }),
+        });
+        const data = await res.json();
+        
+        if (res.ok) {
+            setOrderData(data.order);
+        } else {
+            setError(data.error || 'Could not find order.');
+        }
+    } catch (err) {
+        setError('Connection error.');
+    } finally {
+        setIsLoading(false);
+    }
+  };
+
+  return (
+    <main className="min-h-screen bg-white flex items-center justify-center p-4 pt-32">
+        <div className="w-full max-w-lg bg-white border border-gray-200 shadow-xl p-8 md:p-12">
+            <h1 className="font-display text-3xl font-black uppercase text-center mb-2 text-black">Track Order</h1>
+            <p className="font-sans text-xs text-gray-500 uppercase tracking-widest text-center mb-8">Enter details to view status</p>
+
+            <form onSubmit={handleSubmit} className="space-y-6">
+                <div>
+                    <label className="font-sans text-xs font-bold uppercase tracking-widest text-black mb-2 block">Order Number</label>
+                    <input 
+                        type="text" 
+                        value={orderName} 
+                        onChange={(e) => setOrderName(e.target.value)} 
+                        placeholder="#1001" 
+                        required 
+                        className="w-full px-4 py-3 bg-white text-black border border-black focus:outline-none focus:ring-2 focus:ring-black font-sans"
+                    />
+                </div>
+                <div>
+                    <label className="font-sans text-xs font-bold uppercase tracking-widest text-black mb-2 block">Email Address</label>
+                    <input 
+                        type="email" 
+                        value={email} 
+                        onChange={(e) => setEmail(e.target.value)} 
+                        placeholder="email@example.com" 
+                        required 
+                        className="w-full px-4 py-3 bg-white text-black border border-black focus:outline-none focus:ring-2 focus:ring-black font-sans"
+                    />
+                </div>
+                <button type="submit" disabled={isLoading} className="w-full py-4 bg-black text-white font-sans font-bold uppercase tracking-widest hover:bg-gray-800 disabled:opacity-50">
+                    {isLoading ? 'Searching...' : 'Track'}
+                </button>
+            </form>
+
+            {error && <p className="mt-6 text-center text-red-600 font-bold font-sans text-sm">{error}</p>}
+
+            {orderData && (
+                <motion.div 
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="mt-8 p-6 bg-gray-50 border border-black/10"
+                >
+                    <div className="flex justify-between items-center mb-4 border-b border-gray-200 pb-2">
+                        <span className="font-display text-xl font-bold">{orderData.name}</span>
+                        <span className="font-sans text-xs uppercase font-bold bg-black text-white px-2 py-1">{orderData.status}</span>
+                    </div>
+                    <div className="space-y-2 mb-4">
+                        {orderData.items.map((item: any, i: number) => (
+                            <div key={i} className="flex justify-between text-sm font-sans">
+                                <span>{item.title}</span>
+                                <span className="text-gray-500">x{item.quantity}</span>
+                            </div>
+                        ))}
+                    </div>
+                    <div className="text-right font-sans font-bold pt-2 border-t border-gray-200">
+                        Total: {orderData.currency} {orderData.total}
+                    </div>
+                </motion.div>
+            )}
+        </div>
+    </main>
   );
 }
 
@@ -1325,40 +1534,33 @@ export async function POST(request: Request) {
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { createCustomerAddress } from '@/lib/shopify';
-import { NewAddressInput } from '@/types/shopify'; // Import the type
+import { NewAddressInput } from '@/types/shopify';
 
 export async function POST(request: Request) {
     const cookieStore = cookies();
     const token = cookieStore.get('swambasic_customer_token')?.value;
 
-    // 1. Check if user is authenticated
     if (!token) {
-        // Return a proper JSON error
         return NextResponse.json({ error: 'Not authenticated. Please log in.' }, { status: 401 });
     }
 
     try {
-        // 2. Get the address data from the request
         const addressData: NewAddressInput = await request.json();
 
-        // Optional: Add server-side validation here if needed
-        if (!addressData.address1 || !addressData.city || !addressData.country || !addressData.zip || !addressData.province) {
-            return NextResponse.json({ error: 'Missing required address fields.' }, { status: 400 });
+        // VALIDATION: Reject if phone is missing
+        if (!addressData.address1 || !addressData.city || !addressData.country || !addressData.zip || !addressData.province || !addressData.phone) {
+            return NextResponse.json({ error: 'Address, City, Country, Zip, and Phone Number are required.' }, { status: 400 });
         }
 
-        // 3. Call the Shopify function to create the address
         const result = await createCustomerAddress(token, addressData);
 
-        // 4. Check for errors from Shopify and return them as JSON
         if (result.customerUserErrors && result.customerUserErrors.length > 0) {
             return NextResponse.json({ error: result.customerUserErrors[0].message }, { status: 400 });
         }
 
-        // 5. If successful, return a success response
         return NextResponse.json({ success: true, address: result.customerAddress }, { status: 200 });
 
     } catch (error) {
-        // Handle unexpected errors
         console.error('Add Address API Error:', error);
         return NextResponse.json({ error: 'An unexpected error occurred.' }, { status: 500 });
     }
@@ -1485,50 +1687,62 @@ import { loginCustomer } from '@/lib/shopify';
 const CUSTOMER_TOKEN_COOKIE_NAME = 'swambasic_customer_token';
 
 export async function POST(request: Request) {
-    console.time("REGISTER_API_TOTAL_TIME"); // Start total timer
+    console.time("REGISTER_API_TOTAL_TIME");
 
     try {
-        const { firstName, lastName, email, password } = await request.json();
+        const { firstName, lastName, email, password, phone } = await request.json();
 
-        if (!firstName || !lastName || !email || !password) {
-            return NextResponse.json({ error: 'All fields are required.' }, { status: 400 });
+        // VALIDATION: Phone is now mandatory
+        if (!firstName || !lastName || !email || !password || !phone) {
+            return NextResponse.json({ error: 'All fields including phone number are required.' }, { status: 400 });
         }
 
         const adminApiToken = process.env.SHOPIFY_ADMIN_ACCESS_TOKEN;
         const storeDomain = process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN;
         const adminApiUrl = `https://${storeDomain}/admin/api/2024-07/customers.json`;
 
+        // We send phone at the ROOT level to set it as "Contact Info"
         const customerData = {
             customer: {
                 first_name: firstName,
                 last_name: lastName,
                 email: email,
+                phone: phone, // <--- This populates the "Contact" field in Admin
                 password: password,
                 password_confirmation: password,
                 verified_email: true,
+                addresses: [
+                    {
+                        first_name: firstName,
+                        last_name: lastName,
+                        phone: phone, // <--- We ALSO add it to their default address
+                        default: true
+                    }
+                ]
             }
         };
 
-        // 1. Create the customer using the Admin API
         console.time("SHOPIFY_ADMIN_CREATE_CALL");
         const createResponse = await fetch(adminApiUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'X-Shopify-Access-Token': adminApiToken! },
             body: JSON.stringify(customerData),
         });
-        console.timeEnd("SHOPIFY_ADMIN_CREATE_CALL"); // End Admin API timer
+        console.timeEnd("SHOPIFY_ADMIN_CREATE_CALL");
 
         const createData = await createResponse.json();
 
         if (!createResponse.ok) {
-            const errorMessage = createData.errors ? Object.values(createData.errors).flat().join(', ') : 'Failed to create account.';
+            // Detailed error handling for phone number issues (e.g., duplicates)
+            const errorMessage = createData.errors 
+                ? Object.entries(createData.errors).map(([key, val]) => `${key} ${val}`).join(', ') 
+                : 'Failed to create account.';
             return NextResponse.json({ error: errorMessage }, { status: 400 });
         }
 
-        // 2. Automatically log them in
         console.time("SHOPIFY_STOREFRONT_LOGIN_CALL");
         const loginResult = await loginCustomer({ email, password });
-        console.timeEnd("SHOPIFY_STOREFRONT_LOGIN_CALL"); // End Storefront API timer
+        console.timeEnd("SHOPIFY_STOREFRONT_LOGIN_CALL");
 
         if (loginResult.customerAccessToken) {
             const { accessToken, expiresAt } = loginResult.customerAccessToken;
@@ -1540,7 +1754,7 @@ export async function POST(request: Request) {
                 expires: new Date(expiresAt),
             });
             
-            console.timeEnd("REGISTER_API_TOTAL_TIME"); // End total timer
+            console.timeEnd("REGISTER_API_TOTAL_TIME");
             return NextResponse.json({ success: true }, { status: 201 });
         }
 
@@ -1548,7 +1762,6 @@ export async function POST(request: Request) {
 
     } catch (error) {
         console.error('Register API error:', error);
-        console.timeEnd("REGISTER_API_TOTAL_TIME"); // End total timer in case of error
         return NextResponse.json({ error: 'An unexpected error occurred.' }, { status: 500 });
     }
 }
@@ -1647,6 +1860,73 @@ export async function POST(request: Request) {
   }
 }
 
+
+### ./src/app/api/order/track/route.ts ###
+
+// src/app/api/order/track/route.ts
+
+import { NextResponse } from 'next/server';
+
+export async function POST(request: Request) {
+  const { orderName, email } = await request.json();
+
+  if (!orderName || !email) {
+    return NextResponse.json({ error: 'Order Number and Email are required.' }, { status: 400 });
+  }
+
+  const adminApiToken = process.env.SHOPIFY_ADMIN_ACCESS_TOKEN;
+  const storeDomain = process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN;
+
+  if (!adminApiToken || !storeDomain) {
+    return NextResponse.json({ error: 'Server configuration error.' }, { status: 500 });
+  }
+
+  try {
+    // 1. Search for order using the Admin API
+    const response = await fetch(`https://${storeDomain}/admin/api/2024-07/orders.json?name=${orderName}&status=any`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Shopify-Access-Token': adminApiToken,
+      },
+    });
+
+    if (!response.ok) throw new Error('Failed to fetch order.');
+
+    const data = await response.json();
+    const orders = data.orders;
+
+    // 2. Validate Email matches (Security check)
+    const matchingOrder = orders.find((o: any) => 
+        o.email.toLowerCase() === email.toLowerCase() || 
+        o.customer?.email.toLowerCase() === email.toLowerCase()
+    );
+
+    if (matchingOrder) {
+      // Return safe public details
+      return NextResponse.json({
+        success: true,
+        order: {
+            id: matchingOrder.id,
+            name: matchingOrder.name,
+            status: matchingOrder.fulfillment_status || 'unfulfilled',
+            financial: matchingOrder.financial_status,
+            total: matchingOrder.total_price,
+            currency: matchingOrder.currency,
+            items: matchingOrder.line_items.map((item: any) => ({
+                title: item.title,
+                quantity: item.quantity
+            }))
+        }
+      });
+    } else {
+      return NextResponse.json({ error: 'Order not found or email does not match.' }, { status: 404 });
+    }
+
+  } catch (error) {
+    console.error('Track Order API Error:', error);
+    return NextResponse.json({ error: 'System error. Please try again.' }, { status: 500 });
+  }
+}
 
 ### ./src/app/api/waitlist/route.ts ###
 
@@ -1751,7 +2031,7 @@ export async function POST(request: Request) {
 ### ./src/app/fonts.ts ###
 
 import { Poppins, Unbounded } from 'next/font/google';
-import localFont from 'next/font/local'; // <-- IMPORT THIS
+import localFont from 'next/font/local';
 
 export const fontPoppins = Poppins({
   subsets: ['latin'],
@@ -1765,11 +2045,12 @@ export const fontUnbounded = Unbounded({
     variable: '--font-unbounded',
 });
 
-// DEFINE THE NEW LOCAL FONT HERE
+// Ensure you have the font file at public/assets/fonts/genoa.otf or src/assets/fonts/genoa.otf
+// If you do not have the custom Genoa font file, you can comment this out and remove it from the exports.
 export const fontGenoa = localFont({
-  src: '../assets/fonts/genoa.otf', // <-- PATH TO YOUR FONT FILE
+  src: '../assets/fonts/genoa.otf', 
   display: 'swap',
-  variable: '--font-genoa', // <-- CSS variable we will use
+  variable: '--font-genoa', 
 });
 
 ### ./src/app/globals.css ###
@@ -1778,119 +2059,51 @@ export const fontGenoa = localFont({
 @tailwind components;
 @tailwind utilities;
 
+html {
+  /* THIS FIXES THE DANCING PAGE */
+  scrollbar-gutter: stable; 
+}
+
 html, body {
   padding: 0;
   margin: 0;
   overflow-x: hidden;
+  background-color: theme('colors.background');
+  color: theme('colors.foreground');
 }
 
-body {
-  @apply bg-black text-foreground;
+/* Minimalist Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,0.2);
+  border-radius: 3px;
 }
 
-/* NEW: Shimmer/Glow animation for text */
-.animate-shimmer-glow {
-  background: linear-gradient(90deg, #ffffff 25%, #888888 50%, #ffffff 75%);
-  background-size: 400% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: shimmer-glow 8s linear infinite;
-}
-
-@keyframes shimmer-glow {
-  0% {
-    background-position: 200% 0;
+/* Utilities */
+@layer utilities {
+  .text-shadow-glow {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
   }
-  100% {
-    background-position: -200% 0;
-  }
-}
-/* ADD THIS CODE AT THE END OF THE FILE */
-
-@keyframes liquid-gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-/* src/app/globals.css */
-
-/* Add this at the end of the file */
-@keyframes scroll-left {
-  from {
-    transform: translateX(0%);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-.animate-scroll-left {
-  animation: scroll-left 40s linear infinite;
-}
-.text-stroke {
-  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.8);
-  -webkit-text-fill-color: transparent;
-}
-
-/* Add this to your global CSS file (e.g., globals.css or app.css) */
-
-/* Hide scrollbar while maintaining scroll functionality */
-.hide-scrollbar {
-  /* Webkit browsers (Chrome, Safari, Edge) */
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
-}
-
-.hide-scrollbar::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
-}
-
-/* Apply to html and body when content is revealed */
-.catalog-revealed {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
-}
-
-.catalog-revealed::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
-}
-
-/* Utility class for hiding scrollbars */
-.scrollbar-hide {
-  /* IE and Edge */
-  -ms-overflow-style: none;
-  
-  /* Firefox */
-  scrollbar-width: none;
-}
-
-.scrollbar-hide::-webkit-scrollbar {
-  /* WebKit */
-  display: none;
 }
 
 ### ./src/app/layout.tsx ###
 
+// src/app/layout.tsx
+
 import type { Metadata } from 'next'
 import './globals.css'
 import { fontPoppins, fontUnbounded, fontGenoa } from './fonts';
-import { BackgroundMusicPlayer } from '@/components/core/BackgroundMusicPlayer';
-import { GlobalSoundEffects } from '@/components/core/GlobalSoundEffects';
-import { AppHeightProvider } from '@/components/core/AppHeightProvider'; // <-- IMPORT THE NEW PROVIDER
+import { AppHeightProvider } from '@/components/core/AppHeightProvider'; 
 import { Analytics } from "@vercel/analytics/next"
 
 export const metadata = {
-  title: 'SWAMBASIC - Coming Soon',
-  description: 'Luxury Streetwear. Join the waitlist.',
+  title: 'WANTS AND NEEDS',
+  description: 'Luxury Essentials. Take Action.',
 }
 
 export default function RootLayout({
@@ -1903,15 +2116,11 @@ export default function RootLayout({
         fontPoppins.variable, 
         fontUnbounded.variable, 
         fontGenoa.variable, 
-        'dark'
       ].join(' ')}>
-      <body>
+      <body className="bg-white text-black">
         <Analytics/>
-        {/* WRAP everything in the AppHeightProvider */}
         <AppHeightProvider>
-            <GlobalSoundEffects />
             {children}
-            <BackgroundMusicPlayer />
         </AppHeightProvider>
       </body>
     </html>
@@ -1931,9 +2140,6 @@ import CountdownTimer from '@/components/modules/CountdownTimer';
 import { InteractiveLiquidBackground } from '@/components/core/InteractiveLiquidBackground';
 import { useSound } from '@/hooks/useSound';
 
-// ==================================================================
-// PERFORMANCE CONSTANTS
-// ==================================================================
 const ANIMATION_CONFIG = {
   CONTENT_DELAY: 2500,
   MOTION_DURATION: 1.0,
@@ -1974,63 +2180,33 @@ const STYLES = {
   }
 } as const;
 
-// ==================================================================
-// OPTIMIZED ARROW ICON COMPONENT
-// ==================================================================
 const ArrowIcon = () => (
-  <svg 
-    xmlns="http://www.w3.org/2000/svg" 
-    width="24" 
-    height="24" 
-    viewBox="0 0 24 24" 
-    fill="none" 
-    stroke="currentColor" 
-    strokeWidth="2" 
-    strokeLinecap="round" 
-    strokeLinejoin="round"
-    style={{ pointerEvents: 'none' }}
-  >
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ pointerEvents: 'none' }}>
     <line x1="5" y1="12" x2="19" y2="12"></line>
     <polyline points="12 5 19 12 12 19"></polyline>
   </svg>
 );
 
-// ==================================================================
-// OPTIMIZED PASSWORD ACCESS COMPONENT
-// ==================================================================
 const PasswordAccess = () => {
   const router = useRouter();
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const abortControllerRef = useRef<AbortController | null>(null);
-  
-  // Optimized sound hook with lazy loading
   const playHoverSound = useSound('/audio/hover.mp3', 0.3);
 
-  // Memoized input change handler
   const handlePasswordChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
-    if (error) setError(''); // Clear error on new input
+    if (error) setError('');
   }, [error]);
 
-  // Optimized submit handler with abort controller
   const handleSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
     if (!password.trim() || isLoading) return;
-    
-    // Cancel any pending request
-    if (abortControllerRef.current) {
-      abortControllerRef.current.abort();
-    }
-    
+    if (abortControllerRef.current) abortControllerRef.current.abort();
     setIsLoading(true);
     setError('');
-    
-    // Create new abort controller
     abortControllerRef.current = new AbortController();
-    
     try {
       const response = await fetch('/api/access', {
         method: 'POST',
@@ -2038,38 +2214,29 @@ const PasswordAccess = () => {
         body: JSON.stringify({ password }),
         signal: abortControllerRef.current.signal,
       });
-
       if (response.ok) {
-        // Use replace for better performance
         router.replace('/home');
       } else {
         const data = await response.json();
         setError(data.error || 'Invalid access code.');
       }
     } catch (err: any) {
-      if (err.name !== 'AbortError') {
-        setError('Connection error. Please try again.');
-      }
+      if (err.name !== 'AbortError') setError('Connection error. Please try again.');
     } finally {
       setIsLoading(false);
     }
   }, [password, isLoading, router]);
 
-  // Optimized hover handler
   const handleMouseEnter = useCallback(() => {
     if (!isLoading) playHoverSound();
   }, [playHoverSound, isLoading]);
 
-  // Cleanup on unmount
   useEffect(() => {
     return () => {
-      if (abortControllerRef.current) {
-        abortControllerRef.current.abort();
-      }
+      if (abortControllerRef.current) abortControllerRef.current.abort();
     };
   }, []);
 
-  // Memoized form elements
   const formContent = useMemo(() => (
     <form onSubmit={handleSubmit} className="flex items-center gap-4">
       <input
@@ -2077,7 +2244,7 @@ const PasswordAccess = () => {
         value={password}
         onChange={handlePasswordChange}
         placeholder="Enter Access Code"
-        className="font-sans w-full max-w-[240px] bg-transparent border-b-2 border-foreground/50 focus:border-foreground text-center text-lg focus:outline-none transition-colors duration-300 disabled:opacity-50"
+        className="font-sans w-full max-w-[240px] bg-transparent border-b-2 border-black/50 focus:border-black text-center text-lg focus:outline-none transition-colors duration-300 disabled:opacity-50 text-black placeholder:text-gray-400"
         disabled={isLoading}
         autoComplete="current-password"
         style={STYLES.input}
@@ -2085,7 +2252,7 @@ const PasswordAccess = () => {
       <button
         type="submit"
         disabled={isLoading || !password.trim()}
-        className="text-foreground/80 hover:text-white transition-colors disabled:opacity-50"
+        className="text-black/80 hover:text-black transition-colors disabled:opacity-50"
         onMouseEnter={handleMouseEnter}
         style={STYLES.button}
         aria-label="Submit access code"
@@ -2099,7 +2266,7 @@ const PasswordAccess = () => {
     <div className="mt-8 flex flex-col items-center">
       {formContent}
       {error && (
-        <p className="mt-2 text-sm text-red-400" role="alert">
+        <p className="mt-2 text-sm text-red-500" role="alert">
           {error}
         </p>
       )}
@@ -2107,27 +2274,20 @@ const PasswordAccess = () => {
   );
 };
 
-// ==================================================================
-// OPTIMIZED MAIN GATEWAY PAGE COMPONENT
-// ==================================================================
 export default function GatewayPage() {
   const [showContent, setShowContent] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Optimized content reveal effect
   useEffect(() => {
     timeoutRef.current = setTimeout(() => {
       setShowContent(true);
     }, ANIMATION_CONFIG.CONTENT_DELAY);
 
     return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
   }, []);
 
-  // Memoized content section
   const contentSection = useMemo(() => (
     <AnimatePresence mode="wait">
       {showContent && (
@@ -2135,7 +2295,7 @@ export default function GatewayPage() {
           className="flex w-full max-w-sm flex-col items-center text-center"
           {...MOTION_VARIANTS.content}
         >
-          <p className="font-sans text-sm md:text-xl mt-3 mb-4 md:mt-6 md:mb-6 text-foreground/80 animate-shimmer-glow px-2">
+          <p className="font-sans text-sm md:text-xl mt-3 mb-4 md:mt-6 md:mb-6 text-black/80 px-2">
             Join the waitlist for exclusive access.
           </p>
           
@@ -2156,7 +2316,7 @@ export default function GatewayPage() {
   ), [showContent]);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-white text-black">
       <InteractiveLiquidBackground />
       <main 
         style={STYLES.main}
@@ -2697,15 +2857,11 @@ export const ElementalGradient = () => (
 
 "use client";
 
-// ADDED: useState and useEffect for the gyroscope
 import React, { useMemo, useRef, useState, useEffect } from "react"; 
 import { Canvas, useFrame, extend } from "@react-three/fiber";
 import * as THREE from "three";
 import { shaderMaterial } from "@react-three/drei";
 
-// ===================================================================
-// ==                          CONTROLS                             ==
-// ===================================================================
 const PARTICLE_CONTROLS = {
     quantity: 1500,
     size: 0.04,
@@ -2713,21 +2869,16 @@ const PARTICLE_CONTROLS = {
     blinkPercentage: 0.2,
     direction: -1, 
     speed: 0.2,
-    // ONLY ADDITION: A control for gyroscope sensitivity
     gyroIntensity: 1,
 };
-// ===================================================================
 
-// Your custom shader material. THIS IS UNCHANGED.
 const CustomParticleMaterial = shaderMaterial(
   { u_time: 0.0 },
-  // Vertex Shader
   ` uniform float u_time;
     attribute vec3 a_color;
     attribute float a_blinkSpeed;
     varying vec3 v_color;
     varying float v_blinkSpeed;
-
     void main() {
       v_color = a_color;
       v_blinkSpeed = a_blinkSpeed;
@@ -2736,11 +2887,9 @@ const CustomParticleMaterial = shaderMaterial(
       gl_PointSize = ${PARTICLE_CONTROLS.size} * (300.0 / -viewPosition.z);
       gl_Position = projectionMatrix * viewPosition;
     }`,
-  // Fragment Shader
   ` uniform float u_time;
     varying vec3 v_color;
     varying float v_blinkSpeed;
-
     void main() {
       float dist = distance(gl_PointCoord, vec2(0.5));
       if (dist > 0.5) { discard; }
@@ -2751,31 +2900,32 @@ const CustomParticleMaterial = shaderMaterial(
 );
 extend({ CustomParticleMaterial });
 
-// The particle system.
-// ONLY CHANGE: It now accepts `gyroData` as a prop.
 const Particles = ({ mousePosition, gyroData }: { mousePosition: { x: number, y: number }, gyroData: { x: number, y: number } }) => {
   const meshRef = useRef<THREE.Points>(null!);
   
-  // Your particle generation logic. THIS IS UNCHANGED.
   const particleData = useMemo(() => {
     const positions = new Float32Array(PARTICLE_CONTROLS.quantity * 3);
     const colors = new Float32Array(PARTICLE_CONTROLS.quantity * 3);
     const blinkSpeeds = new Float32Array(PARTICLE_CONTROLS.quantity);
     const distance = 10;
+    
     for (let i = 0; i < PARTICLE_CONTROLS.quantity; i++) {
       positions[i * 3 + 0] = (Math.random() - 0.5) * distance;
       positions[i * 3 + 1] = (Math.random() - 0.5) * distance;
       positions[i * 3 + 2] = (Math.random() - 0.5) * distance;
+      
+      // RESTORED: WHITE STARS
       let particleColor = new THREE.Color();
       blinkSpeeds[i] = 0.0;
+      
       if (Math.random() < PARTICLE_CONTROLS.blinkPercentage) {
-        particleColor.setHSL(0, 0, 1.0);
+        particleColor.setHSL(0, 0, 1.0); // White
         blinkSpeeds[i] = Math.random() * 3 + 1;
       } else if (Math.random() < PARTICLE_CONTROLS.glowPercentage) {
-        particleColor.setHSL(0, 0, 1.0);
+        particleColor.setHSL(0, 0, 1.0); // White
       } else {
         const shade = 0.4 + Math.random() * 0.2;
-        particleColor.setHSL(0, 0, shade);
+        particleColor.setHSL(0, 0, shade); // Grey-White
       }
       colors.set([particleColor.r, particleColor.g, particleColor.b], i * 3);
     }
@@ -2783,19 +2933,13 @@ const Particles = ({ mousePosition, gyroData }: { mousePosition: { x: number, y:
   }, []);
 
   useFrame((state, delta) => {
-    // --- GYROSCOPE INTEGRATION LOGIC ---
-    // 1. Check if gyroscope is active.
     const hasGyro = gyroData.x !== 0 || gyroData.y !== 0;
-    
-    // 2. Use gyro data if available, otherwise fall back to mouse data.
     const targetX = hasGyro ? gyroData.x * PARTICLE_CONTROLS.gyroIntensity : mousePosition.x * 0.5;
     const targetY = hasGyro ? gyroData.y * PARTICLE_CONTROLS.gyroIntensity : mousePosition.y * 0.5;
 
-    // 3. Your original camera movement logic, now driven by either gyro or mouse.
     state.camera.position.x = THREE.MathUtils.lerp(state.camera.position.x, targetX, 0.05);
     state.camera.position.y = THREE.MathUtils.lerp(state.camera.position.y, targetY, 0.05);
     
-    // Your infinite loop animation. THIS IS UNCHANGED.
     if (meshRef.current) {
       const positions = meshRef.current.geometry.attributes.position.array as Float32Array;
       for (let i = 0; i < positions.length; i += 3) {
@@ -2816,7 +2960,7 @@ const Particles = ({ mousePosition, gyroData }: { mousePosition: { x: number, y:
   });
 
   return (
-    // Your JSX for the particles. THIS IS UNCHANGED.
+    // Changed: Blending to Additive for glowing stars
     <points ref={meshRef}>
         <bufferGeometry>
             <bufferAttribute attach="attributes-position" count={particleData.positions.length / 3} array={particleData.positions} itemSize={3} />
@@ -2835,9 +2979,7 @@ const Particles = ({ mousePosition, gyroData }: { mousePosition: { x: number, y:
   );
 };
 
-// --- GYROSCOPE LOGIC ADDED HERE ---
 export const FloatingParticlesBackground = ({ mousePosition, gyroData }: { mousePosition: { x: number, y: number }, gyroData: { x: number, y: number } }) => {
-
   const [internalGyroData, setInternalGyroData] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
@@ -2849,11 +2991,9 @@ export const FloatingParticlesBackground = ({ mousePosition, gyroData }: { mouse
         setInternalGyroData({ x, y });
       }
     };
-    
     if (typeof window !== 'undefined' && window.DeviceOrientationEvent) {
       window.addEventListener('deviceorientation', handleDeviceOrientation);
     }
-
     return () => {
       if (typeof window !== 'undefined' && window.DeviceOrientationEvent) {
         window.removeEventListener('deviceorientation', handleDeviceOrientation);
@@ -2862,9 +3002,8 @@ export const FloatingParticlesBackground = ({ mousePosition, gyroData }: { mouse
   }, []);
 
   return (
-    <div className="fixed inset-0 z-0">
+    <div className="absolute inset-0 z-0 pointer-events-none">
       <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
-        {/* We now pass both mouse and gyro data down */}
         <Particles mousePosition={mousePosition} gyroData={internalGyroData} />
       </Canvas>
     </div>
@@ -2885,24 +3024,22 @@ export const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="w-full bg-black z-40 relative px-6 md:px-12 py-8 border-t border-white/10">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center text-sm text-white/50">
-        {/* Left: Copyright */}
-        <div className="mb-4 md:mb-0">
-          © {currentYear} SWAMBASIC. All Rights Reserved.
+    <footer className="w-full bg-white z-40 relative px-6 md:px-12 py-8 border-t border-black/5">
+      <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row justify-between items-center text-sm text-black/50">
+        {/* BRANDING UPDATE */}
+        <div className="mb-4 md:mb-0 font-sans text-xs uppercase tracking-wider">
+          © {currentYear} WANTS AND NEEDS. All Rights Reserved.
         </div>
         
-        {/* Right: Social & Legal Links */}
         <div className="flex items-center gap-4 md:gap-8 flex-wrap justify-center">
-            <a href="https://www.instagram.com/swambasic/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors"><InstagramIcon /></a>
-            <div className="w-px h-4 bg-white/20 hidden md:block"></div>
-            {/* --- THIS IS THE FIX --- */}
+            <a href="https://www.instagram.com/wantsandneeds/" target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors"><InstagramIcon /></a>
+            <div className="w-px h-4 bg-black/20 hidden md:block"></div>
             <div className="flex items-center gap-4 md:gap-6 font-sans uppercase tracking-wider text-xs flex-wrap justify-center">
-                <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>
-                <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>
-                <Link href="/shipping" className="hover:text-white transition-colors">Shipping</Link>
-                <Link href="/refunds" className="hover:text-white transition-colors">Refunds</Link>
-                <Link href="/reach-out" className="hover:text-white transition-colors">Contact Us</Link>
+                <Link href="/terms" className="hover:text-black transition-colors">Terms</Link>
+                <Link href="/privacy" className="hover:text-black transition-colors">Privacy</Link>
+                <Link href="/shipping" className="hover:text-black transition-colors">Shipping</Link>
+                <Link href="/refunds" className="hover:text-black transition-colors">Refunds</Link>
+                <Link href="/reach-out" className="hover:text-black transition-colors">Contact</Link>
             </div>
         </div>
       </div>
@@ -3121,42 +3258,66 @@ export const GlobalSoundEffects = () => {
 
 "use client";
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCartNotification } from '@/hooks/useCartNotification';
+import { usePathname } from 'next/navigation';
 
 const UserIcon = () => ( <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> );
 const CartIcon = () => {
     const { cartCount } = useCartNotification();
-    return ( <div className="relative"> <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg> {cartCount > 0 && ( <div className="absolute -top-2 -right-2 w-5 h-5 bg-white text-black text-xs font-bold rounded-full flex items-center justify-center"> {cartCount} </div> )} </div> );
+    return ( <div className="relative"> <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg> {cartCount > 0 && ( <div className="absolute -top-2 -right-2 w-5 h-5 bg-red-600 text-white text-xs font-bold rounded-full flex items-center justify-center"> {cartCount} </div> )} </div> );
 };
 const MenuIcon = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>;
 
 export const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const pathname = usePathname();
+
+    // Check if we are on the Catalog page to switch to Dark Mode styling
+    const isCatalogMain = pathname === '/catalog';
+
+    const textColorClass = isCatalogMain ? 'text-white' : 'text-black';
+    const borderColorClass = isCatalogMain ? 'border-white/10' : 'border-black/5';
+    const bgColorClass = isCatalogMain ? 'bg-black/10' : 'bg-white/80';
 
     return (
         <>
-            <header className="fixed top-0 left-0 w-full z-50 p-4 md:p-6">
-                <div className="mx-auto max-w-7xl px-4 md:px-6 py-4 rounded-3xl border border-white/10 bg-black/20 backdrop-blur-sm">
+            <header className="fixed top-0 left-0 w-full z-[110] p-4 md:p-6 pointer-events-none">
+                <div className={`pointer-events-auto mx-auto max-w-[1400px] px-6 md:px-8 py-4 rounded-full backdrop-blur-md shadow-sm border transition-colors duration-300 ${borderColorClass} ${bgColorClass}`}>
                     <nav className="relative flex items-center justify-between w-full">
+                        
+                        {/* LEFT: Categories */}
                         <div className="flex items-center gap-8">
-                            <div className="hidden md:flex items-center gap-8 font-sans text-sm uppercase tracking-wider text-white">
-                                <Link href="/catalog" className="hover:text-white transition-colors">Catalog</Link>
-                                <Link href="/reach-out" className="hover:text-white transition-colors">Reach Out</Link>
+                            <div className={`hidden md:flex items-center gap-6 font-sans text-xs uppercase tracking-widest font-bold ${textColorClass}`}>
+                                <Link href="/catalog" className="hover:opacity-60 transition-opacity">Catalog</Link>
+                                <Link href="/shop/hoodies" className="hover:opacity-60 transition-opacity">Hoodies</Link>
+                                <Link href="/shop/sweatpants" className="hover:opacity-60 transition-opacity">Sweatpants</Link>
                             </div>
                             <div className="md:hidden">
-                                <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-white"> <MenuIcon /> </button>
+                                <button onClick={() => setIsMenuOpen(!isMenuOpen)} className={textColorClass}> <MenuIcon /> </button>
                             </div>
                         </div>
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -ml-4">
-                            <Link href="/home">
-                                <span className="font-heading font-bold text-white text-xl md:text-2xl" style={{ textShadow: '0 0 15px rgba(255, 255, 255, 1)' }}>SWAMBASIC</span>
+                        
+                        {/* CENTER: WANTS AND NEEDS LOGO */}
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                            <Link href="/home" className="block relative w-32 h-10">
+                                <Image 
+                                    src="https://cdn.shopify.com/s/files/1/0975/8736/4138/files/Logos_35.webp?v=1767768515"
+                                    alt="Wants & Needs"
+                                    fill
+                                    className={`object-contain transition-all duration-300 ${isCatalogMain ? 'brightness-0 invert' : ''}`}
+                                    priority
+                                />
                             </Link>
                         </div>
-                        <div className="flex justify-end items-center gap-6 md:gap-8 text-white">
-                            <Link href="/account" className="hover:text-white transition-colors"><UserIcon /></Link>
-                            <Link href="/cart" className="hover:text-white transition-colors"><CartIcon /></Link>
+
+                        {/* RIGHT: Utility */}
+                        <div className={`flex justify-end items-center gap-6 md:gap-8 ${textColorClass} font-sans text-xs uppercase tracking-widest font-bold`}>
+                            <Link href="/track-order" className="hidden md:block hover:opacity-60 transition-opacity">Track Order</Link>
+                            <Link href="/account" className="hover:opacity-60 transition-opacity"><UserIcon /></Link>
+                            <Link href="/cart" className="hover:opacity-60 transition-opacity"><CartIcon /></Link>
                         </div>
                     </nav>
                 </div>
@@ -3168,11 +3329,14 @@ export const Header = () => {
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
-                        className="md:hidden fixed top-24 left-4 right-4 bg-black/50 backdrop-blur-xl border border-white/10 rounded-2xl z-[100] p-6 shadow-2xl"
+                        className="md:hidden fixed top-24 left-4 right-4 bg-white/95 backdrop-blur-xl border border-black/10 rounded-2xl z-[120] p-6 shadow-2xl text-black"
                     >
-                        {/* --- FIX: Added onClick handlers to close the menu on navigation --- */}
-                        <nav className="flex flex-col items-start gap-4 text-white font-sans text-lg uppercase">
-                            <Link href="/catalog" onClick={() => setIsMenuOpen(false)} className="w-full py-2">Catalog</Link>
+                        
+                        <nav className="flex flex-col items-start gap-4 font-sans text-lg uppercase font-bold tracking-wider">
+                            <Link href="/catalog" onClick={() => setIsMenuOpen(false)} className="w-full py-2 border-b border-gray-100">Catalog</Link>
+                            <Link href="/shop/hoodies" onClick={() => setIsMenuOpen(false)} className="w-full py-2 border-b border-gray-100">Hoodies</Link>
+                            <Link href="/shop/sweatpants" onClick={() => setIsMenuOpen(false)} className="w-full py-2 border-b border-gray-100">Sweatpants</Link>
+                            <Link href="/track-order" onClick={() => setIsMenuOpen(false)} className="w-full py-2 border-b border-gray-100">Track Order</Link>
                             <Link href="/reach-out" onClick={() => setIsMenuOpen(false)} className="w-full py-2">Reach Out</Link>
                         </nav>
                     </motion.div>
@@ -3181,6 +3345,8 @@ export const Header = () => {
         </>
     );
 };
+
+
 
 ### ./src/components/core/InteractiveLiquidBackground.tsx ###
 
@@ -3273,7 +3439,7 @@ const LiquidGradientMaterial = shaderMaterial(
 extend({ LiquidGradientMaterial });
 
 function Scene() {
-  const materialRef = useRef<any>();
+  const materialRef = useRef<any>(null);
   const { viewport } = useThree();
 
   useFrame((state, delta) => {
@@ -3419,9 +3585,7 @@ extend({ LiquidGrainMaterial });
 const Scene = () => {
     const materialRef = useRef<any>();
     const { viewport } = useThree();
-    
     useFrame((state, delta) => { if (materialRef.current) materialRef.current.uniforms.u_time.value += delta; });
-    
     return (
         <mesh scale={[viewport.width, viewport.height, 1]}>
             <planeGeometry args={[1, 1]} />
@@ -3432,7 +3596,7 @@ const Scene = () => {
 };
 
 export const LiquidGrainBackground = () => (
-    <div className="fixed inset-0 z-[-1]" style={{ filter: 'blur(8px)' }}>
+    <div className="fixed inset-0 z-0 pointer-events-none" style={{ background: '#000000' }}>
         <Canvas camera={{ position: [0, 0, 1] }}>
             <Scene />
         </Canvas>
@@ -3655,17 +3819,12 @@ export default CountdownTimer;
 import { motion } from "framer-motion";
 import Image from 'next/image';
 import { useMediaQuery } from "@/hooks/useMediaQuery";
-import { useState, useEffect, useMemo, useCallback } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
-// ==================================================================
-// OPTIMIZED CONSTANTS AND VARIANTS
-// ==================================================================
-
-// Pre-computed variants for better performance
 const DESKTOP_VARIANTS = {
   container: {
     hidden: {},
-    visible: { transition: { delayChildren: 1.2, staggerChildren: 1.2 } },
+    visible: { transition: { delayChildren: 0.5, staggerChildren: 0.2 } },
   },
   logoContainer: {
     hidden: { width: 0, opacity: 0, scale: 0 },
@@ -3678,25 +3837,15 @@ const DESKTOP_VARIANTS = {
   },
   image: {
     hidden: { rotate: -180 },
-    visible: { rotate: 0, transition: { duration: 1, delay: 1.2 } }
+    visible: { rotate: 0, transition: { duration: 1, delay: 0.5 } }
   }
 };
 
 const MOBILE_VARIANTS = {
-  container: {
-    visible: {
-      transition: {
-        staggerChildren: 0.6,
-      }
-    }
-  },
+  container: { visible: { transition: { staggerChildren: 0.2 } } },
   logoContainer: {
     hidden: { opacity: 0, scale: 0.5 },
-    visible: { opacity: 1, scale: 1, transition: { duration: 1.0, ease: "easeInOut", delay: 0.4 } }
-  },
-  logoRotation: {
-    hidden: { rotate: -180 },
-    visible: { rotate: 0, transition: { duration: 1.2, ease: "easeInOut" } }
+    visible: { opacity: 1, scale: 1, transition: { duration: 1.0, ease: "easeInOut", delay: 0.2 } }
   },
   text: {
     hidden: { y: "100%", opacity: 0 },
@@ -3704,167 +3853,90 @@ const MOBILE_VARIANTS = {
   }
 };
 
-// Pre-computed text split for desktop
-const TEXT = "SWAMBASIC";
-const TEXT_FIRST_PART = TEXT.slice(0, 4).split('');
-const TEXT_SECOND_PART = TEXT.slice(4).split('');
+// UPDATED TEXT LOGIC
+const TEXT_LEFT = "WANTS".split('');
+const TEXT_RIGHT = "NEEDS".split('');
+const TEXT_FULL = "WANTS & NEEDS";
 
-// ==================================================================
-// OPTIMIZED DESKTOP LAYOUT
-// ==================================================================
 const DesktopLayout = () => {
-  // Memoized letter animations to prevent re-renders
-  const firstPartLetters = useMemo(() => 
-    TEXT_FIRST_PART.map((letter, index) => (
-      <motion.span 
-        key={`first-${index}`}
-        className="inline-block" 
-        initial={{ y: "100%" }} 
-        animate={{ y: 0 }} 
-        transition={{ duration: 0.5, delay: index * 0.1 }}
-      >
-        {letter}
-      </motion.span>
-    )), []
-  );
-
-  const secondPartLetters = useMemo(() => 
-    TEXT_SECOND_PART.map((letter, index) => (
-      <motion.span 
-        key={`second-${index}`}
-        className="inline-block" 
-        initial={{ y: "100%" }} 
-        animate={{ y: 0 }} 
-        transition={{ duration: 0.5, delay: (4 + index) * 0.1 }}
-      >
-        {letter}
-      </motion.span>
-    )), []
-  );
-
   return (
     <motion.div 
       layout
-      className="flex items-center justify-center" 
+      className="flex items-center justify-center text-black" 
       variants={DESKTOP_VARIANTS.container} 
       initial="hidden" 
       animate="visible"
     >
-      <span className="font-heading text-4xl md:text-6xl font-extrabold tracking-widest uppercase overflow-hidden text-shadow-glow">
-        {firstPartLetters}
-      </span>
+      <div className="flex">
+        {TEXT_LEFT.map((letter, index) => (
+            <motion.span key={`l-${index}`} className="font-heading text-5xl md:text-8xl font-black tracking-tight" initial={{ y: 100, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.5, delay: index * 0.1 }}>
+                {letter}
+            </motion.span>
+        ))}
+      </div>
+
       <motion.div 
-        className="flex items-center justify-center mx-3 md:mx-4" 
+        className="flex items-center justify-center mx-6 md:mx-8" 
         variants={DESKTOP_VARIANTS.logoContainer}
       >
-        <motion.div 
-          variants={DESKTOP_VARIANTS.image} 
-          className="relative w-36 h-36 md:w-56 md:h-56"
-        >
-          <Image 
-            src="https://cdn.jsdelivr.net/gh/manankadel/swambasic@main/public/logo-rotating.GIF"
-
-            alt="SWAMBASIC Logo" 
-            fill 
-            className="object-contain" 
-            unoptimized={true}
-            priority={true}
-            loading="eager"
-            sizes="(max-width: 768px) 144px, 224px"
-          />
+        <motion.div variants={DESKTOP_VARIANTS.image} className="relative w-24 h-24 md:w-32 md:h-32">
+          {/* Using a placeholder circle if you don't have the specific logo GIF, or use the Swambasic rotating one if you want */}
+          <div className="w-full h-full rounded-full border-4 border-black flex items-center justify-center">
+             <span className="font-sans font-bold text-2xl">&</span>
+          </div>
         </motion.div>
       </motion.div>
-      <span className="font-heading text-4xl md:text-6xl font-extrabold tracking-widest uppercase overflow-hidden text-shadow-glow">
-        {secondPartLetters}
-      </span>
+
+      <div className="flex">
+        {TEXT_RIGHT.map((letter, index) => (
+            <motion.span key={`r-${index}`} className="font-heading text-5xl md:text-8xl font-black tracking-tight" initial={{ y: 100, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.5, delay: 0.5 + (index * 0.1) }}>
+                {letter}
+            </motion.span>
+        ))}
+      </div>
     </motion.div>
   );
 };
 
-// ==================================================================
-// OPTIMIZED MOBILE LAYOUT
-// ==================================================================
 const MobileLayout = () => {
   return (
     <motion.div 
-      className="flex flex-col items-center justify-center gap-0"
+      className="flex flex-col items-center justify-center gap-4 text-black"
       initial="hidden"
       animate="visible"
       variants={MOBILE_VARIANTS.container}
     >
-      <motion.div variants={MOBILE_VARIANTS.logoContainer}>
-        <motion.div
-          className="relative w-60 h-60"
-          variants={MOBILE_VARIANTS.logoRotation}
-        >
-          <Image 
-            src="https://cdn.jsdelivr.net/gh/manankadel/swambasic@main/public/logo-rotating.GIF"
- alt="SWAMBASIC Logo" 
-            fill 
-            className="object-contain" 
-            unoptimized={true}
-            priority={true}
-            loading="eager"
-            sizes="240px"
-          />
-        </motion.div>
+       <motion.div variants={MOBILE_VARIANTS.logoContainer}>
+        <div className="w-32 h-32 rounded-full border-4 border-black flex items-center justify-center mb-4">
+             <span className="font-sans font-bold text-4xl">&</span>
+        </div>
       </motion.div>
 
       <div className="overflow-hidden">
         <motion.span 
-          className="font-heading text-4xl font-extrabold tracking-widest uppercase inline-block text-shadow-glow"
+          className="font-heading text-4xl font-black tracking-widest uppercase inline-block text-center"
           variants={MOBILE_VARIANTS.text}
         >
-          {TEXT}
+          {TEXT_FULL}
         </motion.span>
       </div>
     </motion.div>
   );
 };
 
-// ==================================================================
-// OPTIMIZED MAIN COMPONENT
-// ==================================================================
 export const GatewayAnimation = () => {
   const isMobile = useMediaQuery('(max-width: 767px)');
   const [hasMounted, setHasMounted] = useState(false);
 
-  // Optimized mount effect
   useEffect(() => {
-    const timer = requestAnimationFrame(() => {
-      setHasMounted(true);
-    });
-    return () => cancelAnimationFrame(timer);
+    setHasMounted(true);
   }, []);
 
-  // Memoized layout component selection
-  const LayoutComponent = useMemo(() => {
-    if (!hasMounted) return null;
-    return isMobile ? MobileLayout : DesktopLayout;
-  }, [isMobile, hasMounted]);
-
-  // Optimized placeholder with exact dimensions
-  if (!hasMounted) {
-    return (
-      <div 
-        className="h-[184px] md:h-[224px]" 
-        style={{ 
-          contain: 'layout style paint',
-          willChange: 'auto'
-        }} 
-      />
-    );
-  }
+  if (!hasMounted) return <div className="h-[200px]" />;
   
-  // Render with performance optimizations
   return (
-    <div 
-      style={{ 
-        contain: 'layout style paint',
-        willChange: 'transform, opacity'
-      }}
-    >
-      {LayoutComponent && <LayoutComponent key={isMobile ? "mobile" : "desktop"} />}
+    <div style={{ contain: 'layout style paint' }}>
+      {isMobile ? <MobileLayout /> : <DesktopLayout />}
     </div>
   );
 };
@@ -3894,52 +3966,18 @@ export const WaitlistForm = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, phone }),
       });
-
-      // DEBUG: Log response details
-      console.log('Response status:', response.status);
-      console.log('Response ok:', response.ok);
-      console.log('Response headers:', response.headers);
-
-      // Check if response has content and is JSON
-      let data = null;
-      const contentType = response.headers.get('content-type');
-      
-      console.log('Content-Type:', contentType); // DEBUG
-      
-      if (contentType && contentType.includes('application/json')) {
-        const text = await response.text();
-        console.log('Response text:', text); // DEBUG
-        
-        if (text) {
-          try {
-            data = JSON.parse(text);
-            console.log('Parsed data:', data); // DEBUG
-          } catch (parseError) {
-            console.error('Failed to parse JSON:', parseError);
-            data = { error: 'Invalid response from server' };
-          }
-        }
-      } else {
-        // If it's not JSON, let's see what we got
-        const text = await response.text();
-        console.log('Non-JSON response text:', text);
-      }
-
-      console.log('Final data object:', data); // DEBUG
+      const data = await response.json(); // Handle JSON response safely
 
       if (response.ok) {
-        console.log('Response was OK, setting success'); // DEBUG
         setStatus('success');
         setMessage("You're on the list. We'll be in touch.");
         setEmail('');
         setPhone('');
       } else {
-        console.log('Response was NOT OK, setting error'); // DEBUG
         setStatus('error');
         setMessage(data?.error || `Server error: ${response.status}`);
       }
     } catch (error) {
-      console.error('Network error:', error);
       setStatus('error');
       setMessage('Network error. Please try again.');
     }
@@ -3947,42 +3985,34 @@ export const WaitlistForm = () => {
 
   return (
     <div className="w-full max-w-sm mt-4 text-center">
-      {/* The main form is a flex column with a gap */}
       <form onSubmit={handleSubmit} className="flex flex-col items-stretch gap-4">
-        
-        {/* ================================================================== */}
-        {/* NEW LAYOUT: A horizontal flex container for the inputs.          */}
-        {/* ================================================================== */}
         <div className='flex flex-row gap-4'>
-            {/* Input 1: Email (shorter width) */}
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email"
               required
-              // UPDATED: rounded-3xl and adjusted placeholder text
-              className="h-11 w-1/2 flex-grow px-4 bg-white/5 border border-white/20 backdrop-blur-sm rounded-3xl focus:outline-none focus:border-white/50 transition-all duration-300 placeholder-foreground/50 font-sans"
+              // Changed: bg-black/5, border-black/20, placeholder-black/50
+              className="h-11 w-1/2 flex-grow px-4 bg-black/5 border border-black/20 backdrop-blur-sm rounded-3xl focus:outline-none focus:border-black/50 transition-all duration-300 placeholder-black/50 font-sans text-black"
               disabled={status === 'loading' || status === 'success'}
             />
-            {/* Input 2: Phone (shorter width) */}
             <input
               type="tel"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               placeholder="Phone"
-              // UPDATED: rounded-3xl and adjusted placeholder text
-              className="h-11 w-1/2 flex-grow px-4 bg-white/5 border border-white/20 backdrop-blur-sm rounded-3xl focus:outline-none focus:border-white/50 transition-all duration-300 placeholder-foreground/50 font-sans"
+              // Changed: bg-black/5, border-black/20, placeholder-black/50
+              className="h-11 w-1/2 flex-grow px-4 bg-black/5 border border-black/20 backdrop-blur-sm rounded-3xl focus:outline-none focus:border-black/50 transition-all duration-300 placeholder-black/50 font-sans text-black"
               disabled={status === 'loading' || status === 'success'}
             />
         </div>
 
-        {/* The button is now a direct child of the flex column, placing it below */}
         <motion.button
           type="submit"
           disabled={status === 'loading' || status === 'success'}
-          // UPDATED: rounded-3xl
-          className="h-11 px-6 bg-white/10 border border-white/20 backdrop-blur-sm rounded-3xl font-sans font-semibold text-white transition-all duration-300 disabled:opacity-50 hover:border-white/40 hover:shadow-[0_0_20px_rgba(255,255,255,0.15)]"
+          // Changed: bg-black/10, text-black
+          className="h-11 px-6 bg-black/10 border border-black/20 backdrop-blur-sm rounded-3xl font-sans font-semibold text-black transition-all duration-300 disabled:opacity-50 hover:border-black/40 hover:shadow-[0_0_20px_rgba(0,0,0,0.15)]"
           whileTap={{ scale: status !== 'loading' ? 0.95 : 1 }}
           onMouseEnter={playHoverSound}
         >
@@ -3991,7 +4021,7 @@ export const WaitlistForm = () => {
       </form>
       
       {message && (
-        <p className={`mt-3 text-sm ${status === 'error' ? 'text-red-400' : 'text-green-400'}`}>
+        <p className={`mt-3 text-sm ${status === 'error' ? 'text-red-500' : 'text-green-600'}`}>
           {message}
         </p>
       )}
@@ -4005,10 +4035,9 @@ export const WaitlistForm = () => {
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-// THE FIX: We now import BOTH types from the centralized `types` file.
 import { ShopifyAddress, NewAddressInput } from "@/types/shopify";
 
-// AddressCard component remains the same
+// AddressCard component
 const AddressCard = ({ address }: { address: ShopifyAddress }) => (
   <div className="p-6 border border-white/10 rounded-lg">
     <p className="font-sans">
@@ -4017,6 +4046,9 @@ const AddressCard = ({ address }: { address: ShopifyAddress }) => (
       {address.city}, {address.province} {address.zip}<br />
       {address.country}
     </p>
+    {address.phone && (
+        <p className="font-mono text-sm text-white/50 mt-2">{address.phone}</p>
+    )}
     <div className="mt-4 flex gap-4 font-sans text-xs uppercase tracking-wider">
       <button className="hover:text-white">Edit</button>
       <button className="hover:text-red-400">Delete</button>
@@ -4030,22 +4062,71 @@ interface AddressFormProps {
 }
 
 const AddressForm = ({ onCancel, onFormSubmit }: AddressFormProps) => {
-    // ... all the state and JSX for this component remains the same
     const [address1, setAddress1] = useState('');
     const [address2, setAddress2] = useState('');
     const [city, setCity] = useState('');
     const [province, setProvince] = useState('');
     const [country, setCountry] = useState('');
     const [zip, setZip] = useState('');
+    const [phone, setPhone] = useState('');
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        onFormSubmit({ address1, address2, city, province, country, zip });
+        onFormSubmit({ address1, address2, city, province, country, zip, phone });
     };
 
     return (
         <form onSubmit={handleSubmit} className="space-y-4 p-6 border border-white/10 rounded-lg">
-            {/* ... form inputs ... */}
+             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                     <label className="block text-xs uppercase text-white/50 mb-1">Address 1 *</label>
+                     <input type="text" value={address1} onChange={e => setAddress1(e.target.value)} required className="w-full px-3 py-2 bg-white/5 border border-white/20 rounded font-sans focus:outline-none focus:border-white/50 transition-colors" />
+                </div>
+                <div>
+                     <label className="block text-xs uppercase text-white/50 mb-1">Address 2</label>
+                     <input type="text" value={address2} onChange={e => setAddress2(e.target.value)} className="w-full px-3 py-2 bg-white/5 border border-white/20 rounded font-sans focus:outline-none focus:border-white/50 transition-colors" />
+                </div>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+                 <div>
+                     <label className="block text-xs uppercase text-white/50 mb-1">City *</label>
+                     <input type="text" value={city} onChange={e => setCity(e.target.value)} required className="w-full px-3 py-2 bg-white/5 border border-white/20 rounded font-sans focus:outline-none focus:border-white/50 transition-colors" />
+                </div>
+                 <div>
+                     <label className="block text-xs uppercase text-white/50 mb-1">State/Province *</label>
+                     <input type="text" value={province} onChange={e => setProvince(e.target.value)} required className="w-full px-3 py-2 bg-white/5 border border-white/20 rounded font-sans focus:outline-none focus:border-white/50 transition-colors" />
+                </div>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+                 <div>
+                     <label className="block text-xs uppercase text-white/50 mb-1">Country *</label>
+                     <input type="text" value={country} onChange={e => setCountry(e.target.value)} required className="w-full px-3 py-2 bg-white/5 border border-white/20 rounded font-sans focus:outline-none focus:border-white/50 transition-colors" />
+                </div>
+                 <div>
+                     <label className="block text-xs uppercase text-white/50 mb-1">Zip/Postal *</label>
+                     <input type="text" value={zip} onChange={e => setZip(e.target.value)} required className="w-full px-3 py-2 bg-white/5 border border-white/20 rounded font-sans focus:outline-none focus:border-white/50 transition-colors" />
+                </div>
+            </div>
+            
+            {/* PHONE INPUT - MANDATORY */}
+            <div>
+                 <label className="block text-xs uppercase text-white/50 mb-1">Phone Number *</label>
+                 <input 
+                    type="tel" 
+                    value={phone} 
+                    onChange={e => setPhone(e.target.value)} 
+                    required 
+                    minLength={10}
+                    pattern="[0-9+ ]{10,}"
+                    title="Please enter a valid phone number (at least 10 digits)"
+                    className="w-full px-3 py-2 bg-white/5 border border-white/20 rounded font-sans focus:outline-none focus:border-white/50 transition-colors" 
+                />
+            </div>
+
+            <div className="flex gap-4 pt-4">
+                <button type="submit" className="px-6 py-2 bg-white text-black font-bold uppercase text-sm rounded hover:bg-white/90 transition-colors">Save Address</button>
+                <button type="button" onClick={onCancel} className="px-6 py-2 border border-white/20 text-white uppercase text-sm rounded hover:bg-white/10 transition-colors">Cancel</button>
+            </div>
         </form>
     );
 }
@@ -4055,7 +4136,6 @@ interface AddressesProps {
 }
 
 const Addresses = ({ addresses }: AddressesProps) => {
-  // ... all the logic and JSX for this main component remains the same
   const router = useRouter();
   const [isAdding, setIsAdding] = useState(false);
   const [error, setError] = useState('');
@@ -4079,7 +4159,40 @@ const Addresses = ({ addresses }: AddressesProps) => {
 
   return (
     <div className="max-w-lg space-y-8">
-        {/* ... component JSX ... */}
+        <div className="flex justify-between items-end">
+            <h2 className="font-display text-3xl font-bold">Saved Addresses</h2>
+            {!isAdding && (
+                <button 
+                    onClick={() => setIsAdding(true)}
+                    className="text-sm font-sans uppercase tracking-wider hover:text-white text-white/70 transition-colors"
+                >
+                    + Add New
+                </button>
+            )}
+        </div>
+
+        {error && (
+            <div className="p-4 bg-red-900/20 border border-red-500/50 text-red-400 rounded-lg text-sm">
+                {error}
+            </div>
+        )}
+
+        {isAdding ? (
+            <AddressForm 
+                onCancel={() => setIsAdding(false)} 
+                onFormSubmit={handleAddNewAddress} 
+            />
+        ) : (
+            <div className="space-y-4">
+                {addresses.length === 0 ? (
+                    <p className="text-white/50 font-sans">No addresses saved yet.</p>
+                ) : (
+                    addresses.map(address => (
+                        <AddressCard key={address.id} address={address} />
+                    ))
+                )}
+            </div>
+        )}
     </div>
   );
 };
@@ -4094,11 +4207,30 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 
-// This is the same reusable input component from before
-const FormInput = ({ label, type, id, value, onChange }: { label: string; type: string; id: string; value: string; onChange: (e: React.ChangeEvent<HTMLInputElement>) => void; }) => (
+const FormInput = ({ 
+  label, 
+  type, 
+  id, 
+  value, 
+  onChange, 
+  required = false,
+  pattern,
+  minLength,
+  title
+}: { 
+  label: string; 
+  type: string; 
+  id: string; 
+  value: string; 
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void; 
+  required?: boolean;
+  pattern?: string;
+  minLength?: number;
+  title?: string;
+}) => (
   <div>
     <label htmlFor={id} className="font-sans text-xs uppercase tracking-wider text-white/50">
-      {label}
+      {label} {required && <span className="text-red-400">*</span>}
     </label>
     <input
       type={type}
@@ -4106,8 +4238,11 @@ const FormInput = ({ label, type, id, value, onChange }: { label: string; type: 
       name={id}
       value={value}
       onChange={onChange}
-      required
-      autoComplete={type === 'password' ? (id === 'password' ? 'current-password' : 'new-password') : 'email'}
+      required={required}
+      pattern={pattern}
+      minLength={minLength}
+      title={title}
+      autoComplete={type === 'password' ? (id === 'password' ? 'current-password' : 'new-password') : (id === 'phone' ? 'tel' : 'email')}
       className="mt-2 w-full px-4 py-3 bg-white/5 border border-white/20 rounded-md focus:outline-none focus:border-white/50 transition-colors font-sans"
     />
   </div>
@@ -4115,14 +4250,14 @@ const FormInput = ({ label, type, id, value, onChange }: { label: string; type: 
 
 const LoginRegister = () => {
   const [isLoginView, setIsLoginView] = useState(true);
-  const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', password: '' });
+  const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', password: '', phone: '' });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    setError(null); // Clear error on new input
+    setError(null);
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -4146,10 +4281,8 @@ const LoginRegister = () => {
       }
 
       if (isLoginView) {
-        // On successful login, redirect to the main account page
         router.push('/account');
       } else {
-        // On successful registration, switch to the login view with a success message
         setIsLoginView(true);
         setError("Account created successfully. Please sign in.");
       }
@@ -4177,12 +4310,28 @@ const LoginRegister = () => {
         >
           {!isLoginView && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <FormInput label="First Name" type="text" id="firstName" value={formData.firstName} onChange={handleInputChange} />
-              <FormInput label="Last Name" type="text" id="lastName" value={formData.lastName} onChange={handleInputChange} />
+              <FormInput label="First Name" type="text" id="firstName" value={formData.firstName} onChange={handleInputChange} required />
+              <FormInput label="Last Name" type="text" id="lastName" value={formData.lastName} onChange={handleInputChange} required />
             </div>
           )}
-          <FormInput label="Email Address" type="email" id="email" value={formData.email} onChange={handleInputChange} />
-          <FormInput label="Password" type="password" id="password" value={formData.password} onChange={handleInputChange} />
+          
+          {/* MANDATORY PHONE INPUT */}
+          {!isLoginView && (
+             <FormInput 
+                label="Phone Number" 
+                type="tel" 
+                id="phone" 
+                value={formData.phone} 
+                onChange={handleInputChange} 
+                required={true}
+                minLength={10}
+                pattern="[0-9+ ]{10,}"
+                title="Please enter a valid phone number"
+             />
+          )}
+
+          <FormInput label="Email Address" type="email" id="email" value={formData.email} onChange={handleInputChange} required />
+          <FormInput label="Password" type="password" id="password" value={formData.password} onChange={handleInputChange} required />
         </motion.div>
 
         {error && (
@@ -4437,7 +4586,23 @@ import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 
 interface FormInputProps { id: string; label: string; type?: string; value: string; onChange: (e: React.ChangeEvent<HTMLInputElement>) => void; required?: boolean; disabled?: boolean; }
-const FormInput = ({ id, label, type = "text", value, onChange, required = true, disabled = false }: FormInputProps) => (<div className="relative"><label htmlFor={id} className="font-sans text-xs uppercase tracking-wider text-white/60">{label}</label><input type={type} id={id} name={id} value={value} onChange={onChange} required={required} disabled={disabled} autoComplete={type === 'password' ? 'current-password' : 'email'} className="w-full mt-2 px-1 py-2 bg-transparent text-white border-b-2 border-white/20 focus:outline-none focus:border-white transition-colors font-sans disabled:opacity-50" /></div>);
+
+const FormInput = ({ id, label, type = "text", value, onChange, required = true, disabled = false }: FormInputProps) => (
+    <div className="relative w-full">
+        <label htmlFor={id} className="font-sans text-xs font-bold uppercase tracking-widest text-black mb-2 block">{label}</label>
+        <input 
+            type={type} 
+            id={id} 
+            name={id} 
+            value={value} 
+            onChange={onChange} 
+            required={required} 
+            disabled={disabled} 
+            autoComplete={type === 'password' ? 'current-password' : 'email'} 
+            className="w-full px-4 py-3 bg-white text-black border border-black focus:outline-none focus:ring-2 focus:ring-black transition-all font-sans placeholder:text-gray-400" 
+        />
+    </div>
+);
 
 export const AuthForm = () => {
     const router = useRouter();
@@ -4448,51 +4613,62 @@ export const AuthForm = () => {
     const [regFirstName, setRegFirstName] = useState(''); const [regLastName, setRegLastName] = useState('');
     const [regEmail, setRegEmail] = useState(''); const [regPassword, setRegPassword] = useState('');
 
-    const handleApiSubmit = async (endpoint: string, body: Record<string, unknown>) => { setIsLoading(true); setError(''); try { const response = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }); const data = await response.json(); if (!response.ok) throw new Error(data.error || 'Something went wrong'); router.push('/home'); router.refresh(); } catch (err: any) { setError(err.message); } finally { setIsLoading(false); } };
+    const handleApiSubmit = async (endpoint: string, body: Record<string, unknown>) => { 
+        setIsLoading(true); setError(''); 
+        try { 
+            const response = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }); 
+            const data = await response.json(); 
+            if (!response.ok) throw new Error(data.error || 'Something went wrong'); 
+            router.push('/home'); router.refresh(); 
+        } catch (err: any) { setError(err.message); } finally { setIsLoading(false); } 
+    };
+
     const handleLoginSubmit = (e: React.FormEvent) => { e.preventDefault(); handleApiSubmit('/api/auth/login', { email: loginEmail, password: loginPassword }); };
     const handleRegisterSubmit = (e: React.FormEvent) => { e.preventDefault(); handleApiSubmit('/api/auth/register', { firstName: regFirstName, lastName: regLastName, email: regEmail, password: regPassword }); };
     const toggleFormType = (type: 'login' | 'register') => { if(!isLoading) { setFormType(type); setError(''); } };
 
     return (
-        // ...but this div re-enables pointer events for itself and all its children.
-        <div className="w-[80%] max-w-sm md:max-w-md mx-auto flex flex-col items-center pointer-events-auto">
-            <div className="w-full h-[450px] md:h-[520px]" style={{ perspective: '1200px' }}>
-                <motion.div
-                    className="relative w-full h-full"
-                    animate={{ rotateY: formType === 'login' ? 0 : 180 }}
-                    transition={{ type: 'spring', stiffness: 200, damping: 25 }}
-                    style={{ transformStyle: 'preserve-3d' }}
-                >
-                    {/* FRONT OF THE CARD (LOGIN) */}
-                    <div className="absolute w-full h-full rounded-2xl border border-white/15 bg-white/5 backdrop-blur-xl shadow-2xl shadow-black/40" style={{ backfaceVisibility: 'hidden' }}>
-                        <form onSubmit={handleLoginSubmit} className="relative z-10 w-full h-full p-10 flex flex-col justify-center space-y-10">
-                            <h2 className="font-display text-2xl md:text-4xl font-bold text-center">Sign In</h2>
-                            <FormInput id="login-email" label="Email" type="email" value={loginEmail} onChange={(e) => setLoginEmail(e.target.value)} disabled={isLoading} />
-                            <FormInput id="login-password" label="Password" type="password" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} disabled={isLoading} />
-                            <button type="submit" disabled={isLoading} className="w-full mt-4 px-8 py-3 bg-white text-black font-sans font-bold uppercase tracking-widest hover:bg-white/80 transition-colors disabled:opacity-50">{isLoading && formType === 'login' ? '...' : 'Sign In'}</button>
-                            <p className="text-center text-xs text-white/50">Don't have an account? <button type='button' onClick={() => toggleFormType('register')} className="font-bold hover:text-white transition">Create one</button>.</p>
-                        </form>
-                    </div>
-
-                    {/* BACK OF THE CARD (REGISTER) */}
-                    <div className="absolute w-full h-full rounded-2xl border border-white/15 bg-white/5 backdrop-blur-xl shadow-2xl shadow-black/40" style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}>
-                        <form onSubmit={handleRegisterSubmit} className="relative z-10 w-full h-full p-10 flex flex-col justify-center space-y-3">
-                            <h2 className="font-display text-2xl md:text-4xl font-bold text-center">Join Us</h2>
-                            <div className="grid grid-cols-2 gap-x-6">
-                                <FormInput id="reg-firstName" label="First Name" value={regFirstName} onChange={(e) => setRegFirstName(e.target.value)} disabled={isLoading} />
-                                <FormInput id="reg-lastName" label="Last Name" value={regLastName} onChange={(e) => setRegLastName(e.target.value)} disabled={isLoading} />
-                            </div>
-                            <FormInput id="reg-email" label="Email" type="email" value={regEmail} onChange={(e) => setRegEmail(e.target.value)} disabled={isLoading} />
-                            <FormInput id="reg-password" label="Password" type="password" value={regPassword} onChange={(e) => setRegPassword(e.target.value)} disabled={isLoading} />
-                            <button type="submit" disabled={isLoading} className="w-full mt-2 px-8 py-3 bg-white text-black font-sans font-bold uppercase tracking-widest hover:bg-white/80 transition-colors disabled:opacity-50">{isLoading && formType === 'register' ? '...' : 'Join'}</button>
-                            <p className="text-center text-xs text-white/50">Already have an account? <button type='button' onClick={() => toggleFormType('login')} className="font-bold hover:text-white transition">Sign in</button>.</p>
-                        </form>
-                    </div>
-                </motion.div>
+        <div className="w-full max-w-md mx-auto flex flex-col items-center pointer-events-auto p-6">
+            <div className="w-full bg-white border border-gray-200 shadow-xl p-8 md:p-12">
+                {formType === 'login' ? (
+                    <form onSubmit={handleLoginSubmit} className="flex flex-col space-y-6">
+                        <h2 className="font-display text-3xl font-black text-black text-center mb-4 uppercase">Login</h2>
+                        <FormInput id="login-email" label="Email" type="email" value={loginEmail} onChange={(e) => setLoginEmail(e.target.value)} disabled={isLoading} />
+                        <FormInput id="login-password" label="Password" type="password" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} disabled={isLoading} />
+                        
+                        <button type="submit" disabled={isLoading} className="w-full mt-4 px-8 py-4 bg-black text-white font-sans font-bold uppercase tracking-widest hover:bg-gray-800 transition-colors disabled:opacity-50">
+                            {isLoading ? 'Processing...' : 'Sign In'}
+                        </button>
+                        
+                        <div className="text-center pt-4 border-t border-gray-100">
+                            <span className="text-xs text-gray-500 font-sans uppercase tracking-wide">New Client? </span>
+                            <button type='button' onClick={() => toggleFormType('register')} className="text-xs font-bold uppercase tracking-wide text-black border-b border-black ml-2 hover:opacity-60">Create Account</button>
+                        </div>
+                    </form>
+                ) : (
+                    <form onSubmit={handleRegisterSubmit} className="flex flex-col space-y-6">
+                        <h2 className="font-display text-3xl font-black text-black text-center mb-4 uppercase">Register</h2>
+                        <div className="grid grid-cols-2 gap-4">
+                            <FormInput id="reg-firstName" label="First Name" value={regFirstName} onChange={(e) => setRegFirstName(e.target.value)} disabled={isLoading} />
+                            <FormInput id="reg-lastName" label="Last Name" value={regLastName} onChange={(e) => setRegLastName(e.target.value)} disabled={isLoading} />
+                        </div>
+                        <FormInput id="reg-email" label="Email" type="email" value={regEmail} onChange={(e) => setRegEmail(e.target.value)} disabled={isLoading} />
+                        <FormInput id="reg-password" label="Password" type="password" value={regPassword} onChange={(e) => setRegPassword(e.target.value)} disabled={isLoading} />
+                        
+                        <button type="submit" disabled={isLoading} className="w-full mt-4 px-8 py-4 bg-black text-white font-sans font-bold uppercase tracking-widest hover:bg-gray-800 transition-colors disabled:opacity-50">
+                            {isLoading ? 'Processing...' : 'Create Account'}
+                        </button>
+                        
+                        <div className="text-center pt-4 border-t border-gray-100">
+                            <span className="text-xs text-gray-500 font-sans uppercase tracking-wide">Have an account? </span>
+                            <button type='button' onClick={() => toggleFormType('login')} className="text-xs font-bold uppercase tracking-wide text-black border-b border-black ml-2 hover:opacity-60">Sign In</button>
+                        </div>
+                    </form>
+                )}
             </div>
              
              <div className="h-6 mt-6 text-center">
-                {error && <p className="text-sm text-red-400" role="alert">{error}</p>}
+                {error && <p className="text-sm font-sans text-red-600 font-medium" role="alert">{error}</p>}
             </div>
         </div>
     );
@@ -4513,110 +4689,77 @@ import { GridView } from './GridView';
 import { LiquidGrainBackground } from '@/components/core/LiquidGrainBackground';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 
-const CollectionSplash = ({ onReveal, isClosing = false }: { onReveal: () => void; isClosing?: boolean }) => {
-  const BAR_HEIGHT = 176;
+const SYNC_TRANSITION = {
+  duration: 1.2,
+  ease: [0.76, 0, 0.24, 1],
+};
+
+interface CollectionSplashProps {
+  onReveal: () => void;
+  shouldAnimateEntry: boolean;
+}
+
+const CollectionSplash = ({ onReveal, shouldAnimateEntry }: CollectionSplashProps) => {
   const isDesktop = useMediaQuery('(min-width: 640px)');
 
-  const textContent = (
-    <div className="text-center px-4">
-      <div className="transform translate-y-0 sm:-translate-y-10">
-        <p className="font-sans uppercase tracking-widest text-lg sm:text-xl text-white/50 mb-6 sm:mb-8">Collection Vol. 1</p>
-        <h1 className="font-heading font-black text-6xl sm:text-8xl md:text-9xl lg:text-[10rem] leading-none">
-          Sins  of
-        </h1>
-      </div>
-      <div className="transform translate-y-0 sm:translate-y-10">
-        <h1 className="font-heading font-black text-6xl sm:text-8xl md:text-9xl lg:text-[10rem] leading-none">
-          Saints
-        </h1>
-        <p className="font-sans uppercase tracking-widest text-lg sm:text-xl text-white/50 mt-8 sm:mt-12">
-          Click to Explore The Collection.
-        </p>
-      </div>
-    </div>
-  );
+  // VARIANTS
+  const topVariants = {
+    closed: { y: '0%' },
+    open: { y: '-100%' }
+  };
 
-  const clipPathOpen = 'polygon(0 0, 100% 0, 100% calc(50% - 88px), 0 calc(50% - 88px), 0 calc(50% + 88px), 100% calc(50% + 88px), 100% 100%, 0 100%)';
-  const clipPathClosed = 'polygon(0 0, 100% 0, 100% 0, 0 0, 0 100%, 100% 100%, 100% 100%, 0 100%)';
+  const bottomVariants = {
+    closed: { y: '0%' },
+    open: { y: '100%' }
+  };
 
   return (
     <motion.div
       key="splash"
-      initial={isClosing ? {} : undefined}
-      animate={isClosing ? {} : undefined}
-      exit={{}}
-      className="fixed inset-0 z-20 cursor-pointer overflow-hidden"
-      onClick={!isClosing ? onReveal : undefined}
+      className="fixed inset-0 z-[100] cursor-pointer overflow-hidden"
+      onClick={onReveal}
+      initial={shouldAnimateEntry ? "open" : "closed"}
+      animate="closed"
+      exit="open"
     >
+      {/* 
+        TOP SHUTTER
+        Height: 50% minus 1px gap.
+      */}
       <motion.div 
-        initial={isClosing ? { y: '-100%' } : undefined} 
-        animate={isClosing ? { y: 0 } : undefined} 
-        exit={!isClosing ? { y: '-100%' } : undefined} 
-        transition={{ 
-          duration: isDesktop ? 1.2 : 0.6,
-          ease: [0.76, 0, 0.24, 1] 
-        }} 
-        className="absolute top-0 left-0 w-full bg-black border-b border-white/20 will-change-transform"
-        style={{ 
-          height: `calc(50% - ${BAR_HEIGHT / 2}px)`,
-          transform: 'translateZ(0)'
-        }} 
-      />
-      
-      <motion.div 
-        initial={isClosing ? { y: '100%' } : undefined} 
-        animate={isClosing ? { y: 0 } : undefined} 
-        exit={!isClosing ? { y: '100%' } : undefined} 
-        transition={{ 
-          duration: isDesktop ? 1.2 : 0.6,
-          ease: [0.76, 0, 0.24, 1] 
-        }} 
-        className="absolute bottom-0 left-0 w-full bg-black border-t border-white/20 will-change-transform"
-        style={{ 
-          height: `calc(50% - ${BAR_HEIGHT / 2}px)`,
-          transform: 'translateZ(0)'
-        }} 
-      />
-      
-      <motion.div 
-        className="absolute inset-0 grid place-items-center text-black overflow-hidden"
-        style={{ 
-          clipPath: isDesktop ? clipPathOpen : 'none',
-          transform: 'translateZ(0)'
-        }} 
-        initial={isClosing && isDesktop ? { clipPath: clipPathClosed } : undefined}
-        animate={isClosing && isDesktop ? { clipPath: clipPathOpen } : undefined}
-        exit={!isClosing ? { 
-          clipPath: isDesktop ? clipPathClosed : 'none',
-          opacity: 0 
-        } : undefined}
-        transition={{ 
-          duration: isDesktop ? 1.2 : 0.6,
-          ease: [0.76, 0, 0.24, 1] 
-        }}
+        variants={topVariants}
+        transition={SYNC_TRANSITION}
+        className="absolute top-0 left-0 w-full bg-black border-b border-white/20 will-change-transform flex items-end justify-center pb-4 md:pb-8 overflow-hidden"
+        style={{ height: 'calc(50% - 65px)' }}
       >
-        {textContent}
+        {/* Adjusted Translate Y to 15% (Moved Up) */}
+        <div className="text-center mix-blend-difference text-white ">
+            <p className="font-sans uppercase tracking-widest text-[10px] md:text-sm text-white/50 mb-2 md:mb-6">Collection Vol. 1</p>
+            <h1 className="font-heading font-black text-6xl sm:text-8xl md:text-9xl lg:text-[12rem] leading-none tracking-tighter">
+              TAKE
+            </h1>
+        </div>
       </motion.div>
       
+      {/* 
+        BOTTOM SHUTTER
+        Height: 50% minus 1px gap.
+      */}
       <motion.div 
-        className="absolute inset-0 grid place-items-center text-white overflow-hidden"
-        style={{ 
-          mixBlendMode: 'difference', 
-          clipPath: isDesktop ? clipPathOpen : 'none',
-          transform: 'translateZ(0)'
-        }}
-        initial={isClosing && isDesktop ? { clipPath: clipPathClosed } : undefined}
-        animate={isClosing && isDesktop ? { clipPath: clipPathOpen } : undefined}
-        exit={!isClosing ? { 
-          clipPath: isDesktop ? clipPathClosed : 'none',
-          opacity: 0 
-        } : undefined}
-        transition={{ 
-          duration: isDesktop ? 1.2 : 0.6,
-          ease: [0.76, 0, 0.24, 1] 
-        }}
+        variants={bottomVariants}
+        transition={SYNC_TRANSITION}
+        className="absolute bottom-0 left-0 w-full bg-black border-t border-white/20 will-change-transform flex items-start justify-center pt-4 md:pt-8 overflow-hidden"
+        style={{ height: 'calc(50% - 65px)' }}
       >
-        {textContent}
+         {/* Adjusted Translate Y to -15% (Moved Down) */}
+         <div className="text-center mix-blend-difference text-white ">
+            <h1 className="font-heading font-black text-6xl sm:text-8xl md:text-9xl lg:text-[12rem] leading-none tracking-tighter">
+              ACTION
+            </h1>
+            <p className="font-sans uppercase tracking-widest text-[10px] md:text-sm text-white/50 mt-8 md:mt-12 cursor-pointer animate-pulse">
+              [ Click to Enter ]
+            </p>
+         </div>
       </motion.div>
     </motion.div>
   );
@@ -4628,17 +4771,15 @@ interface CatalogClientWrapperProps {
 }
 
 export const CatalogClientWrapper = ({ products }: CatalogClientWrapperProps) => {
-  const [isRevealed, setIsRevealed] = useState(false);
-  const [isClosing, setIsClosing] = useState(false);
-  // FIX: Default view is now 'grid'
+  const [showContent, setShowContent] = useState(false);
+  const [hasInteracted, setHasInteracted] = useState(false);
   const [viewMode, setViewMode] = useState<ViewMode>('grid');
   const [focusedIndex, setFocusedIndex] = useState(0);
 
   useEffect(() => {
     const html = document.documentElement;
     const body = document.body;
-    
-    if (!isRevealed || isClosing) {
+    if (!showContent) {
       html.style.overflow = 'hidden';
       body.style.overflow = 'hidden';
       html.classList.remove('catalog-revealed');
@@ -4647,45 +4788,53 @@ export const CatalogClientWrapper = ({ products }: CatalogClientWrapperProps) =>
       body.style.overflow = '';
       html.classList.add('catalog-revealed');
     }
-
     return () => {
       html.style.overflow = '';
       body.style.overflow = '';
       html.classList.remove('catalog-revealed');
     };
-  }, [isRevealed, isClosing]);
+  }, [showContent]);
+
+  const handleEnter = () => {
+    setShowContent(true);
+    setHasInteracted(true);
+  };
 
   const handleGoBack = () => {
-    setIsClosing(true);
-    setTimeout(() => {
-      setIsRevealed(false);
-      setIsClosing(false);
-    }, 1200);
+    setShowContent(false);
   };
 
   return (
-    <div className="relative">
+    <div className="relative min-h-screen">
+      {/* Background (Always Z-0) */}
       <LiquidGrainBackground />
       
-      <AnimatePresence>
-        {(!isRevealed || isClosing) && (
-          <CollectionSplash onReveal={() => setIsRevealed(true)} isClosing={isClosing} />
+      {/* The Gate (Z-Index 100) */}
+      <AnimatePresence mode="wait">
+        {!showContent && (
+          <CollectionSplash 
+            key="splash" 
+            onReveal={handleEnter} 
+            shouldAnimateEntry={hasInteracted} 
+          />
         )}
       </AnimatePresence>
       
+      {/* The Content (Z-Index 10) */}
       <AnimatePresence>
-        {isRevealed && !isClosing && (
+        {showContent && (
           <motion.div
             key="content"
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1, transition: { duration: 0.6, delay: 0.4 } }}
-            exit={{ opacity: 0, transition: { duration: 0.3 } }}
+            animate={{ opacity: 1, transition: { duration: 0.8, delay: 0.2 } }}
+            exit={{ opacity: 0, transition: { duration: 0.2 } }}
             className="relative z-10"
           >
             {viewMode === 'immersive' && (
               <ImmersiveView products={products} focusedIndex={focusedIndex} setFocusedIndex={setFocusedIndex} />
             )}
             {viewMode === 'grid' && <GridView products={products} />}
+            
             <CatalogControls viewMode={viewMode} setViewMode={setViewMode} goBack={handleGoBack} />
           </motion.div>
         )}
@@ -4693,7 +4842,6 @@ export const CatalogClientWrapper = ({ products }: CatalogClientWrapperProps) =>
     </div>
   );
 };
-
 
 ### ./src/components/modules/catalog/CatalogControls.tsx ###
 
@@ -4771,19 +4919,14 @@ export const GridView = ({ products }: GridViewProps) => {
   const [sortKey, setSortKey] = useState(sortOptions[0].key);
   const [isSortOpen, setIsSortOpen] = useState(false);
   const sortDropdownRef = useRef<HTMLDivElement>(null);
-
   const [gridSize, setGridSize] = useState(3); 
   const [isGridSizeOpen, setIsGridSizeOpen] = useState(false);
   const gridSizeRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (sortDropdownRef.current && !sortDropdownRef.current.contains(event.target as Node)) {
-        setIsSortOpen(false);
-      }
-      if (gridSizeRef.current && !gridSizeRef.current.contains(event.target as Node)) {
-        setIsGridSizeOpen(false);
-      }
+      if (sortDropdownRef.current && !sortDropdownRef.current.contains(event.target as Node)) setIsSortOpen(false);
+      if (gridSizeRef.current && !gridSizeRef.current.contains(event.target as Node)) setIsGridSizeOpen(false);
     };
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
@@ -4792,12 +4935,9 @@ export const GridView = ({ products }: GridViewProps) => {
   const sortedProducts = useMemo(() => {
     const newArray = [...products];
     switch (sortKey) {
-      case 'PRICE_LOW_TO_HIGH':
-        return newArray.sort((a, b) => parseFloat(a.priceRange.minVariantPrice.amount) - parseFloat(b.priceRange.minVariantPrice.amount));
-      case 'PRICE_HIGH_TO_LOW':
-        return newArray.sort((a, b) => parseFloat(b.priceRange.minVariantPrice.amount) - parseFloat(a.priceRange.minVariantPrice.amount));
-      default:
-        return products;
+      case 'PRICE_LOW_TO_HIGH': return newArray.sort((a, b) => parseFloat(a.priceRange.minVariantPrice.amount) - parseFloat(b.priceRange.minVariantPrice.amount));
+      case 'PRICE_HIGH_TO_LOW': return newArray.sort((a, b) => parseFloat(b.priceRange.minVariantPrice.amount) - parseFloat(a.priceRange.minVariantPrice.amount));
+      default: return products;
     }
   }, [products, sortKey]);
 
@@ -4807,26 +4947,14 @@ export const GridView = ({ products }: GridViewProps) => {
     <>
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="p-6 md:p-12 pt-32 md:pt-40">
         <div className="max-w-7xl mx-auto mb-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-          <h1 className="font-display text-4xl font-bold">The Collection</h1>
+          <h1 className="font-display text-4xl font-bold text-white">Catalog</h1>
           
           <div className="flex items-center gap-4 w-full md:w-auto">
             <div className="relative" ref={gridSizeRef}>
-              <button 
-                onClick={() => setIsGridSizeOpen(!isGridSizeOpen)} 
-                className="w-10 h-10 flex items-center justify-center bg-black/20 border border-white/10 rounded-full focus:outline-none transition-colors hover:border-white/30"
-                aria-label="Adjust grid density"
-              >
-                <GridDensityIcon />
-              </button>
+              <button onClick={() => setIsGridSizeOpen(!isGridSizeOpen)} className="w-10 h-10 flex items-center justify-center bg-white/5 border border-white/20 rounded-full focus:outline-none transition-colors hover:border-white/30 text-white"> <GridDensityIcon /> </button>
               <AnimatePresence>
                 {isGridSizeOpen && (
-                  <motion.div 
-                    initial={{ opacity: 0, y: -10 }} 
-                    animate={{ opacity: 1, y: 0 }} 
-                    exit={{ opacity: 0, y: -10 }} 
-                    // FIX: Panel is now anchored to the LEFT on mobile, and RIGHT on desktop.
-                    className="absolute top-full left-0 md:left-auto md:right-0 mt-2 w-48 bg-black/50 border border-white/10 rounded-lg backdrop-blur-xl shadow-lg z-30 p-4"
-                  >
+                  <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="absolute top-full left-0 md:left-auto md:right-0 mt-2 w-48 bg-black/80 border border-white/10 rounded-lg backdrop-blur-xl shadow-lg z-30 p-4">
                     <label className="font-sans text-xs uppercase text-white/50">View Density</label>
                     <input type="range" min="2" max="5" step="1" value={gridSize} onChange={(e) => setGridSize(Number(e.target.value))} className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer custom-slider mt-2"/>
                   </motion.div>
@@ -4835,18 +4963,14 @@ export const GridView = ({ products }: GridViewProps) => {
             </div>
 
             <div className="relative w-full md:w-48" ref={sortDropdownRef}>
-              <button onClick={() => setIsSortOpen(!isSortOpen)} className="w-full flex items-center justify-between bg-black/20 border border-white/10 rounded-lg px-4 py-2 text-sm font-sans focus:outline-none transition-colors hover:border-white/30">
+              <button onClick={() => setIsSortOpen(!isSortOpen)} className="w-full flex items-center justify-between bg-white/5 border border-white/20 rounded-lg px-4 py-2 text-sm font-sans focus:outline-none transition-colors hover:border-white/30 text-white">
                 <span>{selectedOption.label}</span>
                 <motion.div animate={{ rotate: isSortOpen ? 180 : 0 }}> <ChevronDown /> </motion.div>
               </button>
               <AnimatePresence>
                 {isSortOpen && (
-                  <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="absolute top-full right-0 mt-2 w-full bg-black/50 border border-white/10 rounded-lg backdrop-blur-xl shadow-lg z-30 overflow-hidden">
-                    {sortOptions.map((option) => (
-                      <button key={option.key} onClick={() => { setSortKey(option.key); setIsSortOpen(false); }} className="w-full text-left px-4 py-2 text-sm font-sans hover:bg-white/10 transition-colors">
-                        {option.label}
-                      </button>
-                    ))}
+                  <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="absolute top-full right-0 mt-2 w-full bg-black/80 border border-white/10 rounded-lg backdrop-blur-xl shadow-lg z-30 overflow-hidden">
+                    {sortOptions.map((option) => ( <button key={option.key} onClick={() => { setSortKey(option.key); setIsSortOpen(false); }} className="w-full text-left px-4 py-2 text-sm font-sans hover:bg-white/10 transition-colors text-white"> {option.label} </button> ))}
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -4862,15 +4986,10 @@ export const GridView = ({ products }: GridViewProps) => {
           ))}
         </motion.div>
       </motion.div>
-      
-      <style jsx global>{`
-        .custom-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 16px; height: 16px; background: #ffffff; cursor: pointer; border-radius: 50%; margin-top: -6px; }
-        .custom-slider::-moz-range-thumb { width: 16px; height: 16px; background: #ffffff; cursor: pointer; border-radius: 50%; }
-      `}</style>
+      <style jsx global>{` .custom-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 16px; height: 16px; background: #ffffff; cursor: pointer; border-radius: 50%; margin-top: -6px; } .custom-slider::-moz-range-thumb { width: 16px; height: 16px; background: #ffffff; cursor: pointer; border-radius: 50%; } `}</style>
     </>
   );
 };
-
 
 ### ./src/components/modules/catalog/ImmersiveView.tsx ###
 
@@ -4950,7 +5069,6 @@ export const ImmersiveView = ({ products, focusedIndex, setFocusedIndex }: Immer
     if (!product) return <div className="w-full min-h-screen grid place-items-center text-white/50">Loading...</div>;
 
     return (
-        // FIX: Main container is now a full-height flexbox to perfectly center the content.
         <div className="relative w-full min-h-screen flex items-center justify-center px-4 py-32 md:py-12">
             
             <button onClick={goToPrev} className="absolute left-2 md:left-8 top-1/2 -translate-y-1/2 z-20 text-white/50 hover:text-white transition-colors p-3"> <ArrowLeft /> </button>
@@ -4970,7 +5088,6 @@ export const ImmersiveView = ({ products, focusedIndex, setFocusedIndex }: Immer
                             drag="x"
                             dragConstraints={{ left: 0, right: 0 }}
                             onDragEnd={handleDrag}
-                            // FIX: Added overflow-hidden to ensure child elements are clipped by the rounded corners.
                             className="w-full h-auto md:h-[75vh] md:max-h-[650px] rounded-2xl border border-white/10 bg-black/30 backdrop-blur-xl shadow-2xl flex flex-col md:grid md:grid-cols-2 md:grid-rows-1 cursor-grab active:cursor-grabbing overflow-hidden"
                         >
                             <div className="w-full aspect-square md:aspect-auto md:h-full relative bg-black/20 flex flex-col p-4">
@@ -5008,7 +5125,7 @@ export const ImmersiveView = ({ products, focusedIndex, setFocusedIndex }: Immer
                             <div className="w-full h-full flex flex-col p-6 md:p-10">
                                 <div className="flex flex-col flex-grow min-h-0">
                                     <div>
-                                        <h1 className="font-display text-3xl md:text-4xl font-bold">{product.title}</h1>
+                                        <h1 className="font-display text-3xl md:text-4xl font-bold text-white">{product.title}</h1>
                                         {selectedVariant && (
                                             <div className="inline-block mt-3"> 
                                                 <p className="font-mono text-xl text-white/90 bg-white/5 px-3 py-1 rounded-md">
@@ -5307,36 +5424,59 @@ export const GlitchCanvas = () => {
 
 ### ./src/components/modules/homepage/BrandManifesto.tsx ###
 
+// src/components/modules/homepage/BrandManifesto.tsx
+
 "use client";
 import { motion } from 'framer-motion';
+import { FloatingParticlesBackground } from '@/components/core/FloatingParticlesBackground';
+import { useGyroscope } from '@/hooks/useGyroscope';
+import { useState } from 'react';
 
-const text = "We are not for everyone. SWAMBASIC is a rejection of the ordinary, a uniform for the discerning individual who moves between worlds. This is luxury defined not by a price tag, but by a perspective.";
+const text = "We are not for everyone. Wants & Needs is a rejection of the ordinary, a uniform for the discerning individual who moves between worlds. This is luxury defined not by a price tag, but by a perspective.";
 
 export const BrandManifesto = () => {
+  const { smoothedGyroData } = useGyroscope();
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
+    const { clientWidth, clientHeight } = event.currentTarget;
+    const x = (event.clientX / clientWidth) * 2 - 1;
+    const y = -((event.clientY / clientHeight) * 2 - 1);
+    setMousePosition({ x, y });
+  };
+
   return (
-    <section className="py-12 px-6 md:px-12 bg-black flex justify-center">
+    <section 
+        className="relative py-32 px-6 md:px-12 bg-black text-white flex justify-center overflow-hidden"
+        onMouseMove={handleMouseMove}
+    >
+      {/* THE GYRO STARS (Original Swambasic Effect) */}
+      <div className="absolute inset-0 z-0 opacity-60 pointer-events-none">
+        <FloatingParticlesBackground mousePosition={mousePosition} gyroData={smoothedGyroData} />
+      </div>
+
       <motion.div 
-        className="max-w-3xl text-center"
+        className="relative z-10 max-w-3xl text-center mix-blend-difference"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.5 }}
         transition={{ staggerChildren: 0.05 }}
       >
-        <h2 className="font-display font-bold text-4xl md:text-6xl mb-8">
+        <h2 className="font-display font-bold text-4xl md:text-6xl mb-12 tracking-tight">
           <motion.span variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8 } } }}>
             The Philosophy
           </motion.span>
         </h2>
-        <p className="font-sans text-base md:text-xl leading-relaxed text-white/70">
+        <p className="font-sans text-lg md:text-2xl leading-relaxed text-white/80 font-light">
           {text.split(' ').map((word, i) => (
             <motion.span
               key={i}
               className="inline-block"
               variants={{
-                hidden: { opacity: 0 },
-                visible: { opacity: 1 }
+                hidden: { opacity: 0, filter: 'blur(10px)' },
+                visible: { opacity: 1, filter: 'blur(0px)' }
               }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.8, ease: "circOut" }}
             >
               {word} 
             </motion.span>
@@ -5352,184 +5492,60 @@ export const BrandManifesto = () => {
 // src/components/modules/homepage/FeaturedProducts.tsx
 
 "use client";
-
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { getProducts } from '@/lib/shopify';
 import { ShopifyProduct } from '@/types/shopify';
-import Link from 'next/link';
-import Image from 'next/image';
+import { ProductCard } from '@/components/modules/products/ProductCard';
 
 export const FeaturedProducts = () => {
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchProducts = async () => {
-      try {
-        const fetchedProducts = await getProducts(5); 
-        setProducts(fetchedProducts);
-      } catch (error) { 
-        console.error("Failed to fetch products:", error); 
-      } finally { 
-        setIsLoading(false); 
-      }
+        const p = await getProducts(4);
+        setProducts(p);
     };
     fetchProducts();
   }, []);
 
-  if (isLoading) {
-    return (
-      <section className="py-24 px-6 md:px-12 bg-black text-center overflow-hidden">
-        <h2 className="font-display text-4xl mb-12 text-white/50 relative z-10">Loading Collection...</h2>
-      </section>
-    );
-  }
-
   return (
-    <section className="py-24 px-6 md:px-12 bg-black relative overflow-hidden">
-      <div className="absolute inset-0 opacity-10">
-        <motion.div
-          className="absolute top-20 left-10 w-32 h-32 border border-white/20 rounded-full"
-          animate={{ rotate: 360, scale: [1, 1.2, 1] }}
-          transition={{ rotate: { duration: 20, repeat: Infinity, ease: "linear" }, scale: { duration: 8, repeat: Infinity, ease: "easeInOut" }}}
-        />
-        <motion.div
-          className="absolute bottom-20 right-10 w-24 h-24 bg-white/5 rounded-full"
-          animate={{ y: [-20, 20, -20], opacity: [0.5, 1, 0.5] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        />
-      </div>
+    <section className="py-32 px-6 md:px-12 bg-white">
+        <div className="max-w-[1400px] mx-auto">
+            <div className="flex flex-col md:flex-row justify-between items-end mb-16">
+                <h2 className="font-display text-4xl md:text-5xl text-black leading-tight">
+                    Curated<br />Selections
+                </h2>
+                <a href="/catalog" className="hidden md:block font-sans text-xs uppercase tracking-widest border-b border-black pb-1 hover:opacity-50 transition-opacity">
+                    View All
+                </a>
+            </div>
 
-      <div className="relative z-10">
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-        >
-          <motion.h2 
-            className="font-display text-4xl md:text-5xl mb-4 text-white"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1 }}
-          >
-            Featured Collection
-          </motion.h2>
-          <motion.div
-            className="w-20 h-0.5 bg-gradient-to-r from-transparent via-white to-transparent mx-auto"
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.5, delay: 0.5 }}
-          />
-        </motion.div>
-
-        <div className="max-w-screen-xl mx-auto">
-          <motion.div
-            className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:flex lg:justify-center lg:items-end lg:gap-8"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ staggerChildren: 0.1 }}
-          >
-            {products.map((product, index) => {
-              const isCenter = index === 2;
-              const isAdjacent = index === 1 || index === 3;
-              const transitionDelay = Math.abs(index - 2) * 0.1;
-
-              return (
-                <motion.div
-                  key={product.id}
-                  variants={{
-                      hidden: { opacity: 0, y: 50 },
-                      visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut", delay: transitionDelay } }
-                  }}
-                  className={`
-                    w-full transition-all duration-500 ease-out
-                    ${isCenter ? 'lg:w-96' : isAdjacent ? 'lg:w-80' : 'lg:w-72'}
-                    ${isCenter ? 'lg:-mb-6' : ''}
-                  `}
-                >
-                  <Link href={`/products/${product.handle}`} passHref>
-                    <div className="group relative">
-                      
-                      <div 
-                        className="
-                          relative bg-zinc-900/60 backdrop-blur-sm 
-                          border border-white/10 
-                          rounded-xl overflow-hidden flex flex-col 
-                          transition-all duration-300 ease-in-out
-                          group-hover:border-cyan-400/50 
-                          
-                        "
-                      >
-                        
-                        <div className="w-full aspect-[3/4] overflow-hidden relative">
-                          {product.featuredImage ? (
-                            <Image
-                              src={product.featuredImage.url}
-                              alt={product.featuredImage.altText || product.title}
-                              fill
-                              className="w-full h-full object-cover transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] group-hover:scale-105"
-                            />
-                          ) : (
-                            <div className="w-full h-full flex items-center justify-center">
-                              <span className="text-sm text-white/50">No Image</span>
-                            </div>
-                          )}
-                        </div>
-
-                        <div className="p-4 text-center">
-                          <h3 className="font-sans font-semibold text-sm text-white truncate">{product.title}</h3>
-                        </div>
-
-                      </div>
-                    </div>
-                  </Link>
-                </motion.div>
-              );
-            })}
-          </motion.div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-12">
+                {products.map((product) => (
+                    <ProductCard key={product.id} product={product} />
+                ))}
+            </div>
+            
+            <div className="mt-16 text-center md:hidden">
+                 <a href="/catalog" className="font-sans text-xs uppercase tracking-widest border-b border-black pb-1">
+                    View All
+                </a>
+            </div>
         </div>
-
-        <motion.div
-          className="text-center mt-24"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1, delay: 0.5 }}
-        >
-          <motion.button
-            className="group relative px-8 py-3 bg-transparent border border-white/20 text-white font-medium rounded-full overflow-hidden hover:border-white/40 transition-all duration-300"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => window.location.href = "/catalog"}
-          >
-            <motion.div
-              className="absolute inset-0 bg-white/5 translate-x-full group-hover:translate-x-0 transition-transform duration-300"
-            />
-            <span className="relative z-10 cursor-pointer">
-              View All Products
-            </span>
-          </motion.button>
-        </motion.div>
-      </div>
     </section>
   );
 };
 
 ### ./src/components/modules/homepage/GlitchMarquee.tsx ###
 
+// src/components/modules/homepage/GlitchMarquee.tsx
+
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
 
-interface TerminalEntry {
-  type: 'command' | 'output' | 'easter' | 'secret';
-  text: string;
-}
+interface TerminalEntry { type: 'command' | 'output'; text: string; }
 
 const TerminalFooter = () => {
   const [currentLine, setCurrentLine] = useState(0);
@@ -5538,48 +5554,17 @@ const TerminalFooter = () => {
   const [showCursor, setShowCursor] = useState(true);
   const [terminalHistory, setTerminalHistory] = useState<TerminalEntry[]>([]);
   const [isHovered, setIsHovered] = useState(false);
-  const [clickCount, setClickCount] = useState(0);
   const [isMounted, setIsMounted] = useState(false);
-  const containerRef = useRef<HTMLElement>(null);
 
-  // --- THIS IS THE FIX: The command list is now longer and more varied ---
+  // UPDATED BRAND COMMANDS
   const commands = [
-    { command: "> initiate --protocol=swambasic", output: "protocol loaded. welcome.", delay: 2000 },
-    { command: "> cat /etc/philosophy", output: "form. function. perspective.", delay: 2500 },
-    { command: "> query --identity", output: "we are not for everyone. and we never will be.", delay: 3000 },
-    { command: "> get_var --collection", output: "vol. 1 // sins of saints", delay: 2800 },
-    { command: "> social --connect --platform=instagram", output: "now streaming consciousness: @swambasic", delay: 3200 },
-    { command: "> echo 'the concept'", output: "luxury is a mindset, not a price tag.", delay: 3000 },
-    { command: "> run diagnostic --aesthetic", output: "result: [OK] minimal. textural. intentional.", delay: 2800 },
-    { command: "> read /dev/thoughts --filter=genz", output: "iykyk. the vibe is the brand.", delay: 2500 },
-    { command: "> get_directive --current", output: "reject the ordinary.", delay: 3000 },
-    { command: "> stream --updates", output: "new artifacts are being forged in the void...", delay: 3500 },
-    { command: "> cat /logs/saints.log", output: "ERROR: no saints found.", delay: 2800 },
-    { command: "> cat /logs/sins.log", output: "log file too large to display.", delay: 2800 },
-    { command: "> follow --us", output: "find us in the static: @swambasic", delay: 3200 },
-    { command: "> exit --code=0", output: "disconnecting... but the signal remains.", delay: 3000 }
+    { command: "> init system --brand=wants_and_needs", output: "system loaded. aesthetic: pure.", delay: 2000 },
+    { command: "> query --philosophy", output: "desire vs utility.", delay: 3000 },
+    { command: "> check --inventory", output: "limited quantities. high demand.", delay: 3200 },
+    { command: "> run --luxury_protocol", output: "take action.", delay: 3000 },
   ];
 
-  const easterEggs = [
-    "> this is not a footer.",
-    "> where does the minimalism end?",
-    "> ask a better question.",
-    "> find what you are not looking for.",
-    "> iykyk"
-  ];
-
-  const secrets = [
-    "// form is an illusion.",
-    "/* function is a construct. */", 
-    "// perspective is the only constant.",
-    "/* the void is staring back. */",
-    "// did you see it?"
-  ];
-  // --- END OF THE FIX ---
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
+  useEffect(() => { setIsMounted(true); }, []);
 
   useEffect(() => {
     const typeCommand = async (text: string, isCommand = true) => {
@@ -5609,96 +5594,154 @@ const TerminalFooter = () => {
   }, [currentLine, commands]);
 
   useEffect(() => {
-    const cursorInterval = setInterval(() => {
-      setShowCursor(prev => !prev);
-    }, 500);
+    const cursorInterval = setInterval(() => { setShowCursor(prev => !prev); }, 500);
     return () => clearInterval(cursorInterval);
   }, []);
 
-  const handleClick = () => {
-    setClickCount(prev => prev + 1);
-    const randomEgg = easterEggs[Math.floor(Math.random() * easterEggs.length)];
-    const randomSecret = secrets[Math.floor(Math.random() * secrets.length)];
-    if (clickCount % 3 === 2) {
-      setTerminalHistory(prev => [...prev, { type: 'secret', text: randomSecret }]);
-    } else {
-      setTerminalHistory(prev => [...prev, { type: 'easter', text: randomEgg }]);
-    }
-  };
-
-  const formatTime = () => {
-    if (!isMounted) return "00:00:00";
-    const now = new Date();
-    return now.toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
-  };
-
   return (
     <footer 
-      ref={containerRef}
-      className="bg-black text-green-400 font-mono text-sm relative border-t border-green-900/50 cursor-pointer overflow-hidden"
+      className="bg-white text-black font-mono text-xs relative border-t border-gray-100 cursor-pointer overflow-hidden py-4"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      onClick={handleClick}
     >
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-green-400/5 to-transparent animate-pulse"></div>
-        <div className="absolute inset-0 bg-[linear-gradient(transparent_98%,rgba(34,197,94,0.1)_100%)] bg-[length:100%_4px]"></div>
-      </div>
-      <div className={`absolute inset-0 transition-opacity duration-1000 ${isHovered ? 'bg-green-400/5' : 'bg-green-400/2'}`}></div>
-      <div className="relative z-10 p-6 max-w-6xl mx-auto">
-        <div className="flex items-center justify-between mb-4 text-xs text-green-500/70">
-          <div className="flex items-center space-x-4">
-            <div className="flex space-x-2">
-              <div className="w-3 h-3 rounded-full bg-red-500/60"></div>
-              <div className="w-3 h-3 rounded-full bg-yellow-500/60"></div>
-              <div className="w-3 h-3 rounded-full bg-green-500/60"></div>
-            </div>
-            <span>swambasic_consciousness_interface</span>
-          </div>
-          <div className="flex items-center space-x-4">
-            <span>{formatTime()}</span>
-            <span className={`transition-opacity ${isHovered ? 'opacity-100' : 'opacity-50'}`}>◉ STREAMING</span>
-          </div>
-        </div>
-        <div className="space-y-1 min-h-[200px] max-h-[300px] overflow-y-auto">
-          {terminalHistory.slice(-10).map((entry, index) => (
-            <div key={index} className={`transition-all duration-300 ${ entry.type === 'command' ? 'text-green-400' : entry.type === 'output' ? 'text-green-300/80 ml-2' : entry.type === 'easter' ? 'text-cyan-400' : 'text-gray-500 italic' }`}>
+      <div className="relative z-10 px-6 max-w-6xl mx-auto">
+        <div className="space-y-1 min-h-[100px] overflow-hidden">
+          {terminalHistory.slice(-4).map((entry, index) => (
+            <div key={index} className={`transition-all duration-300 ${ entry.type === 'command' ? 'text-black font-bold' : 'text-gray-500 ml-2' }`}>
               {entry.text}
             </div>
           ))}
           <div className="flex items-center">
-            <span className="text-green-400">{displayText}</span>
-            <span className={`ml-1 ${showCursor && !isTyping ? 'opacity-100' : 'opacity-0'} transition-opacity`}>█</span>
-          </div>
-        </div>
-        <div className="mt-6 pt-4 border-t border-green-900/30 flex justify-between items-center text-xs text-green-600/60">
-          <div className="flex space-x-6">
-            <span>form</span>
-            <span>//</span>
-            <span>function</span>
-            <span>//</span>
-            <span>perspective</span>
-            <span>•</span>
-            <span className={isHovered ? 'text-green-400' : ''}> [interact] </span>
-          </div>
-          <div className="text-green-500/40">
-            {clickCount > 0 && `log: ${clickCount} thoughts processed`}
+            <span className="text-black font-bold">{displayText}</span>
+            <span className={`ml-1 text-black ${showCursor && !isTyping ? 'opacity-100' : 'opacity-0'}`}>_</span>
           </div>
         </div>
       </div>
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-green-400/50 to-transparent animate-pulse"></div>
-      </div>
-      <style jsx>{`
-        .space-y-1::-webkit-scrollbar { width: 6px; }
-        .space-y-1::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.3); }
-        .space-y-1::-webkit-scrollbar-thumb { background: rgba(34, 197, 94, 0.3); border-radius: 3px; }
-      `}</style>
     </footer>
   );
 };
 
 export default TerminalFooter;
+
+### ./src/components/modules/homepage/GyroSection.tsx ###
+
+// src/components/modules/homepage/GyroSection.tsx
+
+"use client";
+
+import { useRef, useState, useEffect } from 'react';
+import { motion, useSpring, useTransform } from 'framer-motion';
+import { useGyroscope } from '@/hooks/useGyroscope';
+import Link from 'next/link';
+import Image from 'next/image';
+
+export const GyroSection = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { smoothedGyroData } = useGyroscope();
+  
+  // Spring physics for smooth slider movement
+  const xParams = useSpring(50, { stiffness: 200, damping: 30 }); // Start at 50%
+  const [hoverSide, setHoverSide] = useState<'left' | 'right' | null>(null);
+
+  const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
+    const { left, width } = event.currentTarget.getBoundingClientRect();
+    const x = event.clientX - left;
+    const percentage = (x / width) * 100;
+    
+    xParams.set(percentage);
+    
+    if (percentage < 50) setHoverSide('left');
+    else setHoverSide('right');
+  };
+
+  // Gyro fallback for mobile
+  useEffect(() => {
+    if (smoothedGyroData.x !== 0) {
+      // Map gyro tilt (-1 to 1) to percentage (0 to 100)
+      const gyroPercent = 50 + (smoothedGyroData.x * 40); 
+      xParams.set(gyroPercent);
+    }
+  }, [smoothedGyroData, xParams]);
+
+  // Transform percentage into clip-path values
+  const clipPathLeft = useTransform(xParams, (val) => `inset(0 ${100 - val}% 0 0)`);
+  const clipPathRight = useTransform(xParams, (val) => `inset(0 0 0 ${val}%)`);
+
+  return (
+    <section 
+      ref={containerRef}
+      className="relative h-[80vh] w-full overflow-hidden flex bg-black cursor-col-resize"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={() => xParams.set(50)} // Reset to center on leave
+    >
+      {/* === LEFT SIDE: WANTS (Desire/Dark) === */}
+      <motion.div 
+        className="absolute inset-0 z-20 bg-black text-white flex flex-col justify-center items-center overflow-hidden border-r border-white/20"
+        style={{ clipPath: clipPathLeft }}
+      >
+        <div className="absolute inset-0 opacity-40">
+             {/* Replace with a "Hype" or "Dark" product image */}
+             <Image 
+                src="https://wantsandneeds.com/cdn/shop/files/DSC01988.jpg?v=1758250936&width=1680" 
+                alt="Wants" 
+                fill 
+                className="object-cover grayscale brightness-50"
+             />
+        </div>
+        
+        <div className="relative z-10 text-center px-4">
+            <h2 className="font-display text-8xl md:text-[10rem] font-black tracking-tighter leading-none mb-4">
+                WANT
+            </h2>
+            <p className="font-sans text-sm md:text-base font-bold uppercase tracking-[0.3em] mb-8">
+                Desire. Impulse. Statement.
+            </p>
+            <Link href="/shop/hoodies">
+                <button className={`px-10 py-4 border border-white text-white font-sans text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-300 ${hoverSide === 'left' ? 'scale-110 bg-white text-black' : ''}`}>
+                    Shop The Heat
+                </button>
+            </Link>
+        </div>
+      </motion.div>
+
+      {/* === RIGHT SIDE: NEEDS (Utility/Light) === */}
+      <motion.div 
+        className="absolute inset-0 z-10 bg-white text-black flex flex-col justify-center items-center overflow-hidden"
+        style={{ clipPath: clipPathRight }} // Technically visible underneath, but we clip it for safety
+      >
+        {/* Replace with a "Clean" or "White" product image */}
+        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-gray-200 to-white"></div>
+        
+        <div className="relative z-10 text-center px-4">
+            <h2 className="font-display text-8xl md:text-[10rem] font-black tracking-tighter leading-none mb-4">
+                NEED
+            </h2>
+            <p className="font-sans text-sm md:text-base font-bold uppercase tracking-[0.3em] mb-8 text-black/60">
+                Utility. Comfort. Essential.
+            </p>
+            <Link href="/shop/sweatpants">
+                <button className={`px-10 py-4 border border-black text-black font-sans text-xs font-bold uppercase tracking-widest hover:bg-black hover:text-white transition-all duration-300 ${hoverSide === 'right' ? 'scale-110 bg-black text-white' : ''}`}>
+                    Shop Essentials
+                </button>
+            </Link>
+        </div>
+      </motion.div>
+
+      {/* === THE SPLIT LINE === */}
+      <motion.div 
+        className="absolute top-0 bottom-0 w-1 bg-white z-30 mix-blend-difference pointer-events-none"
+        style={{ left: xParams }}
+      />
+      
+      {/* === INSTRUCTION === */}
+      <div className="absolute bottom-8 left-0 w-full text-center z-40 pointer-events-none mix-blend-difference text-white">
+        <p className="font-mono text-[10px] uppercase tracking-widest opacity-50">
+            &lt; Define Your Reality &gt;
+        </p>
+      </div>
+    </section>
+  );
+};
 
 ### ./src/components/modules/homepage/HeroSection.tsx ###
 
@@ -5706,52 +5749,50 @@ export default TerminalFooter;
 
 "use client";
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 export const HeroSection = () => {
   return (
-    <section className="relative h-screen w-screen flex items-center justify-center overflow-hidden">
-      {/* 
-        FIX: The `object-cover` class ensures the video covers the entire screen,
-        even if it has to crop the sides, eliminating the black bars.
-        The `min-w-full` and `min-h-full` properties provide an extra guarantee.
-      */}
-      <video 
-        src="https://cdn.jsdelivr.net/gh/manankadel/swambasic@latest/public/website-test.mp4" 
-        autoPlay 
-        loop 
-        muted 
-        playsInline 
-        className="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto h-auto object-cover -z-10 transform -translate-x-1/2 -translate-y-1/2" 
+    <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-white">
+      {/* THE NEW HERO IMAGE */}
+      <Image 
+        src="https://wantsandneeds.com/cdn/shop/files/DSC01988.jpg?v=1758250936&width=1680"
+        alt="Wants and Needs Hero"
+        fill
+        className="object-cover z-0"
+        priority
+        quality={100}
       />
       
-      <div className="absolute top-0 left-0 w-full h-full bg-black/50 -z-10" />
+      {/* Subtle overlay to make white text pop, or remove for raw look */}
+      <div className="absolute inset-0 bg-black/10 z-0" />
+      
       <motion.div 
-        className="text-center text-white z-10 flex flex-col items-center p-4"
-        initial={{ opacity: 0.5, y: 20 }}
+        className="relative z-10 text-center flex flex-col items-center p-4"
+        initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 0.5 }}
+        transition={{ duration: 1.2, delay: 0.2 }}
       >
-        <h1 className="font-display font-black text-5xl md:text-8xl uppercase">
-          First Drop Is Live
+        <h1 className="font-display text-5xl md:text-8xl text-white font-bold tracking-tighter shadow-sm drop-shadow-lg">
+          WANTS & NEEDS
         </h1>
-        <p className="font-sans text-center mt-4 max-w-lg">
-          Explore the Exclusive collection. Limited quantities available.
+        <p className="font-sans text-xs md:text-sm text-white uppercase tracking-[0.3em] mt-4 mb-8 max-w-md drop-shadow-md">
+          Not for everyone.
         </p>
         <Link href="/catalog" passHref>
           <motion.button 
-            className="mt-8 px-8 py-4 bg-white/90 text-black font-sans font-bold uppercase tracking-widest rounded-full"
+            className="px-10 py-3 bg-white text-black font-sans text-xs font-bold uppercase tracking-widest hover:bg-black hover:text-white transition-colors duration-300"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            Shop Now
+            Shop Collection
           </motion.button>
         </Link>
       </motion.div>
     </section>
   );
 };
-
 
 ### ./src/components/modules/homepage/InteractiveMarquee.tsx ###
 
@@ -5852,18 +5893,13 @@ export const InteractiveProductCard = ({ product }: InteractiveProductCardProps)
     
     const isAddingToCart = cartStatus === 'updating';
 
-    // FIX: New, intelligent click handler for desktop and mobile
     const handleCardClick = () => {
         if (isHoverCapable) {
-            // On desktop, a click always navigates to the product page.
             router.push(`/products/${product.handle}`);
         } else {
-            // On mobile (non-hover devices):
             if (isUIActive) {
-                // If the UI is already active, this is the SECOND tap. Navigate.
                 router.push(`/products/${product.handle}`);
             } else {
-                // If the UI is not active, this is the FIRST tap. Show the UI.
                 setUIActive(true);
             }
         }
@@ -5876,8 +5912,10 @@ export const InteractiveProductCard = ({ product }: InteractiveProductCardProps)
             onHoverStart={() => isHoverCapable && setUIActive(true)}
             onHoverEnd={() => isHoverCapable && setUIActive(false)}
         >
-            <div className="relative w-full rounded-xl border border-white/10 bg-black/20 backdrop-blur-xl shadow-lg overflow-hidden transition-shadow duration-300 group-hover:shadow-black/50">
-                <div className="relative w-full aspect-[3/4] bg-black/20">
+            {/* Changed: border-black/10, bg-white/20, shadow-black/10 */}
+            <div className="relative w-full rounded-xl border border-black/10 bg-white/40 backdrop-blur-xl shadow-lg overflow-hidden transition-shadow duration-300 group-hover:shadow-black/20">
+                {/* Changed: bg-black/5 */}
+                <div className="relative w-full aspect-[3/4] bg-black/5">
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={currentImageIndex}
@@ -5901,22 +5939,25 @@ export const InteractiveProductCard = ({ product }: InteractiveProductCardProps)
                     <AnimatePresence>
                         {isUIActive && (
                             <>
-                                <motion.button onClick={handlePrevImage} className="absolute top-1/2 left-2 -translate-y-1/2 z-10 p-2 rounded-full bg-black/40 text-white/70 hover:text-white backdrop-blur-sm" initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -10 }} transition={{ duration: 0.2 }}> <ArrowLeft /> </motion.button>
-                                <motion.button onClick={handleNextImage} className="absolute top-1/2 right-2 -translate-y-1/2 z-10 p-2 rounded-full bg-black/40 text-white/70 hover:text-white backdrop-blur-sm" initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 10 }} transition={{ duration: 0.2 }}> <ArrowRight /> </motion.button>
+                                {/* Changed: bg-white/80, text-black */}
+                                <motion.button onClick={handlePrevImage} className="absolute top-1/2 left-2 -translate-y-1/2 z-10 p-2 rounded-full bg-white/80 text-black/70 hover:text-black backdrop-blur-sm" initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -10 }} transition={{ duration: 0.2 }}> <ArrowLeft /> </motion.button>
+                                <motion.button onClick={handleNextImage} className="absolute top-1/2 right-2 -translate-y-1/2 z-10 p-2 rounded-full bg-white/80 text-black/70 hover:text-black backdrop-blur-sm" initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 10 }} transition={{ duration: 0.2 }}> <ArrowRight /> </motion.button>
                             </>
                         )}
                     </AnimatePresence>
                 </div>
 
                 <div className="p-4">
-                    <h3 className="font-sans font-semibold text-white truncate">{product.title}</h3>
-                    <p className="font-mono text-sm text-white/70">{formatPrice(product.priceRange.minVariantPrice.amount, product.priceRange.minVariantPrice.currencyCode)}</p>
+                    {/* Changed: text-black */}
+                    <h3 className="font-sans font-semibold text-black truncate">{product.title}</h3>
+                    <p className="font-mono text-sm text-black/70">{formatPrice(product.priceRange.minVariantPrice.amount, product.priceRange.minVariantPrice.currencyCode)}</p>
                 </div>
 
                 <AnimatePresence>
                     {isUIActive && (
                         <motion.div 
-                            className="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black via-black/90 to-transparent z-20"
+                            // Changed: bg-gradient to white
+                            className="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-white via-white/90 to-transparent z-20"
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: 20 }}
@@ -5926,10 +5967,10 @@ export const InteractiveProductCard = ({ product }: InteractiveProductCardProps)
                                 {product.variants?.edges.map(({ node: variant }) => (
                                     <button
                                         key={variant.id}
-                                        // FIX: Stop propagation to prevent navigation when changing size
                                         onClick={(e) => { e.stopPropagation(); setSelectedVariantId(variant.id); }}
                                         disabled={!variant.availableForSale}
-                                        className={`px-2 py-1 rounded-md font-sans text-[10px] font-semibold border transition-colors duration-200 ${selectedVariantId === variant.id ? 'bg-white text-black border-white' : 'bg-transparent text-white border-white/20'} ${!variant.availableForSale ? 'opacity-30 cursor-not-allowed' : 'hover:border-white/70'}`}
+                                        // Changed: bg-black text-white for active, bg-transparent text-black for inactive
+                                        className={`px-2 py-1 rounded-md font-sans text-[10px] font-semibold border transition-colors duration-200 ${selectedVariantId === variant.id ? 'bg-black text-white border-black' : 'bg-transparent text-black border-black/20'} ${!variant.availableForSale ? 'opacity-30 cursor-not-allowed' : 'hover:border-black/70'}`}
                                     >
                                         {variant.title}
                                     </button>
@@ -5938,7 +5979,8 @@ export const InteractiveProductCard = ({ product }: InteractiveProductCardProps)
                             <button
                                 onClick={handleAddToCart}
                                 disabled={!selectedVariantId || isAddingToCart}
-                                className="w-full py-2 bg-white/90 text-black font-sans text-xs font-bold uppercase tracking-widest disabled:opacity-50 enabled:hover:bg-white transition-all rounded-full"
+                                // Changed: bg-black text-white
+                                className="w-full py-2 bg-black/90 text-white font-sans text-xs font-bold uppercase tracking-widest disabled:opacity-50 enabled:hover:bg-black transition-all rounded-full"
                             >
                                 {isAddingToCart ? '...' : 'Quick Add'}
                             </button>
@@ -5949,7 +5991,6 @@ export const InteractiveProductCard = ({ product }: InteractiveProductCardProps)
         </motion.div>
     );
 };
-
 
 ### ./src/components/modules/products/ProductCard.tsx ###
 
@@ -5970,27 +6011,35 @@ export const ProductCard = ({ product }: ProductCardProps) => {
   return (
   <Link href={`/products/${product.handle}`} passHref>
     <motion.div
-      className="group flex flex-col h-full"
-      whileHover={{ y: -5 }}
-      transition={{ type: 'spring', stiffness: 300 }}
+      className="group flex flex-col h-full cursor-pointer"
+      whileHover={{ y: -4 }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
     >
-      <div className="w-full aspect-[3/4] bg-white/5 rounded-lg overflow-hidden relative">
+      <div className="w-full aspect-[3/4] bg-[#f5f5f5] overflow-hidden relative mb-4">
         {product.featuredImage ? (
           <Image
             src={product.featuredImage.url}
             alt={product.featuredImage.altText || product.title}
             fill
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center">
-            <span className="text-sm text-white/50">No Image</span>
+            <span className="text-xs text-gray-400 uppercase">No Image</span>
           </div>
         )}
+        
+        {/* Optional: Add a 'Quick View' or 'Add' button that appears on hover */}
+        <div className="absolute bottom-0 left-0 w-full p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <div className="w-full py-3 bg-white text-black text-center text-xs uppercase tracking-widest font-bold">
+                View Detail
+            </div>
+        </div>
       </div>
-      <div className="mt-4 text-left flex-grow flex flex-col justify-end px-2 pb-2">
-        <h3 className="font-sans font-semibold text-white truncate">{product.title}</h3>
-        <p className="font-mono text-sm text-white/70">
+      
+      <div className="flex justify-between items-start">
+        <h3 className="font-sans text-sm text-gray-900 group-hover:text-black transition-colors">{product.title}</h3>
+        <p className="font-sans text-sm text-gray-600">
             {formatPrice(product.priceRange.minVariantPrice.amount, product.priceRange.minVariantPrice.currencyCode)}
         </p>
       </div>
@@ -6885,6 +6934,7 @@ export interface ShopifyAddress {
     province: string;
     zip: string;
     country: string;
+    phone?: string; 
 }
 
 export interface ShopifyCustomer {
@@ -6938,6 +6988,7 @@ export interface NewAddressInput {
     province: string;
     country: string;
     zip: string;
+    phone?: string;
 }
 
 export interface ShopifyOrderDetailed {
@@ -7000,7 +7051,6 @@ export interface ShopifyProductDetailedResponseBody {
   }
 }
 
-
 ### ./tailwind.config.ts ###
 
 import type { Config } from 'tailwindcss'
@@ -7016,21 +7066,22 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        'background': '#000000',
-        'foreground': '#FFFFFF',
+        // INVERTED: White background, Black text
+        'background': '#ffffff', 
+        'foreground': '#000000',
       },
        fontFamily: {
+        // Retain original Swambasic fonts
         sans: ['var(--font-poppins)', 'sans-serif'],
         display: ['var(--font-unbounded)', 'sans-serif'], 
         heading: ['var(--font-genoa)', 'sans-serif'],
       },
-      // NEW: Add text-shadow theme extension
       textShadow: {
-        'glow': '0 0 8px rgba(255, 255, 255, 0.5)',
+        // Dark glow instead of white glow
+        'glow': '0 0 8px rgba(0, 0, 0, 0.5)',
       },
     },
   },
-  // NEW: Add the textShadow plugin
   plugins: [
     plugin(function ({ matchUtilities, theme }) {
       matchUtilities(

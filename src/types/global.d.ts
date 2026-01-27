@@ -7,7 +7,7 @@ declare module '@react-three/fiber' {
     loginLiquidMaterial: Object3DNode<ShaderMaterial, typeof ShaderMaterial>;
     // ADD THE LINE BELOW
     liquidShaderMaterial: Object3DNode<ShaderMaterial, typeof ShaderMaterial>;
-
+livelyMaterial: Object3DNode<ShaderMaterial, typeof ShaderMaterial>; 
     nebulaMaterial: Object3DNode<ShaderMaterial, typeof ShaderMaterial>;
 floatingPointsMaterial: Object3DNode<ShaderMaterial, typeof ShaderMaterial>;
 customParticleMaterial: Object3DNode<ShaderMaterial, typeof ShaderMaterial>;

@@ -1,203 +1,101 @@
 "use client";
 
-import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/navigation';
-import { GatewayAnimation } from '@/components/modules/GatewayAnimation';
+import Image from 'next/image';
+import { LiquidGlassArt } from '@/components/core/LiquidGlassArt';
 import { WaitlistForm } from '@/components/modules/WaitlistForm';
-import CountdownTimer from '@/components/modules/CountdownTimer';
-import { InteractiveLiquidBackground } from '@/components/core/InteractiveLiquidBackground';
-import { useSound } from '@/hooks/useSound';
+import { ZenGame } from '@/components/modules/gateway/ZenGame';
 
-const ANIMATION_CONFIG = {
-  CONTENT_DELAY: 2500,
-  MOTION_DURATION: 1.0,
-  MOTION_EASE: 'easeInOut',
-  FADE_DELAY: 0.5,
-} as const;
-
-const MOTION_VARIANTS = {
-  content: {
-    initial: { opacity: 0 },
-    animate: { opacity: 1 },
-    transition: { 
-      duration: ANIMATION_CONFIG.MOTION_DURATION, 
-      ease: ANIMATION_CONFIG.MOTION_EASE, 
-      delay: ANIMATION_CONFIG.FADE_DELAY 
-    }
-  },
-  layout: {
-    transition: { 
-      duration: ANIMATION_CONFIG.MOTION_DURATION, 
-      ease: ANIMATION_CONFIG.MOTION_EASE 
-    }
-  }
-} as const;
-
-const STYLES = {
-  main: {
-    height: 'calc(var(--app-height, 100vh))',
-    contain: 'layout style paint',
-    willChange: 'auto'
-  },
-  input: {
-    contain: 'layout style'
-  },
-  button: {
-    contain: 'layout style',
-    willChange: 'color, opacity'
-  }
-} as const;
-
-const ArrowIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ pointerEvents: 'none' }}>
-    <line x1="5" y1="12" x2="19" y2="12"></line>
-    <polyline points="12 5 19 12 12 19"></polyline>
-  </svg>
-);
-
-const PasswordAccess = () => {
-  const router = useRouter();
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const abortControllerRef = useRef<AbortController | null>(null);
-  const playHoverSound = useSound('/audio/hover.mp3', 0.3);
-
-  const handlePasswordChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-    if (error) setError('');
-  }, [error]);
-
-  const handleSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!password.trim() || isLoading) return;
-    if (abortControllerRef.current) abortControllerRef.current.abort();
-    setIsLoading(true);
-    setError('');
-    abortControllerRef.current = new AbortController();
-    try {
-      const response = await fetch('/api/access', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password }),
-        signal: abortControllerRef.current.signal,
-      });
-      if (response.ok) {
-        router.replace('/home');
-      } else {
-        const data = await response.json();
-        setError(data.error || 'Invalid access code.');
-      }
-    } catch (err: any) {
-      if (err.name !== 'AbortError') setError('Connection error. Please try again.');
-    } finally {
-      setIsLoading(false);
-    }
-  }, [password, isLoading, router]);
-
-  const handleMouseEnter = useCallback(() => {
-    if (!isLoading) playHoverSound();
-  }, [playHoverSound, isLoading]);
-
-  useEffect(() => {
-    return () => {
-      if (abortControllerRef.current) abortControllerRef.current.abort();
-    };
-  }, []);
-
-  const formContent = useMemo(() => (
-    <form onSubmit={handleSubmit} className="flex items-center gap-4">
-      <input
-        type="password"
-        value={password}
-        onChange={handlePasswordChange}
-        placeholder="Enter Access Code"
-        className="font-sans w-full max-w-[240px] bg-transparent border-b-2 border-black/50 focus:border-black text-center text-lg focus:outline-none transition-colors duration-300 disabled:opacity-50 text-black placeholder:text-gray-400"
-        disabled={isLoading}
-        autoComplete="current-password"
-        style={STYLES.input}
-      />
-      <button
-        type="submit"
-        disabled={isLoading || !password.trim()}
-        className="text-black/80 hover:text-black transition-colors disabled:opacity-50"
-        onMouseEnter={handleMouseEnter}
-        style={STYLES.button}
-        aria-label="Submit access code"
-      >
-        <ArrowIcon />
-      </button>
-    </form>
-  ), [password, isLoading, handleSubmit, handlePasswordChange, handleMouseEnter]);
-
-  return (
-    <div className="mt-8 flex flex-col items-center">
-      {formContent}
-      {error && (
-        <p className="mt-2 text-sm text-red-500" role="alert">
-          {error}
-        </p>
-      )}
-    </div>
-  );
-};
+const LOGO_URL = "https://cdn.shopify.com/s/files/1/0975/8736/4138/files/Logos_35.webp?v=1767768515";
 
 export default function GatewayPage() {
-  const [showContent, setShowContent] = useState(false);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const [isFlipped, setIsFlipped] = useState(false);
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const router = useRouter();
 
-  useEffect(() => {
-    timeoutRef.current = setTimeout(() => {
-      setShowContent(true);
-    }, ANIMATION_CONFIG.CONTENT_DELAY);
-
-    return () => {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    };
-  }, []);
-
-  const contentSection = useMemo(() => (
-    <AnimatePresence mode="wait">
-      {showContent && (
-        <motion.div
-          className="flex w-full max-w-sm flex-col items-center text-center"
-          {...MOTION_VARIANTS.content}
-        >
-          <p className="font-sans text-sm md:text-xl mt-3 mb-4 md:mt-6 md:mb-6 text-black/80 px-2">
-            Join the waitlist for exclusive access.
-          </p>
-          
-          <div className="mb-4 md:mb-6">
-            <CountdownTimer />
-          </div>
-          
-          <div className="w-full flex justify-center px-2">
-            <WaitlistForm />
-          </div>
-          
-          <div className="mt-4 md:mt-8 mb-4 md:mb-0">
-            <PasswordAccess />
-          </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  ), [showContent]);
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const res = await fetch('/api/access', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password }),
+    });
+    if (res.ok) router.replace('/home');
+    else setError('ACCESS_KEY_INVALID');
+  };
 
   return (
-    <div className="min-h-screen bg-white text-black">
-      <InteractiveLiquidBackground />
-      <main 
-        style={STYLES.main}
-        className="relative flex flex-col items-center justify-center px-4 py-8"
-      >
-        <div className="flex flex-col items-center justify-center w-full max-w-4xl mx-auto">
-          <motion.div layout {...MOTION_VARIANTS.layout} className="mb-4 md:mb-8">
-            <GatewayAnimation />
-          </motion.div>
-          {contentSection}
-        </div>
-      </main>
-    </div>
+    <main className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-white">
+      <LiquidGlassArt />
+
+      <div className="relative z-10 w-full max-w-[480px] h-[580px] perspective-[2000px]">
+        <motion.div
+          animate={{ rotateY: isFlipped ? 180 : 0 }}
+          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+          style={{ transformStyle: 'preserve-3d', height: '100%', width: '100%' }}
+        >
+          {/* FRONT: THE FORM */}
+          <div 
+            className="absolute inset-0 bg-white/40 backdrop-blur-3xl border-[0.5px] border-black/10 rounded-sm p-12 flex flex-col items-center justify-between"
+            style={{ backfaceVisibility: 'hidden' }}
+          >
+            <div className="w-full flex flex-col items-center">
+              <div className="relative w-32 h-10 mb-20">
+                <Image src={LOGO_URL} alt="W&N" fill className="object-contain" priority />
+              </div>
+
+              <form onSubmit={handleLogin} className="w-full space-y-12">
+                <div className="relative group">
+                  <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="PRIVATE_KEY"
+                    className="w-full bg-transparent border-b border-black/10 py-2 text-center font-heading text-xs tracking-[0.5em] focus:outline-none focus:border-black transition-all uppercase"
+                  />
+                  {error && <p className="absolute -bottom-6 w-full text-center text-[8px] font-bold text-red-500 tracking-widest">{error}</p>}
+                </div>
+                
+                <button type="submit" className="w-full py-4 bg-black text-white font-heading text-[10px] uppercase tracking-[0.4em] hover:bg-zinc-800 transition-all">
+                  Validate
+                </button>
+              </form>
+            </div>
+
+            <div className="w-full text-center">
+              <div className="h-px w-8 bg-black/10 mx-auto mb-8" />
+              <button 
+                onClick={() => setIsFlipped(true)}
+                className="font-heading text-[9px] uppercase tracking-[0.3em] text-black/40 hover:text-black transition-colors"
+              >
+                Access Simulation &rarr;
+              </button>
+            </div>
+          </div>
+
+          {/* BACK: THE GAME */}
+          <div 
+            className="absolute inset-0 bg-white border-[0.5px] border-black/10 rounded-sm overflow-hidden"
+            style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
+          >
+            <ZenGame />
+            <button 
+              onClick={() => setIsFlipped(false)}
+              className="absolute bottom-12 left-1/2 -translate-x-1/2 font-heading text-[9px] uppercase tracking-[0.3em] text-black border-b border-black"
+            >
+              Return to Vault
+            </button>
+          </div>
+        </motion.div>
+      </div>
+
+      <div className="fixed bottom-8 left-8 flex gap-8 font-heading text-[8px] uppercase tracking-[0.4em] text-black/20">
+        <span>34.0522° N, 118.2437° W</span>
+        <span>Est. 2026</span>
+      </div>
+    </main>
   );
 }

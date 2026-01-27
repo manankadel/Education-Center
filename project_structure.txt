@@ -1,9 +1,29 @@
+.env.local
 .gitignore
 README.md
 code_dump.txt
 dump_project.py
 eslint.config.mjs
+listings/
+  1/
+    Back_BH.webp
+    Front_BH.webp
+    GroundShot_BH.webp
+    HunterFront_BH.webp
+    PeytonFront_BH.webp
+    PeytonSide_BH.webp
+    PeytonSleeve_BH.webp
+  2/
+    BackPocketBS.webp
+    Back_BS.webp
+    FrontBS.webp
+    FullFrontBS.webp
+    GroundShotBS.webp
+    HunterFrontBS.webp
+    SideBS.webp
+  Logos_35.webp
 middleware.ts
+next-env.d.ts
 next.config.mjs
 package.json
 postcss.config.mjs
@@ -50,7 +70,12 @@ src/
         page.tsx
       shipping/
         page.tsx
+      shop/
+        [category]/
+          page.tsx
       terms/
+        page.tsx
+      track-order/
         page.tsx
     api/
       access/
@@ -69,6 +94,9 @@ src/
           route.ts
       contact/
         route.ts
+      order/
+        track/
+          route.ts
       waitlist/
         route.ts
     fonts.ts
@@ -120,6 +148,7 @@ src/
         BrandManifesto.tsx
         FeaturedProducts.tsx
         GlitchMarquee.tsx
+        GyroSection.tsx
         HeroSection.tsx
         InteractiveMarquee.tsx
       products/
