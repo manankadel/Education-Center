@@ -5,8 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { LiquidGlassArt } from '@/components/core/LiquidGlassArt';
-import { WaitlistForm } from '@/components/modules/WaitlistForm';
-import { ZenGame } from '@/components/modules/gateway/ZenGame';
+import { AetherRunnerGame } from '@/components/modules/gateway/AetherRunnerGame';
 
 const LOGO_URL = "https://cdn.shopify.com/s/files/1/0975/8736/4138/files/Logos_35.webp?v=1767768515";
 
@@ -14,6 +13,9 @@ export default function GatewayPage() {
   const [isFlipped, setIsFlipped] = useState(false);
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [showWinScreen, setShowWinScreen] = useState(false);
+  const [secretKey, setSecretKey] = useState('');
+  const [agentName, setAgentName] = useState('');
   const router = useRouter();
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -24,7 +26,12 @@ export default function GatewayPage() {
       body: JSON.stringify({ password }),
     });
     if (res.ok) router.replace('/home');
-    else setError('ACCESS_KEY_INVALID');
+    else setError('AUTH_KEY_INVALID');
+  };
+
+  const handleWin = (key: string) => {
+    setSecretKey(key);
+    setShowWinScreen(true);
   };
 
   return (
@@ -71,31 +78,48 @@ export default function GatewayPage() {
                 onClick={() => setIsFlipped(true)}
                 className="font-heading text-[9px] uppercase tracking-[0.3em] text-black/40 hover:text-black transition-colors"
               >
-                Access Simulation &rarr;
+                Activate Aether &rarr;
               </button>
             </div>
           </div>
 
           {/* BACK: THE GAME */}
           <div 
-            className="absolute inset-0 bg-white border-[0.5px] border-black/10 rounded-sm overflow-hidden"
+            className="absolute inset-0 bg-black border-[0.5px] border-white/10 rounded-sm overflow-hidden"
             style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
           >
-            <ZenGame />
+            <AetherRunnerGame onWin={handleWin} />
             <button 
               onClick={() => setIsFlipped(false)}
-              className="absolute bottom-12 left-1/2 -translate-x-1/2 font-heading text-[9px] uppercase tracking-[0.3em] text-black border-b border-black"
+              className="absolute bottom-8 left-1/2 -translate-x-1/2 font-mono text-[9px] uppercase tracking-[0.3em] text-white/40 border-b border-white/40"
             >
               Return to Vault
             </button>
           </div>
         </motion.div>
       </div>
-
-      <div className="fixed bottom-8 left-8 flex gap-8 font-heading text-[8px] uppercase tracking-[0.4em] text-black/20">
-        <span>34.0522° N, 118.2437° W</span>
-        <span>Est. 2026</span>
-      </div>
+      
+      {/* WIN SCREEN OVERLAY */}
+      <AnimatePresence>
+        {showWinScreen && (
+          <motion.div 
+            initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}} 
+            className="fixed inset-0 bg-black/80 backdrop-blur-md z-20 flex flex-col items-center justify-center p-8 text-center text-white"
+          >
+              <h2 className="font-display text-4xl text-green-400 font-black">ACCESS GRANTED</h2>
+              <p className="font-mono text-xs text-white/60 mt-2">Enter your callsign to receive your key.</p>
+              <input 
+                type="text" 
+                value={agentName} 
+                onChange={(e) => setAgentName(e.target.value)} 
+                placeholder="[ENTER CALLSIGN]" 
+                className="mt-8 bg-transparent border-b border-green-400 py-2 text-center text-green-400 placeholder:text-green-400/30 font-mono tracking-widest uppercase focus:outline-none"
+              />
+              {agentName && <p className="mt-8 font-mono text-2xl text-white animate-pulse">{secretKey}</p>}
+              <button onClick={() => setShowWinScreen(false)} className="mt-8 text-xs font-mono text-white/50 border-b border-white/50">RETURN</button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </main>
   );
 }

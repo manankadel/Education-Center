@@ -1,6 +1,6 @@
 "use client";
 import { Canvas, useFrame, extend, useThree } from '@react-three/fiber';
-import { useRef, useMemo } from 'react';
+import { useRef } from 'react';
 import * as THREE from 'three';
 import { shaderMaterial } from '@react-three/drei';
 
@@ -20,21 +20,29 @@ const GlassArtMaterial = shaderMaterial(
 
     void main() {
       vec2 p = vUv;
-      float t = u_time * 0.15;
+      float t = u_time * 0.2; // Slowed down for a heavier feel
       
       // Create soft liquid displacement
       for(float i = 1.0; i < 4.0; i++) {
-        p.x += 0.3 / i * sin(i * 3.0 * p.y + t + u_mouse.x * 0.5);
-        p.y += 0.3 / i * cos(i * 3.0 * p.x + t + u_mouse.y * 0.5);
+        p.x += 0.2 / i * sin(i * 2.5 * p.y + t + u_mouse.x * 0.5);
+        p.y += 0.2 / i * cos(i * 2.5 * p.x + t + u_mouse.y * 0.5);
       }
 
-      // Greyscale Gradient Logic
+      // === HIGH CONTRAST INK & MILK PALETTE ===
       float color = 0.5 + 0.5 * sin(p.x + p.y + t);
-      vec3 finalColor = mix(vec3(0.98), vec3(0.85), color); // Soft Off-whites to Light Greys
       
-      // Subtle shadow depth
-      float shadow = smoothstep(0.4, 0.7, color);
-      finalColor = mix(finalColor, vec3(0.7), shadow * 0.2);
+      // Base: Off-White
+      vec3 base = vec3(0.98, 0.98, 0.97); 
+      
+      // Ink: Deep Charcoal/Black
+      vec3 ink = vec3(0.1, 0.1, 0.1); 
+      
+      // Mix them with a sharp falloff for high contrast
+      vec3 finalColor = mix(base, ink, smoothstep(0.4, 0.6, color));
+
+      // Add grain for texture
+      float grain = fract(sin(dot(vUv, vec2(12.9898, 78.233))) * 43758.5453) * 0.05;
+      finalColor -= grain;
 
       gl_FragColor = vec4(finalColor, 1.0);
     }
@@ -63,7 +71,7 @@ function Scene() {
 }
 
 export const LiquidGlassArt = () => (
-  <div className="fixed inset-0 z-0 bg-[#f9f9f9]">
+  <div className="fixed inset-0 z-0 bg-[#f0f0f0]">
     <Canvas camera={{ position: [0, 0, 1] }}>
       <Scene />
     </Canvas>

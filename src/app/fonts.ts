@@ -1,4 +1,6 @@
-import { Poppins, Unbounded } from 'next/font/google';
+// src/app/fonts.ts
+
+import { Poppins, Unbounded, IBM_Plex_Mono } from 'next/font/google';
 import localFont from 'next/font/local';
 
 export const fontPoppins = Poppins({
@@ -13,10 +15,15 @@ export const fontUnbounded = Unbounded({
     variable: '--font-unbounded',
 });
 
-// Ensure you have the font file at public/assets/fonts/genoa.otf or src/assets/fonts/genoa.otf
-// If you do not have the custom Genoa font file, you can comment this out and remove it from the exports.
 export const fontGenoa = localFont({
   src: '../assets/fonts/genoa.otf', 
   display: 'swap',
   variable: '--font-genoa', 
+});
+
+// ADD THIS FONT
+export const fontMono = IBM_Plex_Mono({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  variable: '--font-mono',
 });
