@@ -8,12 +8,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 const GRID_SIZE = 20;
 const SECRET_KEY = "GLYPHKEY";
 
-// Define a type for food
 type Food = { x: number; y: number; special: boolean; };
 
-export const SnakeGame = ({ onWin }: { onWin: (key: string) => void }) => {
+// FIXED: Added onBack to the props
+export const SnakeGame = ({ onWin, onBack }: { onWin: (key: string) => void; onBack: () => void; }) => {
     const [snake, setSnake] = useState([{ x: 10, y: 10 }]);
-    const [food, setFood] = useState<Food>({ x: 15, y: 15, special: false }); // Use type here
+    const [food, setFood] = useState<Food>({ x: 15, y: 15, special: false });
     const [direction, setDirection] = useState<'UP' | 'DOWN' | 'LEFT' | 'RIGHT'>('RIGHT');
     const [score, setScore] = useState(0);
     const [isPlaying, setIsPlaying] = useState(false);
@@ -22,7 +22,6 @@ export const SnakeGame = ({ onWin }: { onWin: (key: string) => void }) => {
     const gameLoopRef = useRef<NodeJS.Timeout | null>(null);
 
     const generateFood = () => {
-        // FIXED: Give newFoodPos an explicit type
         let newFoodPos: Food;
         do {
             newFoodPos = {
@@ -140,6 +139,11 @@ export const SnakeGame = ({ onWin }: { onWin: (key: string) => void }) => {
                   </motion.div>
                 )}
               </AnimatePresence>
+              
+              {/* BACK BUTTON */}
+              <button onClick={onBack} className="absolute bottom-8 left-8 font-mono text-xs uppercase text-white/50 hover:text-white">
+                &larr; Return to Hub
+              </button>
         </div>
     );
 };

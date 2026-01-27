@@ -7,14 +7,15 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const SECRET_KEY = "VOIDWALKER";
 
-export const NodeHunterGame = ({ onWin }: { onWin: (key: string) => void }) => {
+// FIXED: Added onBack to the props
+export const NodeHunterGame = ({ onWin, onBack }: { onWin: (key: string) => void; onBack: () => void; }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [score, setScore] = useState(0);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [gameOver, setGameOver] = useState(false);
   
   const timerRef = useRef<NodeJS.Timeout | null>(null);
-  const speedRef = useRef(2500); // 2.5 seconds start time
+  const speedRef = useRef(2500);
 
   const startGame = () => {
     setIsPlaying(true);
@@ -33,16 +34,12 @@ export const NodeHunterGame = ({ onWin }: { onWin: (key: string) => void }) => {
 
   const handleClick = (index: number) => {
     if (!isPlaying || index !== activeIndex) return;
-    
-    // BIG NUMBER SCORING
     const newScore = score + 30;
     setScore(newScore);
-
     if (newScore >= 420) {
-      handleGameOver(420); // Trigger win
+      handleGameOver(420);
       return;
     }
-    
     speedRef.current = Math.max(200, speedRef.current * 0.95);
     nextTurn();
   };
@@ -58,7 +55,7 @@ export const NodeHunterGame = ({ onWin }: { onWin: (key: string) => void }) => {
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-center p-8 text-white relative">
-      <div className="w-full max-w-[280px] flex justify-between items-center mb-8">
+       <div className="w-full max-w-[280px] flex justify-between items-center mb-8">
         <div>
           <h3 className="font-mono text-[9px] uppercase tracking-widest text-white/40">Score</h3>
           <p className="font-display text-4xl font-black">{score}</p>
@@ -82,14 +79,20 @@ export const NodeHunterGame = ({ onWin }: { onWin: (key: string) => void }) => {
       </div>
 
       <AnimatePresence>
-        {!isPlaying && !gameOver && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 z-10 flex items-center justify-center bg-black/60 backdrop-blur-sm">
-            <button onClick={startGame} className="px-10 py-3 bg-white text-black font-sans text-xs font-bold uppercase tracking-[0.2em]">
-                INITIALIZE
+        {!isPlaying && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black/60 backdrop-blur-sm">
+            <h2 className="font-display text-5xl font-black text-white">{gameOver ? "GAME OVER" : "NODE HUNTER"}</h2>
+            <button onClick={startGame} className="mt-8 px-10 py-3 bg-white text-black font-sans text-xs font-bold uppercase tracking-[0.2em]">
+                {gameOver ? 'RETRY' : 'INITIALIZE'}
             </button>
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* BACK BUTTON */}
+      <button onClick={onBack} className="absolute bottom-8 left-8 font-mono text-xs uppercase text-white/50 hover:text-white">
+        &larr; Return to Hub
+      </button>
     </div>
   );
 };
