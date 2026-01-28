@@ -1,3 +1,5 @@
+// src/components/core/LiquidGlassArt.tsx
+
 "use client";
 import { Canvas, useFrame, extend, useThree } from '@react-three/fiber';
 import { useRef } from 'react';

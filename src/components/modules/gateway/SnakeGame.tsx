@@ -10,7 +10,6 @@ const SECRET_KEY = "GLYPHKEY";
 
 type Food = { x: number; y: number; special: boolean; };
 
-// FIXED: Added onBack to the props
 export const SnakeGame = ({ onWin, onBack }: { onWin: (key: string) => void; onBack: () => void; }) => {
     const [snake, setSnake] = useState([{ x: 10, y: 10 }]);
     const [food, setFood] = useState<Food>({ x: 15, y: 15, special: false });
@@ -140,9 +139,12 @@ export const SnakeGame = ({ onWin, onBack }: { onWin: (key: string) => void; onB
                 )}
               </AnimatePresence>
               
-              {/* BACK BUTTON */}
-              <button onClick={onBack} className="absolute bottom-8 left-8 font-mono text-xs uppercase text-white/50 hover:text-white">
-                &larr; Return to Hub
+              {/* FIXED BACK BUTTON */}
+              <button 
+                onClick={onBack} 
+                className="absolute bottom-6 left-1/2 -translate-x-1/2 font-mono text-[9px] uppercase tracking-[0.3em] text-white/40 border-b border-white/40 hover:text-white hover:border-white transition-colors z-50 pointer-events-auto"
+              >
+                Return to Hub
               </button>
         </div>
     );

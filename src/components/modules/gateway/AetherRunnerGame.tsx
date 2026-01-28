@@ -8,29 +8,23 @@ import { useState, useMemo, useRef, useEffect } from 'react';
 
 const SECRET_KEY = "AETHERKEY";
 
+// ... (Keep Player, Obstacle, Fragment components exactly as they were)
 const Player = ({ position }: { position: THREE.Vector3 }) => (
   <mesh position={position}>
     <icosahedronGeometry args={[0.3, 0]} />
     <meshStandardMaterial color="#fff" emissive="#0ff" emissiveIntensity={3} toneMapped={false} />
   </mesh>
 );
-
 const Obstacle = ({ position }: { position: THREE.Vector3 }) => (
   <mesh position={position} rotation={[0, Math.random() * Math.PI, 0]}>
     <boxGeometry args={[1, 4, 1]} />
     <meshStandardMaterial color="#333" roughness={0.5} />
   </mesh>
 );
-
 const Fragment = ({ position, isSpecial }: { position: THREE.Vector3; isSpecial: boolean }) => (
   <mesh position={position}>
     <octahedronGeometry args={[isSpecial ? 0.3 : 0.15, 0]} />
-    <meshStandardMaterial 
-      color={isSpecial ? "#0f0" : "#fff"} 
-      emissive={isSpecial ? "#0f0" : "#0ff"} 
-      emissiveIntensity={5} 
-      toneMapped={false} 
-    />
+    <meshStandardMaterial color={isSpecial ? "#0f0" : "#fff"} emissive={isSpecial ? "#0f0" : "#0ff"} emissiveIntensity={5} toneMapped={false} />
   </mesh>
 );
 
@@ -38,16 +32,15 @@ const GameScene = ({ setScore, setGameOver }: { setScore: any; setGameOver: any 
   const { viewport } = useThree();
   const playerPos = useMemo(() => new THREE.Vector3(0, -1, 0), []);
   
-  // FIXED: The game would crash if viewport was not ready on first render.
   const obstacles = useMemo(() => {
-    if (!viewport) return []; // Safeguard
+    if (!viewport) return [];
     return [...Array(10)].map(() => ({
       position: new THREE.Vector3((Math.random() - 0.5) * viewport.width, -1, -(Math.random() * 50) - 10)
     }));
   }, [viewport]);
 
   const fragments = useMemo(() => {
-    if (!viewport) return []; // Safeguard
+    if (!viewport) return [];
     return [...Array(20)].map(() => ({
       position: new THREE.Vector3((Math.random() - 0.5) * viewport.width, -1, -(Math.random() * 50) - 10),
       isSpecial: Math.random() > 0.9
@@ -57,8 +50,7 @@ const GameScene = ({ setScore, setGameOver }: { setScore: any; setGameOver: any 
   const gameSpeed = useRef(0.1);
 
   useFrame((state) => {
-    if (gameSpeed.current === 0) return; // Stop updates if game over
-
+    if (gameSpeed.current === 0) return;
     playerPos.lerp(new THREE.Vector3(state.pointer.x * (viewport.width / 2), -1, 0), 0.1);
 
     obstacles.forEach(obs => {
@@ -66,7 +58,7 @@ const GameScene = ({ setScore, setGameOver }: { setScore: any; setGameOver: any 
       if (obs.position.z > 2) obs.position.z = -50;
       if (playerPos.distanceTo(obs.position) < 0.8) {
         setGameOver(true);
-        gameSpeed.current = 0; // Stop the game
+        gameSpeed.current = 0;
       }
     });
     
@@ -109,12 +101,12 @@ export const AetherRunnerGame = ({ onWin, onBack }: { onWin: (key: string) => vo
   };
 
   return (
-    <div className="w-full h-full relative text-white bg-black">
+    <div className="w-full h-full relative text-white bg-black rounded-2xl overflow-hidden">
       <Canvas camera={{ position: [0, 2, 5], fov: 75 }}>
         {gameState === 'playing' && <GameScene setScore={setScore} setGameOver={handleGameOver} />}
       </Canvas>
       
-      <div className="absolute top-8 left-8">
+      <div className="absolute top-8 left-8 z-10 pointer-events-none">
         <h3 className="font-mono text-xs uppercase tracking-widest text-white/50">Score</h3>
         <p className="font-display text-5xl font-black">{score}</p>
       </div>
@@ -123,19 +115,22 @@ export const AetherRunnerGame = ({ onWin, onBack }: { onWin: (key: string) => vo
         {gameState !== 'playing' && (
           <motion.div
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black/70 backdrop-blur-sm"
+            className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-black/70 backdrop-blur-sm"
           >
-            <h2 className="font-display text-6xl font-black">{gameState === 'over' ? "DEACTIVATED" : "AETHER RUNNER"}</h2>
-            <button onClick={startGame} className="mt-8 px-10 py-3 bg-white text-black font-sans text-xs font-bold uppercase tracking-[0.2em]">
+            <h2 className="font-display text-4xl md:text-6xl font-black">{gameState === 'over' ? "DEACTIVATED" : "AETHER RUNNER"}</h2>
+            <button onClick={startGame} className="mt-8 px-10 py-3 bg-white text-black font-sans text-xs font-bold uppercase tracking-[0.2em] hover:bg-gray-200">
                 {gameState === 'over' ? 'RE-INITIATE' : 'INITIATE'}
             </button>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* BACK BUTTON */}
-      <button onClick={onBack} className="absolute bottom-8 left-8 font-mono text-xs uppercase text-white/50 hover:text-white">
-        &larr; Return to Hub
+      {/* FIXED BACK BUTTON */}
+      <button 
+        onClick={onBack} 
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 font-mono text-[9px] uppercase tracking-[0.3em] text-white/40 border-b border-white/40 hover:text-white hover:border-white transition-colors z-[50] pointer-events-auto"
+      >
+        Return to Hub
       </button>
     </div>
   );
