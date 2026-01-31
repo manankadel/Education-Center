@@ -9,15 +9,15 @@ import { useState } from 'react';
 const text = "We are not for everyone. Wants & Needs is a rejection of the ordinary, a uniform for the discerning individual who moves between worlds. This is luxury defined not by a price tag, but by a perspective.";
 
 export const BrandManifesto = () => {
-  // 1. Get Gyro Data
-  const { smoothedGyroData } = useGyroscope();
+  // FIX: Destructure x and y (MotionValues) instead of smoothedGyroData
+  const { x, y } = useGyroscope();
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
     const { clientWidth, clientHeight } = event.currentTarget;
-    const x = (event.clientX / clientWidth) * 2 - 1;
-    const y = -((event.clientY / clientHeight) * 2 - 1);
-    setMousePosition({ x, y });
+    const normX = (event.clientX / clientWidth) * 2 - 1;
+    const normY = -((event.clientY / clientHeight) * 2 - 1);
+    setMousePosition({ x: normX, y: normY });
   };
 
   return (
@@ -25,9 +25,9 @@ export const BrandManifesto = () => {
         className="relative py-32 px-6 md:px-12 bg-black text-white flex justify-center overflow-hidden"
         onMouseMove={handleMouseMove}
     >
-      {/* 2. Pass Gyro Data to Particles */}
+      {/* FIX: Pass the MotionValues (x, y) as props */}
       <div className="absolute inset-0 z-0 opacity-60 pointer-events-none">
-        <FloatingParticlesBackground mousePosition={mousePosition} gyroData={smoothedGyroData} />
+        <FloatingParticlesBackground mousePosition={mousePosition} gyroX={x} gyroY={y} />
       </div>
 
       <motion.div 
@@ -58,12 +58,6 @@ export const BrandManifesto = () => {
           ))}
         </p>
       </motion.div>
-      
-      <div className="absolute bottom-8 left-0 w-full text-center z-10 pointer-events-none opacity-30">
-        <p className="font-mono text-[9px] uppercase tracking-widest">
-            ( Tilt to navigate the void )
-        </p>
-      </div>
     </section>
   );
 };

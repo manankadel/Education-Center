@@ -2,10 +2,11 @@
 
 "use client";
 
-import React, { useMemo, useRef, useState, useEffect } from "react"; 
+import React, { useMemo, useRef } from "react"; 
 import { Canvas, useFrame, extend } from "@react-three/fiber";
 import * as THREE from "three";
 import { shaderMaterial } from "@react-three/drei";
+import { MotionValue } from "framer-motion";
 
 const PARTICLE_CONTROLS = {
     quantity: 1500,
@@ -14,7 +15,7 @@ const PARTICLE_CONTROLS = {
     blinkPercentage: 0.2,
     direction: -1, 
     speed: 0.2,
-    gyroIntensity: 1,
+    gyroIntensity: 2.0, // Increased intensity for better mobile feel
 };
 
 const CustomParticleMaterial = shaderMaterial(
@@ -45,7 +46,14 @@ const CustomParticleMaterial = shaderMaterial(
 );
 extend({ CustomParticleMaterial });
 
-const Particles = ({ mousePosition, gyroData }: { mousePosition: { x: number, y: number }, gyroData: { x: number, y: number } }) => {
+// New Prop Interface using MotionValues
+interface ParticlesProps {
+    mousePosition: { x: number, y: number };
+    gyroX?: MotionValue<number>;
+    gyroY?: MotionValue<number>;
+}
+
+const Particles = ({ mousePosition, gyroX, gyroY }: ParticlesProps) => {
   const meshRef = useRef<THREE.Points>(null!);
   
   const particleData = useMemo(() => {
@@ -59,18 +67,17 @@ const Particles = ({ mousePosition, gyroData }: { mousePosition: { x: number, y:
       positions[i * 3 + 1] = (Math.random() - 0.5) * distance;
       positions[i * 3 + 2] = (Math.random() - 0.5) * distance;
       
-      // RESTORED: WHITE STARS
       let particleColor = new THREE.Color();
       blinkSpeeds[i] = 0.0;
       
       if (Math.random() < PARTICLE_CONTROLS.blinkPercentage) {
-        particleColor.setHSL(0, 0, 1.0); // White
+        particleColor.setHSL(0, 0, 1.0); 
         blinkSpeeds[i] = Math.random() * 3 + 1;
       } else if (Math.random() < PARTICLE_CONTROLS.glowPercentage) {
-        particleColor.setHSL(0, 0, 1.0); // White
+        particleColor.setHSL(0, 0, 1.0);
       } else {
         const shade = 0.4 + Math.random() * 0.2;
-        particleColor.setHSL(0, 0, shade); // Grey-White
+        particleColor.setHSL(0, 0, shade);
       }
       colors.set([particleColor.r, particleColor.g, particleColor.b], i * 3);
     }
@@ -78,9 +85,15 @@ const Particles = ({ mousePosition, gyroData }: { mousePosition: { x: number, y:
   }, []);
 
   useFrame((state, delta) => {
-    const hasGyro = gyroData.x !== 0 || gyroData.y !== 0;
-    const targetX = hasGyro ? gyroData.x * PARTICLE_CONTROLS.gyroIntensity : mousePosition.x * 0.5;
-    const targetY = hasGyro ? gyroData.y * PARTICLE_CONTROLS.gyroIntensity : mousePosition.y * 0.5;
+    // Read directly from MotionValues (if available) to avoid React re-renders
+    const gx = gyroX ? gyroX.get() : 0;
+    const gy = gyroY ? gyroY.get() : 0;
+    
+    const hasGyro = gx !== 0 || gy !== 0;
+    
+    // Smooth Lerp Targets
+    const targetX = hasGyro ? gx * PARTICLE_CONTROLS.gyroIntensity : mousePosition.x * 0.5;
+    const targetY = hasGyro ? gy * PARTICLE_CONTROLS.gyroIntensity : mousePosition.y * 0.5;
 
     state.camera.position.x = THREE.MathUtils.lerp(state.camera.position.x, targetX, 0.05);
     state.camera.position.y = THREE.MathUtils.lerp(state.camera.position.y, targetY, 0.05);
@@ -105,7 +118,6 @@ const Particles = ({ mousePosition, gyroData }: { mousePosition: { x: number, y:
   });
 
   return (
-    // Changed: Blending to Additive for glowing stars
     <points ref={meshRef}>
         <bufferGeometry>
             <bufferAttribute attach="attributes-position" count={particleData.positions.length / 3} array={particleData.positions} itemSize={3} />
@@ -124,32 +136,11 @@ const Particles = ({ mousePosition, gyroData }: { mousePosition: { x: number, y:
   );
 };
 
-export const FloatingParticlesBackground = ({ mousePosition, gyroData }: { mousePosition: { x: number, y: number }, gyroData: { x: number, y: number } }) => {
-  const [internalGyroData, setInternalGyroData] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    const handleDeviceOrientation = (event: DeviceOrientationEvent) => {
-      const { beta, gamma } = event;
-      if (beta !== null && gamma !== null) {
-        const x = THREE.MathUtils.clamp(gamma / 90, -1, 1);
-        const y = THREE.MathUtils.clamp(beta / 90, -1, 1);
-        setInternalGyroData({ x, y });
-      }
-    };
-    if (typeof window !== 'undefined' && window.DeviceOrientationEvent) {
-      window.addEventListener('deviceorientation', handleDeviceOrientation);
-    }
-    return () => {
-      if (typeof window !== 'undefined' && window.DeviceOrientationEvent) {
-        window.removeEventListener('deviceorientation', handleDeviceOrientation);
-      }
-    };
-  }, []);
-
+export const FloatingParticlesBackground = (props: ParticlesProps) => {
   return (
     <div className="absolute inset-0 z-0 pointer-events-none">
-      <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
-        <Particles mousePosition={mousePosition} gyroData={internalGyroData} />
+      <Canvas camera={{ position: [0, 0, 5], fov: 75 }} dpr={[1, 1.5]}>
+        <Particles {...props} />
       </Canvas>
     </div>
   );
