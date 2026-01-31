@@ -1,6 +1,6 @@
 {
   "/page": "app/page.js",
+  "/api/access/route": "app/api/access/route.js",
   "/(main)/home/page": "app/(main)/home/page.js",
-  "/(main)/catalog/page": "app/(main)/catalog/page.js",
   "/icon.png/route": "app/icon.png/route.js"
 }
