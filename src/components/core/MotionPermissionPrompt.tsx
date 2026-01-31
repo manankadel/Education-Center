@@ -1,32 +1,30 @@
+// src/components/core/MotionPermissionPrompt.tsx
+
 "use client";
-import { useGyroscope } from '@/hooks/useGyroscope'; // <-- Use our new hook
+import { useGyroscope } from '@/hooks/useGyroscope';
+import { AnimatePresence, motion } from 'framer-motion';
 
-const MotionIcon = () => (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M10 3.2a9 9 0 1 0 10.8 10.8"/>
-        <path d="M14 2.26A9.01 9.01 0 0 0 12 2a9 9 0 0 0-9.2 8.74"/>
-        <path d="M22 12h-2.5"/>
-        <path d="M6 12H2"/>
-        <path d="M12 6V2"/>
-        <path d="M12 22v-2.5"/>
-    </svg>
-);
 export const MotionPermissionPrompt = () => {
-    // Get the tools from our custom hook
-    const { needsPermission, requestPermission } = useGyroscope();
-
-    // If the device doesn't need permission, this will be false.
-    if (!needsPermission) {
-        return null;
-    }
+    const { requiresPermission, requestPermission } = useGyroscope();
 
     return (
-        <button
-            onClick={requestPermission}
-            className="fixed bottom-4 left-4 z-50 p-3 bg-white/10 text-white backdrop-blur-md rounded-full animate-pulse transition-all hover:bg-white/20"
-            aria-label="Enable motion controls"
-        >
-            <MotionIcon />
-        </button>
+        <AnimatePresence>
+            {requiresPermission && (
+                <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                    className="absolute bottom-24 left-1/2 -translate-x-1/2 z-50 pointer-events-auto"
+                >
+                    <button
+                        onClick={requestPermission}
+                        className="flex items-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full shadow-2xl text-white font-sans text-[10px] uppercase tracking-widest hover:bg-white hover:text-black transition-colors"
+                    >
+                        <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                        Enable Motion Sensors
+                    </button>
+                </motion.div>
+            )}
+        </AnimatePresence>
     );
 };

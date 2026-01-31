@@ -2,54 +2,39 @@
 
 "use client";
 
-import { useRef, useState, useEffect } from 'react';
-import { motion, useSpring, useTransform } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useTransform, useSpring } from 'framer-motion';
 import { useGyroscope } from '@/hooks/useGyroscope';
 import Link from 'next/link';
 import Image from 'next/image';
+import { MotionPermissionPrompt } from '@/components/core/MotionPermissionPrompt';
 
 export const GyroSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { smoothedGyroData } = useGyroscope();
+  const { x } = useGyroscope(); // Get the raw MotionValue
   
-  // Spring physics for smooth slider movement
-  const xParams = useSpring(50, { stiffness: 100, damping: 20 }); 
-  const [hoverSide, setHoverSide] = useState<'left' | 'right' | null>(null);
+  // Smooth out the raw sensor data
+  const smoothX = useSpring(x, { stiffness: 50, damping: 20 });
 
-  const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
-    const { left, width } = event.currentTarget.getBoundingClientRect();
-    const x = event.clientX - left;
-    const percentage = (x / width) * 100;
-    
-    xParams.set(percentage);
-    
-    if (percentage < 50) setHoverSide('left');
-    else setHoverSide('right');
-  };
-
-  // GYRO LOGIC
-  useEffect(() => {
-    if (smoothedGyroData.x !== 0 && typeof window !== 'undefined' && window.matchMedia("(pointer: coarse)").matches) {
-      const tiltStrength = 40;
-      const newPercent = 50 + (smoothedGyroData.x * tiltStrength);
-      xParams.set(newPercent);
-      
-      if (newPercent < 50) setHoverSide('left');
-      else setHoverSide('right');
-    }
-  }, [smoothedGyroData, xParams]);
-
-  const clipPathLeft = useTransform(xParams, (val) => `inset(0 ${100 - val}% 0 0)`);
-  const clipPathRight = useTransform(xParams, (val) => `inset(0 0 0 ${val}%)`);
+  // Map -1 to 1 (Tilt) directly to CSS Clip Path percentages
+  // 0% is full left, 100% is full right
+  const splitPercent = useTransform(smoothX, [-1, 1], [30, 70]); 
+  
+  // Create strings for clip-path
+  const clipPathLeft = useTransform(splitPercent, (v) => `inset(0 ${100 - v}% 0 0)`);
+  const clipPathRight = useTransform(splitPercent, (v) => `inset(0 0 0 ${v}%)`);
+  
+  // Parallax Text Movement (Opposite to tilt)
+  const textX = useTransform(smoothX, [-1, 1], [30, -30]);
 
   return (
     <section 
       ref={containerRef}
-      className="relative h-[85vh] w-full overflow-hidden flex bg-black cursor-col-resize"
-      onMouseMove={handleMouseMove}
-      onMouseLeave={() => xParams.set(50)}
+      className="relative h-[85vh] w-full overflow-hidden flex bg-black"
     >
-      {/* === LEFT SIDE: WANTS (Desire/Dark) === */}
+      <MotionPermissionPrompt />
+
+      {/* === LEFT: WANTS === */}
       <motion.div 
         className="absolute inset-0 z-20 bg-black text-white flex flex-col justify-center items-center overflow-hidden border-r border-white/20"
         style={{ clipPath: clipPathLeft }}
@@ -63,27 +48,27 @@ export const GyroSection = () => {
              />
         </div>
         
-        <div className="relative z-10 text-center px-4 mix-blend-hard-light">
-            <h2 className="font-display text-7xl md:text-[10rem] font-black tracking-tighter leading-none mb-4">
+        <motion.div style={{ x: textX }} className="relative z-10 text-center px-4 mix-blend-hard-light">
+            {/* Responsive Text Sizes */}
+            <h2 className="font-display text-6xl sm:text-8xl md:text-[10rem] font-black tracking-tighter leading-none mb-4">
                 WANT
             </h2>
-            <p className="font-sans text-xs md:text-sm font-bold uppercase tracking-[0.3em] mb-8">
-                Desire. Impulse. Statement.
+            <p className="font-sans text-[10px] md:text-sm font-bold uppercase tracking-[0.3em] mb-8">
+                Desire. Impulse.
             </p>
             <Link href="/shop/hoodies">
-                <button className={`px-10 py-4 border border-white text-white font-sans text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-300 ${hoverSide === 'left' ? 'scale-110 bg-white text-black' : ''}`}>
+                <button className="px-8 py-3 md:px-10 md:py-4 border border-white text-white font-sans text-[10px] md:text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all">
                     Shop The Heat
                 </button>
             </Link>
-        </div>
+        </motion.div>
       </motion.div>
 
-      {/* === RIGHT SIDE: NEEDS (Utility/Light) === */}
+      {/* === RIGHT: NEEDS === */}
       <motion.div 
         className="absolute inset-0 z-10 bg-white text-black flex flex-col justify-center items-center overflow-hidden"
         style={{ clipPath: clipPathRight }}
       >
-        {/* NEW NEEDS IMAGE */}
         <div className="absolute inset-0 opacity-80">
              <Image 
                 src="https://cdn.shopify.com/s/files/1/0975/8736/4138/files/IMG_7275.webp?v=1769856520" 
@@ -91,35 +76,33 @@ export const GyroSection = () => {
                 fill 
                 className="object-cover grayscale contrast-125"
              />
-             {/* Light overlay to ensure black text pops */}
              <div className="absolute inset-0 bg-white/30 mix-blend-lighten" />
         </div>
         
-        <div className="relative z-10 text-center px-4">
-            <h2 className="font-display text-7xl md:text-[10rem] font-black tracking-tighter leading-none mb-4">
+        <motion.div style={{ x: textX }} className="relative z-10 text-center px-4">
+            <h2 className="font-display text-6xl sm:text-8xl md:text-[10rem] font-black tracking-tighter leading-none mb-4">
                 NEED
             </h2>
-            <p className="font-sans text-xs md:text-sm font-bold uppercase tracking-[0.3em] mb-8 text-black">
-                Utility. Comfort. Essential.
+            <p className="font-sans text-[10px] md:text-sm font-bold uppercase tracking-[0.3em] mb-8 text-black">
+                Utility. Comfort.
             </p>
             <Link href="/shop/sweatpants">
-                <button className={`px-10 py-4 border border-black text-black font-sans text-xs font-bold uppercase tracking-widest hover:bg-black hover:text-white transition-all duration-300 ${hoverSide === 'right' ? 'scale-110 bg-black text-white' : ''}`}>
+                <button className="px-8 py-3 md:px-10 md:py-4 border border-black text-black font-sans text-[10px] md:text-xs font-bold uppercase tracking-widest hover:bg-black hover:text-white transition-all">
                     Shop Essentials
                 </button>
             </Link>
-        </div>
+        </motion.div>
       </motion.div>
 
-      {/* === THE SPLIT LINE === */}
+      {/* === SPLIT LINE === */}
       <motion.div 
         className="absolute top-0 bottom-0 w-1 bg-white z-30 mix-blend-difference pointer-events-none"
-        style={{ left: xParams }}
+        style={{ left: useTransform(splitPercent, v => `${v}%`) }}
       />
       
-      {/* === INSTRUCTION === */}
       <div className="absolute bottom-8 left-0 w-full text-center z-40 pointer-events-none mix-blend-difference text-white">
         <p className="font-mono text-[9px] uppercase tracking-widest opacity-50">
-            &lt; Tilt Device or Move Cursor &gt;
+            &lt; Tilt Device &gt;
         </p>
       </div>
     </section>
