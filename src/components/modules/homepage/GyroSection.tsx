@@ -13,7 +13,7 @@ export const GyroSection = () => {
   const { smoothedGyroData } = useGyroscope();
   
   // Spring physics for smooth slider movement
-  const xParams = useSpring(50, { stiffness: 100, damping: 20 }); // Softer spring for tilt
+  const xParams = useSpring(50, { stiffness: 100, damping: 20 }); 
   const [hoverSide, setHoverSide] = useState<'left' | 'right' | null>(null);
 
   const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -27,15 +27,10 @@ export const GyroSection = () => {
     else setHoverSide('right');
   };
 
-  // GYRO LOGIC: Map tilt to slider position
+  // GYRO LOGIC
   useEffect(() => {
-    // Only use gyro if it's active (not 0) and user isn't hovering (desktop override)
     if (smoothedGyroData.x !== 0 && typeof window !== 'undefined' && window.matchMedia("(pointer: coarse)").matches) {
-      // Gyro X typically ranges from -1 to 1 (or wider depending on normalization).
-      // We map -1 (Left tilt) -> 10%
-      // We map 1 (Right tilt) -> 90%
-      // 50 is center
-      const tiltStrength = 40; // How much it moves
+      const tiltStrength = 40;
       const newPercent = 50 + (smoothedGyroData.x * tiltStrength);
       xParams.set(newPercent);
       
@@ -44,7 +39,6 @@ export const GyroSection = () => {
     }
   }, [smoothedGyroData, xParams]);
 
-  // Transform percentage into clip-path values
   const clipPathLeft = useTransform(xParams, (val) => `inset(0 ${100 - val}% 0 0)`);
   const clipPathRight = useTransform(xParams, (val) => `inset(0 0 0 ${val}%)`);
 
@@ -60,16 +54,16 @@ export const GyroSection = () => {
         className="absolute inset-0 z-20 bg-black text-white flex flex-col justify-center items-center overflow-hidden border-r border-white/20"
         style={{ clipPath: clipPathLeft }}
       >
-        <div className="absolute inset-0 opacity-40">
+        <div className="absolute inset-0 opacity-60">
              <Image 
                 src="https://wantsandneeds.com/cdn/shop/files/DSC01988.jpg?v=1758250936&width=1680" 
                 alt="Wants" 
                 fill 
-                className="object-cover grayscale brightness-50"
+                className="object-cover grayscale brightness-75"
              />
         </div>
         
-        <div className="relative z-10 text-center px-4">
+        <div className="relative z-10 text-center px-4 mix-blend-hard-light">
             <h2 className="font-display text-7xl md:text-[10rem] font-black tracking-tighter leading-none mb-4">
                 WANT
             </h2>
@@ -89,13 +83,23 @@ export const GyroSection = () => {
         className="absolute inset-0 z-10 bg-white text-black flex flex-col justify-center items-center overflow-hidden"
         style={{ clipPath: clipPathRight }}
       >
-        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-gray-200 to-white"></div>
+        {/* NEW NEEDS IMAGE */}
+        <div className="absolute inset-0 opacity-80">
+             <Image 
+                src="https://cdn.shopify.com/s/files/1/0975/8736/4138/files/IMG_7275.webp?v=1769856520" 
+                alt="Needs" 
+                fill 
+                className="object-cover grayscale contrast-125"
+             />
+             {/* Light overlay to ensure black text pops */}
+             <div className="absolute inset-0 bg-white/30 mix-blend-lighten" />
+        </div>
         
         <div className="relative z-10 text-center px-4">
             <h2 className="font-display text-7xl md:text-[10rem] font-black tracking-tighter leading-none mb-4">
                 NEED
             </h2>
-            <p className="font-sans text-xs md:text-sm font-bold uppercase tracking-[0.3em] mb-8 text-black/60">
+            <p className="font-sans text-xs md:text-sm font-bold uppercase tracking-[0.3em] mb-8 text-black">
                 Utility. Comfort. Essential.
             </p>
             <Link href="/shop/sweatpants">

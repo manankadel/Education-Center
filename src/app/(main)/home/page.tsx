@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 import { BrandManifesto } from "@/components/modules/homepage/BrandManifesto";
 import TerminalFooter from "@/components/modules/homepage/GlitchMarquee";
 import { GyroSection } from "@/components/modules/homepage/GyroSection";
-import { StaticInterlude } from "@/components/modules/homepage/StaticInterlude";
+import { ArchiveStack } from "@/components/modules/homepage/ArchiveStack"; // NEW
 
 const HomePage = () => {
   return (
@@ -16,7 +16,7 @@ const HomePage = () => {
       {/* 1. Hero */}
       <HeroSection />
 
-      {/* 2. Featured Products (MOVED UP) - Instant commerce context */}
+      {/* 2. Featured Products */}
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -26,13 +26,13 @@ const HomePage = () => {
         <FeaturedProducts />
       </motion.div>
       
-      {/* 3. Gyro Split Section - Interactive Brand Experience */}
+      {/* 3. Gyro Split Section */}
       <GyroSection />
       
-      {/* 4. Static Interlude - Editorial Break */}
-      <StaticInterlude />
+      {/* 4. Interactive Archive Stack (Replaces Static Interlude) */}
+      <ArchiveStack />
 
-      {/* 5. Philosophy/Stars - Deep Dive */}
+      {/* 5. Philosophy/Stars */}
       <BrandManifesto />
       
       <TerminalFooter />
