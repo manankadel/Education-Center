@@ -5,11 +5,12 @@ import { useGyroscope } from '@/hooks/useGyroscope';
 import { AnimatePresence, motion } from 'framer-motion';
 
 export const MotionPermissionPrompt = () => {
-    const { requiresPermission, requestPermission } = useGyroscope();
+    // FIX: Changed 'requiresPermission' to 'needsPermission' to match the hook
+    const { needsPermission, requestPermission } = useGyroscope();
 
     return (
         <AnimatePresence>
-            {requiresPermission && (
+            {needsPermission && (
                 <motion.div 
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
