@@ -2,8 +2,8 @@
 
 "use client";
 
-import { useRef, useState, useEffect } from 'react';
-import { motion, useSpring, useTransform } from 'framer-motion';
+import { useRef, useState } from 'react';
+import { motion, useSpring, useTransform, useMotionValue, useMotionValueEvent } from 'framer-motion';
 import { useGyroscope } from '@/hooks/useGyroscope';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -11,49 +11,57 @@ import { MotionPermissionPrompt } from '@/components/core/MotionPermissionPrompt
 
 export const GyroSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { smoothedGyroData } = useGyroscope();
-  
-  // Spring for the slider position (Starts at 50%)
-  const xParams = useSpring(50, { stiffness: 100, damping: 20 }); 
+  const { x } = useGyroscope(); // Gyro Input (-1 to 1)
+  const mouseX = useMotionValue(0); // Mouse Input (-1 to 1)
+
+  const smoothGyro = useSpring(x, { stiffness: 50, damping: 20 });
+  const smoothMouse = useSpring(mouseX, { stiffness: 50, damping: 20 });
+
+  const splitFromGyro = useTransform(smoothGyro, [-1, 1], [10, 90]);
+  const splitFromMouse = useTransform(smoothMouse, [-1, 1], [10, 90]);
+
+  // Combine inputs safely
+  const currentSplit = useTransform(() => {
+    if (Math.abs(smoothGyro.get()) > 0.05) return splitFromGyro.get();
+    return splitFromMouse.get();
+  });
+
   const [hoverSide, setHoverSide] = useState<'left' | 'right' | null>(null);
 
-  // Mouse Interaction (Desktop)
+  // FIX: Replaced the buggy useTransform side-effect with useMotionValueEvent
+  // This prevents the infinite re-render loop
+  useMotionValueEvent(currentSplit, "change", (latest) => {
+      const newSide = latest < 50 ? 'left' : 'right';
+      // Only update state if it actually changed
+      if (newSide !== hoverSide) {
+          setHoverSide(newSide);
+      }
+  });
+
+  const clipPathLeft = useTransform(currentSplit, (v) => `inset(0 ${100 - v}% 0 0)`);
+  const clipPathRight = useTransform(currentSplit, (v) => `inset(0 0 0 ${v}%)`);
+  const linePos = useTransform(currentSplit, (v) => `${v}%`);
+
   const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
     const { left, width } = event.currentTarget.getBoundingClientRect();
-    const x = event.clientX - left;
-    const percentage = (x / width) * 100;
-    xParams.set(percentage);
-    
-    if (percentage < 50) setHoverSide('left');
-    else setHoverSide('right');
+    const norm = ((event.clientX - left) / width) * 2 - 1;
+    mouseX.set(norm);
   };
 
-  // Gyro Interaction (Mobile)
-  useEffect(() => {
-    if (smoothedGyroData.x !== 0) {
-      // Map -1(Left) to 1(Right) -> 10% to 90%
-      const tilt = 50 + (smoothedGyroData.x * 40);
-      xParams.set(tilt);
-      
-      if (tilt < 50) setHoverSide('left');
-      else setHoverSide('right');
-    }
-  }, [smoothedGyroData, xParams]);
-
-  // Map spring value to clip-paths
-  const clipPathLeft = useTransform(xParams, (val) => `inset(0 ${100 - val}% 0 0)`);
-  const clipPathRight = useTransform(xParams, (val) => `inset(0 0 0 ${val}%)`);
+  const handleMouseLeave = () => {
+    mouseX.set(0);
+  };
 
   return (
     <section 
       ref={containerRef}
       className="relative h-[85vh] w-full overflow-hidden flex bg-black cursor-col-resize"
       onMouseMove={handleMouseMove}
-      onMouseLeave={() => xParams.set(50)}
+      onMouseLeave={handleMouseLeave}
     >
       <MotionPermissionPrompt />
 
-      {/* === LEFT SIDE: WANTS === */}
+      {/* === LEFT: WANTS === */}
       <motion.div 
         className="absolute inset-0 z-20 bg-black text-white flex flex-col justify-center items-center overflow-hidden border-r border-white/20"
         style={{ clipPath: clipPathLeft }}
@@ -64,6 +72,8 @@ export const GyroSection = () => {
                 alt="Wants" 
                 fill 
                 className="object-cover grayscale brightness-75"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                priority
              />
         </div>
         
@@ -75,14 +85,16 @@ export const GyroSection = () => {
                 Desire. Impulse.
             </p>
             <Link href="/shop/hoodies">
-                <button className={`px-10 py-4 border border-white text-white font-sans text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-300 ${hoverSide === 'left' ? 'scale-110 bg-white text-black' : ''}`}>
+                <button 
+                    className={`px-10 py-4 border border-white font-sans text-xs font-bold uppercase tracking-widest transition-all duration-300 ${hoverSide === 'left' ? 'bg-white text-black scale-105' : 'text-white hover:bg-white hover:text-black'}`}
+                >
                     Shop The Heat
                 </button>
             </Link>
         </div>
       </motion.div>
 
-      {/* === RIGHT SIDE: NEEDS === */}
+      {/* === RIGHT: NEEDS === */}
       <motion.div 
         className="absolute inset-0 z-10 bg-white text-black flex flex-col justify-center items-center overflow-hidden"
         style={{ clipPath: clipPathRight }}
@@ -93,6 +105,8 @@ export const GyroSection = () => {
                 alt="Needs" 
                 fill 
                 className="object-cover grayscale contrast-125"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                priority
              />
              <div className="absolute inset-0 bg-white/30 mix-blend-lighten" />
         </div>
@@ -105,18 +119,26 @@ export const GyroSection = () => {
                 Utility. Comfort.
             </p>
             <Link href="/shop/sweatpants">
-                <button className={`px-10 py-4 border border-black text-black font-sans text-xs font-bold uppercase tracking-widest hover:bg-black hover:text-white transition-all duration-300 ${hoverSide === 'right' ? 'scale-110 bg-black text-white' : ''}`}>
+                <button 
+                    className={`px-10 py-4 border border-black font-sans text-xs font-bold uppercase tracking-widest transition-all duration-300 ${hoverSide === 'right' ? 'bg-black text-white scale-105' : 'text-black hover:bg-black hover:text-white'}`}
+                >
                     Shop Essentials
                 </button>
             </Link>
         </div>
       </motion.div>
 
-      {/* SPLIT LINE */}
+      {/* === SPLIT LINE === */}
       <motion.div 
         className="absolute top-0 bottom-0 w-1 bg-white z-30 mix-blend-difference pointer-events-none"
-        style={{ left: xParams }}
+        style={{ left: linePos }}
       />
+      
+      <div className="absolute bottom-8 left-0 w-full text-center z-40 pointer-events-none mix-blend-difference text-white">
+        <p className="font-mono text-[9px] uppercase tracking-widest opacity-50">
+            &lt; Tilt Device &gt;
+        </p>
+      </div>
     </section>
   );
 };

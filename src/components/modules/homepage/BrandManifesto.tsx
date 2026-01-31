@@ -9,15 +9,14 @@ import { useState } from 'react';
 const text = "We are not for everyone. Wants & Needs is a rejection of the ordinary, a uniform for the discerning individual who moves between worlds. This is luxury defined not by a price tag, but by a perspective.";
 
 export const BrandManifesto = () => {
-  // FIX: Using the correct return values from the fixed hook
-  const { smoothedGyroData } = useGyroscope();
+  const { x, y } = useGyroscope();
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
     const { clientWidth, clientHeight } = event.currentTarget;
-    const x = (event.clientX / clientWidth) * 2 - 1;
-    const y = -((event.clientY / clientHeight) * 2 - 1);
-    setMousePosition({ x, y });
+    const normX = (event.clientX / clientWidth) * 2 - 1;
+    const normY = -((event.clientY / clientHeight) * 2 - 1);
+    setMousePosition({ x: normX, y: normY });
   };
 
   return (
@@ -26,8 +25,8 @@ export const BrandManifesto = () => {
         onMouseMove={handleMouseMove}
     >
       <div className="absolute inset-0 z-0 opacity-60 pointer-events-none">
-        {/* FIX: Passing the correct data structure to particles */}
-        <FloatingParticlesBackground mousePosition={mousePosition} gyroData={smoothedGyroData} />
+        {/* Pass MotionValues directly */}
+        <FloatingParticlesBackground mousePosition={mousePosition} gyroX={x} gyroY={y} />
       </div>
 
       <motion.div 

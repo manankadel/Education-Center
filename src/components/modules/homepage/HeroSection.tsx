@@ -16,6 +16,7 @@ export const HeroSection = () => {
         className="object-cover z-0"
         priority
         quality={90}
+        sizes="100vw" // FIX: Performance
       />
       
       <div className="absolute inset-0 bg-black/10 z-0" />
@@ -26,7 +27,6 @@ export const HeroSection = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.2, delay: 0.2 }}
       >
-        {/* RESPONSIVE TEXT SIZES */}
         <h1 className="font-display text-6xl sm:text-7xl md:text-9xl text-white font-bold tracking-tighter shadow-sm drop-shadow-lg leading-none">
           WANTS & NEEDS
         </h1>

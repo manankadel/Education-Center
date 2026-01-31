@@ -3,15 +3,16 @@
 import { Header } from "@/components/core/Header";
 import { Footer } from "@/components/core/Footer";
 import { CartProvider, ShopifyProvider } from '@shopify/hydrogen-react';
-import { CartToast } from '@/hooks/useCartNotification'; // Import the new toast component
+import { CartToast } from '@/hooks/useCartNotification'; 
 
 export default function MainLayout({ children }: { children: React.ReactNode; }) {
   return (
     <ShopifyProvider
       storeDomain={process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN!}
       storefrontToken={process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN!}
-      storefrontApiVersion="2024-07"
-      countryIsoCode="IN" // UPDATED from "US" to "IN"
+      // FIX: Updated version to match Hydrogen package
+      storefrontApiVersion="2025-04"
+      countryIsoCode="IN"
       languageIsoCode="EN"
     >
       <CartProvider>
@@ -19,7 +20,7 @@ export default function MainLayout({ children }: { children: React.ReactNode; })
           <Header />
           {children}
           <Footer />
-          <CartToast /> {/* Add the global toast component here */}
+          <CartToast /> 
         </div>
       </CartProvider>
     </ShopifyProvider>
