@@ -9,15 +9,15 @@ import { useState } from 'react';
 const text = "We are not for everyone. Wants & Needs is a rejection of the ordinary, a uniform for the discerning individual who moves between worlds. This is luxury defined not by a price tag, but by a perspective.";
 
 export const BrandManifesto = () => {
-  // FIX: Destructure x and y (MotionValues) instead of smoothedGyroData
-  const { x, y } = useGyroscope();
+  // FIX: Using the correct return values from the fixed hook
+  const { smoothedGyroData } = useGyroscope();
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
     const { clientWidth, clientHeight } = event.currentTarget;
-    const normX = (event.clientX / clientWidth) * 2 - 1;
-    const normY = -((event.clientY / clientHeight) * 2 - 1);
-    setMousePosition({ x: normX, y: normY });
+    const x = (event.clientX / clientWidth) * 2 - 1;
+    const y = -((event.clientY / clientHeight) * 2 - 1);
+    setMousePosition({ x, y });
   };
 
   return (
@@ -25,9 +25,9 @@ export const BrandManifesto = () => {
         className="relative py-32 px-6 md:px-12 bg-black text-white flex justify-center overflow-hidden"
         onMouseMove={handleMouseMove}
     >
-      {/* FIX: Pass the MotionValues (x, y) as props */}
       <div className="absolute inset-0 z-0 opacity-60 pointer-events-none">
-        <FloatingParticlesBackground mousePosition={mousePosition} gyroX={x} gyroY={y} />
+        {/* FIX: Passing the correct data structure to particles */}
+        <FloatingParticlesBackground mousePosition={mousePosition} gyroData={smoothedGyroData} />
       </div>
 
       <motion.div 

@@ -2,11 +2,10 @@
 
 "use client";
 
-import React, { useMemo, useRef } from "react"; 
+import React, { useMemo, useRef, useState, useEffect } from "react"; 
 import { Canvas, useFrame, extend } from "@react-three/fiber";
 import * as THREE from "three";
 import { shaderMaterial } from "@react-three/drei";
-import { MotionValue } from "framer-motion";
 
 const PARTICLE_CONTROLS = {
     quantity: 1500,
@@ -15,7 +14,7 @@ const PARTICLE_CONTROLS = {
     blinkPercentage: 0.2,
     direction: -1, 
     speed: 0.2,
-    gyroIntensity: 2.0, // Increased intensity for better mobile feel
+    gyroIntensity: 1,
 };
 
 const CustomParticleMaterial = shaderMaterial(
@@ -46,14 +45,13 @@ const CustomParticleMaterial = shaderMaterial(
 );
 extend({ CustomParticleMaterial });
 
-// New Prop Interface using MotionValues
+// FIX: Updated Interface to match what BrandManifesto passes
 interface ParticlesProps {
     mousePosition: { x: number, y: number };
-    gyroX?: MotionValue<number>;
-    gyroY?: MotionValue<number>;
+    gyroData: { x: number, y: number };
 }
 
-const Particles = ({ mousePosition, gyroX, gyroY }: ParticlesProps) => {
+const Particles = ({ mousePosition, gyroData }: ParticlesProps) => {
   const meshRef = useRef<THREE.Points>(null!);
   
   const particleData = useMemo(() => {
@@ -67,17 +65,18 @@ const Particles = ({ mousePosition, gyroX, gyroY }: ParticlesProps) => {
       positions[i * 3 + 1] = (Math.random() - 0.5) * distance;
       positions[i * 3 + 2] = (Math.random() - 0.5) * distance;
       
+      // WHITE STARS
       let particleColor = new THREE.Color();
       blinkSpeeds[i] = 0.0;
       
       if (Math.random() < PARTICLE_CONTROLS.blinkPercentage) {
-        particleColor.setHSL(0, 0, 1.0); 
+        particleColor.setHSL(0, 0, 1.0); // White
         blinkSpeeds[i] = Math.random() * 3 + 1;
       } else if (Math.random() < PARTICLE_CONTROLS.glowPercentage) {
-        particleColor.setHSL(0, 0, 1.0);
+        particleColor.setHSL(0, 0, 1.0); // White
       } else {
         const shade = 0.4 + Math.random() * 0.2;
-        particleColor.setHSL(0, 0, shade);
+        particleColor.setHSL(0, 0, shade); // Grey-White
       }
       colors.set([particleColor.r, particleColor.g, particleColor.b], i * 3);
     }
@@ -85,15 +84,9 @@ const Particles = ({ mousePosition, gyroX, gyroY }: ParticlesProps) => {
   }, []);
 
   useFrame((state, delta) => {
-    // Read directly from MotionValues (if available) to avoid React re-renders
-    const gx = gyroX ? gyroX.get() : 0;
-    const gy = gyroY ? gyroY.get() : 0;
-    
-    const hasGyro = gx !== 0 || gy !== 0;
-    
-    // Smooth Lerp Targets
-    const targetX = hasGyro ? gx * PARTICLE_CONTROLS.gyroIntensity : mousePosition.x * 0.5;
-    const targetY = hasGyro ? gy * PARTICLE_CONTROLS.gyroIntensity : mousePosition.y * 0.5;
+    const hasGyro = gyroData.x !== 0 || gyroData.y !== 0;
+    const targetX = hasGyro ? gyroData.x * PARTICLE_CONTROLS.gyroIntensity : mousePosition.x * 0.5;
+    const targetY = hasGyro ? gyroData.y * PARTICLE_CONTROLS.gyroIntensity : mousePosition.y * 0.5;
 
     state.camera.position.x = THREE.MathUtils.lerp(state.camera.position.x, targetX, 0.05);
     state.camera.position.y = THREE.MathUtils.lerp(state.camera.position.y, targetY, 0.05);
@@ -137,10 +130,38 @@ const Particles = ({ mousePosition, gyroX, gyroY }: ParticlesProps) => {
 };
 
 export const FloatingParticlesBackground = (props: ParticlesProps) => {
+  const [internalGyroData, setInternalGyroData] = useState({ x: 0, y: 0 });
+
+  // Only run this internal listener if NO gyro data is passed in (fallback)
+  useEffect(() => {
+    if (props.gyroData) return;
+
+    const handleDeviceOrientation = (event: DeviceOrientationEvent) => {
+      const { beta, gamma } = event;
+      if (beta !== null && gamma !== null) {
+        const x = THREE.MathUtils.clamp(gamma / 90, -1, 1);
+        const y = THREE.MathUtils.clamp(beta / 90, -1, 1);
+        setInternalGyroData({ x, y });
+      }
+    };
+    if (typeof window !== 'undefined' && window.DeviceOrientationEvent) {
+      window.addEventListener('deviceorientation', handleDeviceOrientation);
+    }
+    return () => {
+      if (typeof window !== 'undefined' && window.DeviceOrientationEvent) {
+        window.removeEventListener('deviceorientation', handleDeviceOrientation);
+      }
+    };
+  }, [props.gyroData]);
+
   return (
     <div className="absolute inset-0 z-0 pointer-events-none">
       <Canvas camera={{ position: [0, 0, 5], fov: 75 }} dpr={[1, 1.5]}>
-        <Particles {...props} />
+        {/* Use passed gyroData if available, otherwise internal fallback */}
+        <Particles 
+            mousePosition={props.mousePosition} 
+            gyroData={props.gyroData || internalGyroData} 
+        />
       </Canvas>
     </div>
   );

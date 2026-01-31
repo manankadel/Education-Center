@@ -1,21 +1,18 @@
 // src/hooks/useGyroscope.ts
 "use client";
-import { useState, useEffect } from 'react';
-import { useMotionValue } from 'framer-motion';
+import { useState, useEffect, useCallback } from 'react';
+import * as THREE from 'three';
 
 export const useGyroscope = () => {
-    // MotionValues update outside the React Render Cycle (Butter Smooth)
-    const x = useMotionValue(0);
-    const y = useMotionValue(0);
+    const [needsPermission, setNeedsPermission] = useState(false);
     const [permissionGranted, setPermissionGranted] = useState(false);
-    const [requiresPermission, setRequiresPermission] = useState(false);
+    const [smoothedGyroData, setSmoothedGyroData] = useState({ x: 0, y: 0 });
 
     useEffect(() => {
-        // Check if device is iOS 13+
+        // Detect if iOS (requires permission)
         if (typeof window !== 'undefined' && typeof (DeviceOrientationEvent as any).requestPermission === 'function') {
-            setRequiresPermission(true);
+            setNeedsPermission(true);
         } else {
-            // Android/Desktop doesn't need explicit permission usually
             setPermissionGranted(true);
         }
     }, []);
@@ -23,40 +20,39 @@ export const useGyroscope = () => {
     useEffect(() => {
         if (!permissionGranted) return;
 
-        const handleOrientation = (event: DeviceOrientationEvent) => {
-            const { gamma, beta } = event; // gamma: left-right, beta: front-back
-            
+        const handleDeviceOrientation = (event: DeviceOrientationEvent) => {
+            const { beta, gamma } = event;
             if (gamma !== null && beta !== null) {
-                // Normalize and Clamp (-1 to 1)
-                // We use a smaller range (30 degrees) for higher sensitivity
-                const normX = Math.max(-1, Math.min(1, gamma / 30));
-                const normY = Math.max(-1, Math.min(1, beta / 30));
-                
-                // Update MotionValues directly
-                x.set(normX);
-                y.set(normY);
+                // Normalize: -1 to 1
+                const rawX = THREE.MathUtils.clamp(gamma / 45, -1, 1);
+                const rawY = THREE.MathUtils.clamp(beta / 45, -1, 1);
+
+                setSmoothedGyroData(prev => ({
+                    x: THREE.MathUtils.lerp(prev.x, rawX, 0.1), // Smooth factor
+                    y: THREE.MathUtils.lerp(prev.y, rawY, 0.1)
+                }));
             }
         };
 
-        window.addEventListener('deviceorientation', handleOrientation);
-        return () => window.removeEventListener('deviceorientation', handleOrientation);
-    }, [permissionGranted, x, y]);
+        window.addEventListener('deviceorientation', handleDeviceOrientation);
+        return () => window.removeEventListener('deviceorientation', handleDeviceOrientation);
+    }, [permissionGranted]);
 
-    const requestPermission = async () => {
+    const requestPermission = useCallback(async () => {
         if (typeof (DeviceOrientationEvent as any).requestPermission === 'function') {
             try {
                 const response = await (DeviceOrientationEvent as any).requestPermission();
                 if (response === 'granted') {
                     setPermissionGranted(true);
-                    setRequiresPermission(false);
+                    setNeedsPermission(false);
                 }
             } catch (e) {
-                console.error(e);
+                console.error("Gyro permission error", e);
             }
         } else {
             setPermissionGranted(true);
         }
-    };
+    }, []);
 
-    return { x, y, requiresPermission, requestPermission, permissionGranted };
+    return { smoothedGyroData, needsPermission, requestPermission };
 };
