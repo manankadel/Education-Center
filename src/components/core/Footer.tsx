@@ -1,34 +1,27 @@
 // src/components/core/Footer.tsx
 "use client";
-import Link from 'next/link';
 
-const InstagramIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-);
+import { usePathname } from 'next/navigation';
 
 export const Footer = () => {
-  const currentYear = new Date().getFullYear();
+    const pathname = usePathname();
 
-  return (
-    <footer className="w-full bg-white z-40 relative px-6 md:px-12 py-8 border-t border-black/5">
-      <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row justify-between items-center text-sm text-black/50">
-        {/* BRANDING UPDATE */}
-        <div className="mb-4 md:mb-0 font-sans text-xs uppercase tracking-wider">
-          © {currentYear} WANTS AND NEEDS. All Rights Reserved.
-        </div>
-        
-        <div className="flex items-center gap-4 md:gap-8 flex-wrap justify-center">
-            <a href="https://www.instagram.com/wantsandneeds/" target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors"><InstagramIcon /></a>
-            <div className="w-px h-4 bg-black/20 hidden md:block"></div>
-            <div className="flex items-center gap-4 md:gap-6 font-sans uppercase tracking-wider text-xs flex-wrap justify-center">
-                <Link href="/terms" className="hover:text-black transition-colors">Terms</Link>
-                <Link href="/privacy" className="hover:text-black transition-colors">Privacy</Link>
-                <Link href="/shipping" className="hover:text-black transition-colors">Shipping</Link>
-                <Link href="/refunds" className="hover:text-black transition-colors">Refunds</Link>
-                <Link href="/reach-out" className="hover:text-black transition-colors">Contact</Link>
+    if (pathname.startsWith('/atlas') || pathname === '/') {
+        return null;
+    }
+
+    return (
+        <footer className="relative z-50 w-full p-6 bg-[#050505] border-t border-white/10">
+            <div className="max-w-[1800px] mx-auto flex justify-between items-center">
+                <div className="font-mono text-[9px] uppercase tracking-widest text-white/30">
+                    <p>&copy; 2026 SPOTTED // MEMORY_GRID_INDIA</p>
+                    <p>STATUS: <span className="text-green-500">OPERATIONAL</span></p>
+                </div>
+                <div className="font-mono text-[9px] uppercase tracking-widest text-white/30">
+                    <p>SESSION ID: {(Math.random() + 1).toString(36).substring(2).toUpperCase()}</p>
+                    <p>AUTHENTICATION: CLEARED</p>
+                </div>
             </div>
-        </div>
-      </div>
-    </footer>
-  );
+        </footer>
+    );
 };

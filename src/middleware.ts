@@ -1,61 +1,42 @@
 // src/middleware.ts
-
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-// Define the names of our cookies for clarity
-const SITE_ACCESS_TOKEN_NAME = 'swambasic_session';
-const CUSTOMER_TOKEN_COOKIE_NAME = 'swambasic_customer_token';
-const PROTECTED_ROUTES = ['/account']; // Customer account pages remain protected
+const SESSION_COOKIE = 'tmp_session_v1';
 
 export function middleware(request: NextRequest) {
     const { pathname } = request.nextUrl;
 
-    // --- PASSWORD GATE ---
-    // This runs for ALL pages except the entry page itself (`/`).
-    if (pathname !== '/') {
-        const siteAccessToken = request.cookies.get(SITE_ACCESS_TOKEN_NAME);
-        
-        // If there's no site access token, force the user back to the entry page.
-        if (!siteAccessToken) {
-            return NextResponse.redirect(new URL('/', request.url));
-        }
+    // 1. IGNORE PUBLIC ASSETS & ATLAS ROUTE
+    if (
+        pathname.startsWith('/_next') || 
+        pathname.startsWith('/api') || 
+        pathname.startsWith('/static') || 
+        pathname.startsWith('/atlas') || // <--- ADDED THIS TO BYPASS THE GATE FOR THE MAP
+        pathname.includes('.')
+    ) {
+        return NextResponse.next();
     }
 
-    // --- Customer Login Protection ---
-    const isProtectedRoute = PROTECTED_ROUTES.some(route => pathname.startsWith(route));
+    // 2. CHECK IF USER IS AUTHENTICATED
+    const hasSession = request.cookies.has(SESSION_COOKIE);
 
-    if (isProtectedRoute) {
-        const customerToken = request.cookies.get(CUSTOMER_TOKEN_COOKIE_NAME);
-
-        if (!customerToken) {
-            return NextResponse.redirect(new URL('/login', request.url));
+    // 3. LOGIC FOR THE GATEWAY PAGE ('/')
+    if (pathname === '/') {
+        if (hasSession) {
+            return NextResponse.redirect(new URL('/home', request.url));
         }
+        return NextResponse.next();
     }
 
-    // --- Prevent Logged-in Users from seeing Login Page ---
-    if (pathname === '/login') {
-        const customerToken = request.cookies.get(CUSTOMER_TOKEN_COOKIE_NAME);
-
-        if (customerToken) {
-            return NextResponse.redirect(new URL('/account', request.url));
-        }
+    // 4. LOGIC FOR PROTECTED PAGES
+    if (!hasSession) {
+        return NextResponse.redirect(new URL('/', request.url));
     }
 
-    // If none of the above rules apply, allow the request to proceed.
     return NextResponse.next();
 }
 
-// This config ensures the middleware runs on all paths EXCEPT for static files and API routes.
 export const config = {
-  matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - api (API routes)
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     */
-    '/((?!api|_next/static|_next/image|favicon.ico).*)',
-  ],
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
 }

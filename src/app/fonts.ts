@@ -1,29 +1,26 @@
 // src/app/fonts.ts
+import { Bebas_Neue, Barlow_Condensed, IBM_Plex_Mono, Share_Tech_Mono } from 'next/font/google';
 
-import { Poppins, Unbounded, IBM_Plex_Mono } from 'next/font/google';
-import localFont from 'next/font/local';
-
-export const fontPoppins = Poppins({
+export const fontBebas = Bebas_Neue({
   subsets: ['latin'],
-  weight: ['400', '600', '700'],
-  variable: '--font-poppins',
+  weight: ['400'],
+  variable: '--font-bebas',
 });
 
-export const fontUnbounded = Unbounded({
+export const fontBarlow = Barlow_Condensed({
+  subsets: ['latin'],
+  weight: ['300', '400', '700', '900'],
+  variable: '--font-barlow',
+});
+
+export const fontIBM = IBM_Plex_Mono({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '700'],
+  variable: '--font-ibm',
+});
+
+export const fontShareTech = Share_Tech_Mono({
     subsets: ['latin'],
-    weight: ['700', '900'],
-    variable: '--font-unbounded',
-});
-
-export const fontGenoa = localFont({
-  src: '../assets/fonts/genoa.otf', 
-  display: 'swap',
-  variable: '--font-genoa', 
-});
-
-// ADD THIS FONT
-export const fontMono = IBM_Plex_Mono({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-  variable: '--font-mono',
+    weight: ['400'],
+    variable: '--font-share-tech',
 });

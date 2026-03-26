@@ -4,24 +4,6 @@ README.md
 code_dump.txt
 dump_project.py
 eslint.config.mjs
-listings/
-  1/
-    Back_BH.webp
-    Front_BH.webp
-    GroundShot_BH.webp
-    HunterFront_BH.webp
-    PeytonFront_BH.webp
-    PeytonSide_BH.webp
-    PeytonSleeve_BH.webp
-  2/
-    BackPocketBS.webp
-    Back_BS.webp
-    FrontBS.webp
-    FullFrontBS.webp
-    GroundShotBS.webp
-    HunterFrontBS.webp
-    SideBS.webp
-  Logos_35.webp
 middleware.ts
 next-env.d.ts
 next.config.mjs
@@ -109,17 +91,26 @@ src/
     core/
       AppHeightProvider.tsx
       AtmosphericBackground.tsx
+      AudioFrequencyBackground.tsx
       BackgroundMusicPlayer.tsx
+      ChromaticLiquidBackground.tsx
       ElementalGradient.tsx
       FloatingParticlesBackground.tsx
+      FogEraserEffect.tsx
       Footer.tsx
       FullScreenImageViewer.tsx
       GlitchTextureBackground.tsx
       GlobalSoundEffects.tsx
       Header.tsx
+      InteractiveFooter.tsx
       InteractiveLiquidBackground.tsx
+      LiquidGlassArt.tsx
       LiquidGradient.tsx
       LiquidGrainBackground.tsx
+      LiquidMeshBackground.tsx
+      LiquidMetalBackground.tsx
+      MagneticButton.tsx
+      MagneticFluxBackground.tsx
       MotionPermissionPrompt.tsx
       PolicyPageLayout.tsx
       SubtleSmokeBackground.tsx
@@ -142,16 +133,33 @@ src/
         ImmersiveView.tsx
         ProductMonolith.tsx
         Viewfinder.tsx
+      gateway/
+        AetherRunnerGame.tsx
+        GatewayHUD.tsx
+        KineticTypography.tsx
+        NodeHunterGame.tsx
+        PatchBayGame.tsx
+        ReflexGame.tsx
+        SequenceGame.tsx
+        SnakeGame.tsx
+        ZenGame.tsx
       glitch/
         GlitchCanvas.tsx
       homepage/
+        ArchiveStack.tsx
         BrandManifesto.tsx
+        CategoryGrid.tsx
+        FeaturedInstruments.tsx
         FeaturedProducts.tsx
         GlitchMarquee.tsx
         GyroSection.tsx
         HeroSection.tsx
         InteractiveMarquee.tsx
+        SonicManifesto.tsx
+        SonicPlayground.tsx
+        StaticInterlude.tsx
       products/
+        InstrumentCard.tsx
         InteractiveProductCard.tsx
         ProductCard.tsx
         ProductDetails.tsx
@@ -163,8 +171,10 @@ src/
   lib/
     constants.ts
     shopify.ts
+    tmp_data.ts
     utils/
       formatPrice.ts
+      shopifyImage.ts
   middleware.ts
   types/
     global.d.ts

@@ -1,14 +1,13 @@
 // src/app/layout.tsx
-
 import type { Metadata } from 'next'
 import './globals.css'
-import { fontPoppins, fontUnbounded, fontGenoa } from './fonts';
+import { fontBebas, fontBarlow, fontIBM, fontShareTech } from './fonts';
 import { AppHeightProvider } from '@/components/core/AppHeightProvider'; 
 import { Analytics } from "@vercel/analytics/next"
 
 export const metadata = {
-  title: 'WANTS AND NEEDS',
-  description: 'Luxury Essentials. Take Action.',
+  title: 'SPOTTED // Tactical Urban Intelligence Network',
+  description: 'The World\'s First Tactical Urban Intelligence Network.',
 }
 
 export default function RootLayout({
@@ -18,11 +17,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={[
-        fontPoppins.variable, 
-        fontUnbounded.variable, 
-        fontGenoa.variable, 
+        fontBebas.variable, 
+        fontBarlow.variable, 
+        fontIBM.variable, 
+        fontShareTech.variable
       ].join(' ')}>
-      <body className="bg-white text-black">
+      <body className="bg-void text-text-primary">
         <Analytics/>
         <AppHeightProvider>
             {children}

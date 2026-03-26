@@ -1,150 +1,115 @@
 // src/app/page.tsx
-
 "use client";
 
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useRouter } from 'next/navigation';
-import Image from 'next/image';
-import { LiquidGlassArt } from '@/components/core/LiquidGlassArt';
-import { WaitlistForm } from '@/components/modules/WaitlistForm';
-import { NodeHunterGame } from '@/components/modules/gateway/NodeHunterGame';
+import { motion } from "framer-motion";
+import Link from 'next/link';
+import { FloatingParticlesBackground } from "@/components/core/FloatingParticlesBackground";
 
-const LOGO_URL = "https://cdn.shopify.com/s/files/1/0975/8736/4138/files/Logos_35.webp?v=1767768515";
+// Mock data for the live feed
+const RECENT_SPOTS =[
+  { id: 1, author: "Agent_K", location: "Bandra Sea Link, Mumbai", desc: "2 AM drive. No traffic. The city is quiet.", time: "2 hrs ago" },
+  { id: 2, author: "Freq_01", location: "Hauz Khas Village, Delhi", desc: "Found the hidden vinyl cafe. Dropping coords.", time: "5 hrs ago" },
+  { id: 3, author: "SysAdmin", location: "Nandi Hills, Bangalore", desc: "Sunrise point secured. Fog is dense today.", time: "12 hrs ago" },
+  { id: 4, author: "Anon_99", location: "Fort Kochi, Kerala", desc: "Old warehouse. Perfect acoustics.", time: "1 day ago" },
+];
 
-export default function GatewayPage() {
-  const [isFlipped, setIsFlipped] = useState(false);
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [showWaitlist, setShowWaitlist] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
-
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if(!password) return;
-    setIsLoading(true);
-    
-    const res = await fetch('/api/access', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ password }),
-    });
-    
-    if (res.ok) router.replace('/home');
-    else {
-        setError('WRONG CODE');
-        setIsLoading(false);
-    }
-  };
-
-  const handleWin = () => {
-    // If they win, we could auto-fill the code or show it.
-    // NodeHunterGame handles its own win state display.
-  };
-
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => { setMounted(true); }, []);
-  if (!mounted) return null;
-
+export default function SpottedDashboard() {
   return (
-    <main className="relative min-h-[100dvh] w-full flex items-center justify-center overflow-hidden bg-white text-black perspective-[2000px]">
+    <main className="bg-[#050505] min-h-[100dvh] text-white relative overflow-hidden pt-24 pb-12">
       
-      {/* 1. BACKGROUND */}
-      <LiquidGlassArt />
-
-      {/* 2. THE CARD CONTAINER (Mobile Optimized) */}
-      <motion.div 
-        className="relative z-10 w-[90vw] max-w-[450px] h-[600px]"
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0, rotateY: isFlipped ? 180 : 0 }}
-        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-        style={{ transformStyle: 'preserve-3d' }}
-      >
-        
-        {/* === FRONT SIDE (Login) === */}
-        <div 
-            className={`
-                absolute inset-0 bg-white/40 backdrop-blur-3xl border-[0.5px] border-black/10 rounded-sm p-8 md:p-12 flex flex-col items-center justify-between shadow-2xl
-                ${isFlipped ? 'pointer-events-none' : 'pointer-events-auto'}
-            `}
-            style={{ backfaceVisibility: 'hidden' }}
-        >
-            <div className="relative w-40 h-16 mb-12">
-                <Image src={LOGO_URL} alt="W&N" fill className="object-contain" priority />
-            </div>
-
-            <div className="w-full flex-grow flex flex-col justify-center">
-                <AnimatePresence mode="wait">
-                    {!showWaitlist ? (
-                        <motion.div key="login" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="w-full space-y-10">
-                            <div className="text-center">
-                                <h2 className="font-display text-3xl md:text-4xl font-black uppercase tracking-tight mb-2">Restricted</h2>
-                                <p className="font-sans text-xs font-bold text-black/40 uppercase tracking-widest">Members Only</p>
-                            </div>
-
-                            <form onSubmit={handleLogin} className="space-y-8">
-                                <div className="relative">
-                                    <input 
-                                        type="password" 
-                                        value={password} 
-                                        onChange={(e) => { setPassword(e.target.value); setError(''); }} 
-                                        placeholder="ENTER CODE" 
-                                        className="w-full bg-transparent border-b-2 border-black/10 py-4 text-center font-display text-2xl md:text-3xl font-black focus:outline-none focus:border-black transition-all uppercase placeholder:text-black/10"
-                                        autoFocus
-                                    />
-                                    {error && <p className="absolute -bottom-8 w-full text-center text-[10px] font-bold text-red-500 uppercase tracking-widest">{error}</p>}
-                                </div>
-                                <button type="submit" disabled={isLoading} className="w-full py-5 bg-black text-white font-display text-lg uppercase tracking-wider hover:scale-[1.02] transition-transform">
-                                    {isLoading ? 'Checking...' : 'Enter'}
-                                </button>
-                            </form>
-                            
-                            <div className="flex justify-center">
-                                <button onClick={() => setShowWaitlist(true)} className="text-[10px] font-bold uppercase tracking-widest text-black/40 hover:text-black border-b border-transparent hover:border-black transition-all">
-                                    No Access? Join Waitlist
-                                </button>
-                            </div>
-                        </motion.div>
-                    ) : (
-                        <motion.div key="waitlist" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="w-full">
-                            <WaitlistForm />
-                            <button onClick={() => setShowWaitlist(false)} className="w-full mt-6 text-center text-[10px] font-bold uppercase tracking-widest text-black/40 hover:text-black">
-                                &larr; Back to Login
-                            </button>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-            </div>
-
-            <div className="w-full pt-8 border-t border-black/5 flex justify-center">
-                 <button onClick={() => setIsFlipped(true)} className="group flex items-center gap-3">
-                    <span className="font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-black transition-colors group-hover:text-red-500">
-                        Play To Unlock
-                    </span>
-                    <div className="w-2 h-2 bg-black rounded-full group-hover:bg-red-500 transition-colors animate-pulse" />
-                 </button>
-            </div>
-        </div>
-
-        {/* === BACK SIDE (Game) === */}
-        <div 
-            className={`
-                absolute inset-0 bg-white/80 backdrop-blur-3xl border border-white/50 shadow-2xl rounded-3xl overflow-hidden
-                ${isFlipped ? 'pointer-events-auto' : 'pointer-events-none'}
-            `}
-            style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
-        >
-            <NodeHunterGame onBack={() => setIsFlipped(false)} />
-        </div>
-
-      </motion.div>
-      
-      {/* Footer Branding */}
-      <div className="absolute bottom-8 text-[10px] font-bold uppercase tracking-widest text-black/20">
-        Wants & Needs © 2026
+      <div className="absolute inset-0 opacity-30 pointer-events-none">
+        <FloatingParticlesBackground mousePosition={{x: 0, y: 0}} />
       </div>
 
+      <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-12">
+        
+        <header className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 border-b border-white/10 pb-8">
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+          >
+            <div className="flex items-center gap-3 mb-4">
+              <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse shadow-[0_0_10px_#22c55e]" />
+              <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/50">Sys.Online // 10 Agents Active</span>
+            </div>
+            <h1 className="font-display text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none">
+              Command<br/>Center.
+            </h1>
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="mt-8 md:mt-0 flex gap-8"
+          >
+            <div className="flex flex-col items-end">
+              <span className="font-mono text-[10px] uppercase tracking-widest text-white/40">Total Spots</span>
+              <span className="font-display text-4xl font-bold text-[#FFB000]">142</span>
+            </div>
+            <div className="flex flex-col items-end">
+              <span className="font-mono text-[10px] uppercase tracking-widest text-white/40">Latest Region</span>
+              <span className="font-display text-4xl font-bold text-white">BOM</span>
+            </div>
+          </motion.div>
+        </header>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="lg:col-span-2 relative h-[400px] md:h-[500px] border border-white/10 bg-[#0a0a0a] group overflow-hidden"
+          >
+            <div className="absolute inset-0 opacity-40 group-hover:opacity-60 transition-opacity duration-700 bg-[url('https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=2074&auto=format&fit=crop')] bg-cover bg-center grayscale contrast-125 mix-blend-screen" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent" />
+            
+            <div className="absolute bottom-0 left-0 p-8 w-full">
+              <span className="font-mono text-[10px] uppercase tracking-widest text-[#FFB000] mb-2 block">
+                [ Interactive Grid ]
+              </span>
+              <h2 className="font-display text-4xl md:text-5xl font-black uppercase mb-6">
+                Open The Atlas
+              </h2>
+              <Link href="/atlas">
+                <button className="px-8 py-4 bg-[#FFB000] text-black font-mono text-xs font-bold uppercase tracking-widest hover:bg-white transition-colors flex items-center gap-3">
+                  Deploy Radar
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+              </Link>
+            </div>
+
+            <div className="absolute top-4 right-4 w-4 h-4 border-t border-r border-white/30" />
+            <div className="absolute bottom-4 right-4 w-4 h-4 border-b border-r border-white/30" />
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="border border-white/10 bg-[#0a0a0a] flex flex-col h-[400px] md:h-[500px]"
+          >
+            <div className="p-6 border-b border-white/10 bg-white/5">
+              <h3 className="font-mono text-xs uppercase tracking-widest text-white/50">Live Intel // Feed</h3>
+            </div>
+            
+            <div className="flex-1 overflow-y-auto p-6 space-y-6 custom-scrollbar">
+              {RECENT_SPOTS.map((spot, i) => (
+                <div key={spot.id} className="relative pl-4 border-l border-white/10 hover:border-[#FFB000] transition-colors group cursor-default">
+                  <div className="absolute left-[-5px] top-0 w-2 h-2 bg-[#050505] border border-white/30 group-hover:border-[#FFB000] group-hover:bg-[#FFB000] transition-colors rounded-full" />
+                  
+                  <div className="flex justify-between items-start mb-1">
+                    <span className="font-mono text-[10px] text-[#FFB000]">{spot.author}</span>
+                    <span className="font-mono text-[9px] text-white/30">{spot.time}</span>
+                  </div>
+                  <h4 className="font-sans text-sm font-bold text-white mb-1">{spot.location}</h4>
+                  <p className="font-sans text-xs text-white/60 leading-relaxed">{spot.desc}</p>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </div>
     </main>
   );
 }
