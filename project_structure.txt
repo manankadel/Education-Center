@@ -10,77 +10,8 @@ next.config.mjs
 package.json
 postcss.config.mjs
 project_structure.txt
-public/
-  assets/
-    audio/
-  audio/
-    typing.wav
 src/
   app/
-    (main)/
-      account/
-        addresses/
-          page.tsx
-        layout.tsx
-        login/
-          page.tsx
-        orders/
-          [id]/
-            page.tsx
-          [id]~491283e907dd18cbc4530c065275389f64fae78f
-          page.tsx
-        page.tsx
-        profile/
-          page.tsx
-      cart/
-        page.tsx
-      catalog/
-        page.tsx
-      home/
-        page.tsx
-      layout.tsx
-      login/
-        page.tsx
-      privacy/
-        page.tsx
-      products/
-        [handle]/
-          page.tsx
-      reach-out/
-        page.tsx
-      refunds/
-        page.tsx
-      shipping/
-        page.tsx
-      shop/
-        [category]/
-          page.tsx
-      terms/
-        page.tsx
-      track-order/
-        page.tsx
-    api/
-      access/
-        route.ts
-      account/
-        addAddress/
-          route.ts
-        updateProfile/
-          route.ts
-      auth/
-        login/
-          route.ts
-        logout/
-          route.ts
-        register/
-          route.ts
-      contact/
-        route.ts
-      order/
-        track/
-          route.ts
-      waitlist/
-        route.ts
     fonts.ts
     globals.css
     layout.tsx
@@ -89,95 +20,22 @@ src/
     fonts/
   components/
     core/
-      AppHeightProvider.tsx
-      AtmosphericBackground.tsx
-      AudioFrequencyBackground.tsx
-      BackgroundMusicPlayer.tsx
-      ChromaticLiquidBackground.tsx
-      ElementalGradient.tsx
-      FloatingParticlesBackground.tsx
-      FogEraserEffect.tsx
       Footer.tsx
-      FullScreenImageViewer.tsx
-      GlitchTextureBackground.tsx
-      GlobalSoundEffects.tsx
       Header.tsx
-      InteractiveFooter.tsx
-      InteractiveLiquidBackground.tsx
-      LiquidGlassArt.tsx
-      LiquidGradient.tsx
-      LiquidGrainBackground.tsx
-      LiquidMeshBackground.tsx
-      LiquidMetalBackground.tsx
-      MagneticButton.tsx
-      MagneticFluxBackground.tsx
-      MotionPermissionPrompt.tsx
-      PolicyPageLayout.tsx
-      SubtleSmokeBackground.tsx
+      RadialGradient.tsx
+      SmoothScroller.tsx
     modules/
-      CountdownTimer.tsx
-      GatewayAnimation.tsx
-      WaitlistForm.tsx
-      account/
-        Addresses.tsx
-        LoginRegister.tsx
-        OrderDetails.tsx
-        OrderHistory.tsx
-        ProfileDetails.tsx
-      auth/
-        AuthForm.tsx
-      catalog/
-        CatalogClientWrapper.tsx
-        CatalogControls.tsx
-        GridView.tsx
-        ImmersiveView.tsx
-        ProductMonolith.tsx
-        Viewfinder.tsx
-      gateway/
-        AetherRunnerGame.tsx
-        GatewayHUD.tsx
-        KineticTypography.tsx
-        NodeHunterGame.tsx
-        PatchBayGame.tsx
-        ReflexGame.tsx
-        SequenceGame.tsx
-        SnakeGame.tsx
-        ZenGame.tsx
-      glitch/
-        GlitchCanvas.tsx
-      homepage/
-        ArchiveStack.tsx
-        BrandManifesto.tsx
-        CategoryGrid.tsx
-        FeaturedInstruments.tsx
-        FeaturedProducts.tsx
-        GlitchMarquee.tsx
-        GyroSection.tsx
-        HeroSection.tsx
-        InteractiveMarquee.tsx
-        SonicManifesto.tsx
-        SonicPlayground.tsx
-        StaticInterlude.tsx
-      products/
-        InstrumentCard.tsx
-        InteractiveProductCard.tsx
-        ProductCard.tsx
-        ProductDetails.tsx
-  hooks/
-    useCartNotification.tsx
-    useGyroscope.ts
-    useMediaQuery.ts
-    useSound.ts
+      landing/
+        About.tsx
+        Contact.tsx
+        Hero.tsx
+        Manifesto.tsx
+        Programs.tsx
+        Services.tsx
+        Testimonials.tsx
   lib/
-    constants.ts
-    shopify.ts
-    tmp_data.ts
+    data.ts
     utils/
-      formatPrice.ts
-      shopifyImage.ts
-  middleware.ts
-  types/
-    global.d.ts
-    shopify.d.ts
+    utils.ts
 tailwind.config.ts
 tsconfig.json

@@ -1,7 +1,8 @@
+/* tailwind.config.ts */
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-  content:[
+  content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
@@ -9,21 +10,21 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "#F8FAFC",
-        foreground: "#0F172A",
-        brand: {
-          navy: "#0A192F",       // Deep Oxford Blue
-          gold: "#D4AF37",       // Heritage Gold
-          light: "#112240",      // Lighter Navy for cards
-          slate: "#8892B0",      // Premium grey for text
-        },
+        background: "#050505",
+        foreground: "#FFFFFF",
+        accent: "#fbbf24",
+        muted: "#888888",
+        glass: "rgba(255, 255, 255, 0.05)",
       },
       fontFamily: {
         sans: ["var(--font-inter)", "sans-serif"],
-        display:["var(--font-syne)", "sans-serif"],
+        display: ["var(--font-syne)", "sans-serif"],
       },
+      animation: {
+        'spin-slow': 'spin 8s linear infinite',
+      }
     },
   },
-  plugins:[],
+  plugins: [],
 };
 export default config;

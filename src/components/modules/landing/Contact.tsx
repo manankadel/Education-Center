@@ -1,73 +1,67 @@
+/* src/components/modules/landing/Contact.tsx */
 "use client";
-
-import { CONTACT_INFO } from '@/lib/data';
-import { MapPin, Phone, Mail, ArrowRight } from 'lucide-react';
-import Link from 'next/link'; // <-- ADDED THIS IMPORT
+import { CONTACT_INFO } from "@/lib/data";
+import { ArrowUpRight } from "lucide-react";
 
 export const Contact = () => {
-    return (
-        <footer id="contact" className="bg-brand-blue text-white pt-20 md:pt-24 pb-12 px-5 md:px-12 border-t-[8px] md:border-t-[12px] border-brand-accent">
-            <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
-                
-                <div className="flex flex-col">
-                    <h2 className="font-display text-4xl md:text-7xl font-bold leading-[1.1] mb-6">
-                        Ready to <br/><span className="text-brand-accent">Think Beyond?</span>
-                    </h2>
-                    <p className="text-gray-300 text-base md:text-lg max-w-md font-light mb-12">
-                        Join the institution that has nurtured destinies for over a decade. Reach out to our expert counselors today.
-                    </p>
-                    
-                    <div className="space-y-6 mt-auto">
-                        <div className="flex items-start gap-4">
-                            <MapPin className="text-brand-accent mt-1 flex-shrink-0" size={20} />
-                            <p className="text-gray-300 text-sm md:text-base font-light">{CONTACT_INFO.address}</p>
-                        </div>
-                        <div className="flex items-center gap-4">
-                            <Phone className="text-brand-accent flex-shrink-0" size={20} />
-                            <p className="text-gray-300 text-sm md:text-base font-light">{CONTACT_INFO.phones.join('  •  ')}</p>
-                        </div>
-                        <div className="flex items-center gap-4">
-                            <Mail className="text-brand-accent flex-shrink-0" size={20} />
-                            <a href={`mailto:${CONTACT_INFO.email}`} className="text-gray-300 text-sm md:text-base font-light hover:text-white transition-colors">{CONTACT_INFO.email}</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="bg-white rounded-2xl p-6 md:p-12 text-brand-blue shadow-2xl relative">
-                    <h3 className="font-display text-2xl md:text-3xl font-bold mb-8">Inquiry Form</h3>
-                    <form className="space-y-5 md:space-y-6" onSubmit={(e) => e.preventDefault()}>
-                        <div className="space-y-1.5 md:space-y-2">
-                            <label className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest">Full Name</label>
-                            <input type="text" className="w-full border-b border-gray-200 py-2.5 md:py-3 focus:outline-none focus:border-brand-accent transition-colors bg-transparent text-sm md:text-base" placeholder="John Doe" />
-                        </div>
-                        <div className="space-y-1.5 md:space-y-2">
-                            <label className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest">Contact Number</label>
-                            <input type="tel" className="w-full border-b border-gray-200 py-2.5 md:py-3 focus:outline-none focus:border-brand-accent transition-colors bg-transparent text-sm md:text-base" placeholder="+91 XXXXX XXXXX" />
-                        </div>
-                        <div className="space-y-1.5 md:space-y-2">
-                            <label className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest">Preferred Stream</label>
-                            <select className="w-full border-b border-gray-200 py-2.5 md:py-3 focus:outline-none focus:border-brand-accent transition-colors bg-transparent text-gray-600 text-sm md:text-base cursor-pointer">
-                                <option>General Inquiry</option>
-                                <option>Engineering / IT</option>
-                                <option>Commerce / Management</option>
-                                <option>Distance Education</option>
-                                <option>Industry Training (ISTP)</option>
-                            </select>
-                        </div>
-                        <button className="w-full mt-4 flex items-center justify-center gap-3 bg-brand-blue text-white py-4 rounded-xl font-bold text-base md:text-lg hover:bg-brand-light transition-all">
-                            Submit Request <ArrowRight size={20} />
-                        </button>
-                    </form>
-                </div>
+  return (
+    <footer id="contact" className="bg-[#0a0a0a] pt-32 pb-12 border-t border-white/5">
+      <div className="max-w-[1400px] mx-auto px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 mb-32">
+          <div>
+            <h2 className="text-7xl md:text-9xl font-black tracking-tighter leading-none mb-12">
+              LET'S <br /> <span className="text-accent italic">TALK.</span>
+            </h2>
+            <div className="space-y-8">
+              <div>
+                <p className="text-muted uppercase text-xs font-bold tracking-[0.2em] mb-2">Location</p>
+                <p className="text-xl max-w-sm">{CONTACT_INFO.address}</p>
+              </div>
+              <div>
+                <p className="text-muted uppercase text-xs font-bold tracking-[0.2em] mb-2">Direct Contact</p>
+                {CONTACT_INFO.phones.map(p => <p key={p} className="text-xl">{p}</p>)}
+                <p className="text-accent text-xl mt-2">{CONTACT_INFO.email}</p>
+              </div>
             </div>
+          </div>
 
-            <div className="max-w-[1400px] mx-auto mt-20 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between text-[10px] md:text-xs text-gray-400 font-medium">
-                <p>© {new Date().getFullYear()} Education Centre, Jaipur.</p>
-                <div className="flex gap-6 mt-4 md:mt-0 uppercase tracking-widest">
-                    <Link href="#" className="hover:text-white transition-colors">Privacy</Link>
-                    <Link href="#" className="hover:text-white transition-colors">Terms</Link>
+          <div className="glass-card p-8 md:p-16 rounded-[40px]">
+            <form className="space-y-12">
+              <div className="relative">
+                <input type="text" placeholder="Your Name" className="w-full bg-transparent border-b border-white/20 py-4 text-2xl focus:outline-none focus:border-accent transition-colors peer" />
+                <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all peer-focus:w-full" />
+              </div>
+              <div className="relative">
+                <input type="email" placeholder="Your Email" className="w-full bg-transparent border-b border-white/20 py-4 text-2xl focus:outline-none focus:border-accent transition-colors peer" />
+                <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all peer-focus:w-full" />
+              </div>
+              <div className="relative">
+                <select className="w-full bg-transparent border-b border-white/20 py-4 text-2xl focus:outline-none focus:border-accent transition-colors appearance-none cursor-pointer">
+                  <option className="bg-background">General Inquiry</option>
+                  <option className="bg-background">Admission</option>
+                  <option className="bg-background">ISTP Training</option>
+                </select>
+              </div>
+              
+              <button className="group flex items-center gap-6 text-3xl font-display font-black uppercase">
+                Send Request
+                <div className="w-20 h-20 rounded-full bg-accent flex items-center justify-center text-black -rotate-45 group-hover:rotate-0 transition-transform">
+                  <ArrowUpRight size={40} />
                 </div>
-            </div>
-        </footer>
-    );
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <div className="flex flex-col md:flex-row justify-between items-center pt-12 border-t border-white/5 text-muted text-sm uppercase tracking-widest font-bold">
+          <p>© {new Date().getFullYear()} EDUCATION CENTRE JAIPUR</p>
+          <div className="flex gap-8 mt-4 md:mt-0">
+            <a href="#" className="hover:text-accent transition-colors">Instagram</a>
+            <a href="#" className="hover:text-accent transition-colors">LinkedIn</a>
+            <a href="#" className="hover:text-accent transition-colors">Legal</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
 };
