@@ -2,14 +2,12 @@
 
 import { CONTACT_INFO } from '@/lib/data';
 import { MapPin, Phone, Mail, ArrowRight } from 'lucide-react';
-import { motion } from 'framer-motion';
 
-export const FooterContact = () => {
+export const Contact = () => {
     return (
         <footer id="contact" className="bg-brand-blue text-white pt-24 pb-12 px-6 md:px-12 border-t-[12px] border-brand-accent">
             <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
                 
-                {/* Left Side: Massive Typography */}
                 <div className="flex flex-col justify-between">
                     <div>
                         <h2 className="font-display text-5xl md:text-7xl font-bold leading-[1.1] mb-6">
@@ -36,7 +34,6 @@ export const FooterContact = () => {
                     </div>
                 </div>
 
-                {/* Right Side: Conversion Form */}
                 <div className="bg-white rounded-2xl p-8 md:p-12 text-brand-blue shadow-2xl">
                     <h3 className="font-display text-2xl font-bold mb-8">Request a Callback</h3>
                     <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>

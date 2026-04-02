@@ -1,26 +1,15 @@
 // src/app/fonts.ts
-import { Bebas_Neue, Barlow_Condensed, IBM_Plex_Mono, Share_Tech_Mono } from 'next/font/google';
 
-export const fontBebas = Bebas_Neue({
-  subsets: ['latin'],
-  weight: ['400'],
-  variable: '--font-bebas',
-});
+import { Inter, Syne } from 'next/font/google';
 
-export const fontBarlow = Barlow_Condensed({
-  subsets: ['latin'],
-  weight: ['300', '400', '700', '900'],
-  variable: '--font-barlow',
-});
-
-export const fontIBM = IBM_Plex_Mono({
+export const fontInter = Inter({
   subsets: ['latin'],
   weight: ['300', '400', '500', '700'],
-  variable: '--font-ibm',
+  variable: '--font-inter',
 });
 
-export const fontShareTech = Share_Tech_Mono({
+export const fontSyne = Syne({
     subsets: ['latin'],
-    weight: ['400'],
-    variable: '--font-share-tech',
+    weight: ['700', '800'],
+    variable: '--font-syne',
 });
