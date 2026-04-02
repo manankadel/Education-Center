@@ -2,6 +2,7 @@
 
 import { CONTACT_INFO } from '@/lib/data';
 import { MapPin, Phone, Mail, ArrowRight } from 'lucide-react';
+import Link from 'next/link'; // <-- ADDED THIS IMPORT
 
 export const Contact = () => {
     return (
