@@ -9,21 +9,18 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "#F8F9FA",
+        background: "#F8FAFC",
         foreground: "#0F172A",
         brand: {
-          blue: "#0A2540",      // Deep authoritative navy
-          light: "#1C3D5A",     // Lighter navy for hover states
-          accent: "#3B82F6",    // Vibrant blue for CTAs
-          surface: "#F1F5F9",   // Very light grey/blue for section backgrounds
+          navy: "#0A192F",       // Deep Oxford Blue
+          gold: "#D4AF37",       // Heritage Gold
+          light: "#112240",      // Lighter Navy for cards
+          slate: "#8892B0",      // Premium grey for text
         },
       },
       fontFamily: {
         sans: ["var(--font-inter)", "sans-serif"],
         display:["var(--font-syne)", "sans-serif"],
-      },
-      backgroundImage: {
-        'grid-pattern': "linear-gradient(to right, #e2e8f0 1px, transparent 1px), linear-gradient(to bottom, #e2e8f0 1px, transparent 1px)",
       },
     },
   },

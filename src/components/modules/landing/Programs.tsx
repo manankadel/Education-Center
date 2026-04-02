@@ -1,91 +1,58 @@
 "use client";
 
 import { PROGRAMS_LIST } from '@/lib/data';
-import { motion, useMotionValue, useSpring } from 'framer-motion';
-import { useState, useRef, useEffect } from 'react';
-import Image from 'next/image';
+import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export const Programs = () => {
-    const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-    const containerRef = useRef<HTMLDivElement>(null);
-    
-    const cursorX = useMotionValue(0);
-    const cursorY = useMotionValue(0);
-    const springConfig = { damping: 25, stiffness: 200, mass: 0.5 };
-    const cursorXSpring = useSpring(cursorX, springConfig);
-    const cursorYSpring = useSpring(cursorY, springConfig);
-
-    useEffect(() => {
-        const moveCursor = (e: MouseEvent) => {
-            if (containerRef.current) {
-                const bounds = containerRef.current.getBoundingClientRect();
-                cursorX.set(e.clientX - bounds.left - 150);
-                cursorY.set(e.clientY - bounds.top - 200);
-            }
-        };
-        window.addEventListener("mousemove", moveCursor);
-        return () => window.removeEventListener("mousemove", moveCursor);
-    }, [cursorX, cursorY]);
-
     return (
-        <section id="programs" className="py-20 md:py-32 px-5 md:px-12 bg-white relative overflow-hidden" ref={containerRef}>
-            <div className="max-w-[1400px] mx-auto">
-                <div className="mb-10 md:mb-16">
-                    <span className="text-brand-accent font-bold uppercase tracking-widest text-xs md:text-sm">Comprehensive Portfolio</span>
-                    <h2 className="font-display text-4xl md:text-6xl font-bold text-brand-blue mt-4">
-                        Available Programs
-                    </h2>
+        <section id="programs" className="py-24 md:py-32 px-6 md:px-12 bg-white relative">
+            <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16">
+                
+                {/* Sticky Left Column */}
+                <div className="lg:col-span-5">
+                    <div className="sticky top-32">
+                        <span className="text-brand-gold font-bold uppercase tracking-widest text-xs md:text-sm">Academic Excellence</span>
+                        <h2 className="font-display text-4xl md:text-6xl font-bold text-brand-navy mt-4 mb-6 leading-tight">
+                            Programs Available
+                        </h2>
+                        <p className="text-gray-600 text-lg font-light mb-8 max-w-md">
+                            From 12th pass-outs to graduates, we offer a comprehensive portfolio designed to meet industry demands and elevate your career.
+                        </p>
+                        <a href="#contact" className="inline-flex items-center gap-2 text-brand-navy font-bold hover:text-brand-gold transition-colors pb-1 border-b-2 border-brand-gold">
+                            Download Prospectus <ArrowRight size={18} />
+                        </a>
+                    </div>
                 </div>
 
-                <div className="relative border-t border-gray-200">
+                {/* Scrolling Right Column */}
+                <div className="lg:col-span-7 flex flex-col gap-8">
                     {PROGRAMS_LIST.map((program, idx) => (
-                        <div 
+                        <motion.div 
                             key={idx}
-                            onMouseEnter={() => setHoveredIndex(idx)}
-                            onMouseLeave={() => setHoveredIndex(null)}
-                            className="group relative border-b border-gray-200 py-10 md:py-16 flex flex-col lg:flex-row lg:items-center justify-between cursor-pointer"
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-50px" }}
+                            transition={{ duration: 0.5 }}
+                            className="bg-background border border-gray-200 p-8 md:p-12 rounded-3xl hover:border-brand-gold/50 transition-colors shadow-sm hover:shadow-xl hover:shadow-brand-gold/5"
                         >
-                            <div className="absolute inset-0 bg-brand-surface origin-bottom scale-y-0 group-hover:scale-y-100 transition-transform duration-500 ease-out -z-10" />
+                            <h3 className="font-display text-3xl font-bold text-brand-navy mb-3">
+                                {program.title}
+                            </h3>
+                            <p className="text-gray-500 mb-8 font-light text-lg">
+                                {program.desc}
+                            </p>
                             
-                            <div className="relative z-10 lg:w-1/2">
-                                <h3 className="font-display text-2xl md:text-5xl font-bold text-brand-blue group-hover:text-brand-accent transition-colors duration-300">
-                                    {program.title}
-                                </h3>
-                                <p className="mt-2 md:mt-4 text-gray-500 text-base md:text-lg font-light group-hover:text-gray-700 transition-colors">
-                                    {program.desc}
-                                </p>
-                            </div>
-
-                            <div className="relative z-10 lg:w-1/2 mt-6 lg:mt-0 flex flex-wrap gap-2 lg:justify-end">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 {program.details.map((detail, dIdx) => (
-                                    <span key={dIdx} className="px-3 py-1.5 md:px-4 md:py-2 rounded-full border border-gray-200 text-[10px] md:text-xs font-semibold text-gray-600 bg-white shadow-sm">
-                                        {detail}
-                                    </span>
+                                    <div key={dIdx} className="flex items-start gap-3">
+                                        <CheckCircle2 className="text-brand-gold flex-shrink-0 mt-0.5" size={18} />
+                                        <span className="text-sm font-medium text-brand-navy">{detail}</span>
+                                    </div>
                                 ))}
                             </div>
-                        </div>
+                        </motion.div>
                     ))}
-
-                    <motion.div
-                        className="hidden lg:block absolute top-0 left-0 w-[300px] h-[400px] rounded-2xl overflow-hidden pointer-events-none z-50 shadow-2xl"
-                        style={{ x: cursorXSpring, y: cursorYSpring }}
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ 
-                            opacity: hoveredIndex !== null ? 1 : 0,
-                            scale: hoveredIndex !== null ? 1 : 0.8,
-                        }}
-                    >
-                        {PROGRAMS_LIST.map((program, idx) => (
-                            <Image
-                                key={idx}
-                                src={program.image}
-                                alt="Reveal"
-                                fill
-                                sizes="300px"
-                                className={`object-cover transition-opacity duration-500 ${hoveredIndex === idx ? 'opacity-100' : 'opacity-0'}`}
-                            />
-                        ))}
-                    </motion.div>
                 </div>
             </div>
         </section>

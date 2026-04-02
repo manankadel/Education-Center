@@ -1,77 +1,81 @@
 "use client";
 
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { HERO_DATA } from '@/lib/data';
-import { ArrowDownRight } from 'lucide-react';
-import { useRef } from 'react';
+import { ArrowRight } from 'lucide-react';
 
 export const Hero = () => {
-    const containerRef = useRef(null);
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ["start start", "end start"]
-    });
-
-    const yImage = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-    const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-
     return (
-        <section ref={containerRef} className="relative min-h-screen flex items-center bg-brand-surface overflow-hidden">
-            <div className="absolute inset-0 bg-grid-pattern opacity-[0.2] md:opacity-[0.4] bg-[size:30px_30px] md:bg-[size:40px_40px]" />
+        <section className="relative min-h-[90vh] flex items-center justify-center pt-24 pb-12 overflow-hidden bg-brand-navy">
+            {/* Background Image with Dark Overlay for Text Readability */}
+            <div className="absolute inset-0 z-0">
+                <Image 
+                    src={HERO_DATA.image} 
+                    alt="Education Centre Jaipur"
+                    fill
+                    priority
+                    sizes="100vw"
+                    className="object-cover opacity-40"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-brand-navy via-brand-navy/90 to-transparent" />
+            </div>
             
-            <div className="max-w-[1400px] mx-auto w-full px-5 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 pt-28 pb-12 relative z-10">
+            <div className="max-w-[1400px] mx-auto w-full px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
+                
+                {/* Left: Massive Value Proposition */}
                 <motion.div 
-                    className="lg:col-span-7 flex flex-col justify-center"
-                    style={{ opacity }}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                    className="flex flex-col"
                 >
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                    >
-                        <div className="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-brand-blue/5 border border-brand-blue/10 mb-6 md:mb-8 backdrop-blur-sm">
-                            <span className="w-2 h-2 rounded-full bg-brand-accent animate-pulse" />
-                            <span className="text-[10px] md:text-xs font-bold text-brand-blue uppercase tracking-widest">10+ Years Excellence</span>
-                        </div>
-                        
-                        <h1 className="font-display text-4xl sm:text-5xl md:text-7xl lg:text-[5.5rem] font-bold text-brand-blue leading-[1.1] md:leading-[1.05] tracking-tight mb-6 md:mb-8">
-                            DESTINIES ARE NOT CREATED <span className="text-brand-accent italic font-light">ALONE.</span>
-                        </h1>
-                        
-                        <p className="text-base md:text-xl text-gray-600 font-light leading-relaxed max-w-2xl border-l-4 border-brand-accent pl-5 md:pl-6">
-                            {HERO_DATA.subheadline}
-                        </p>
-
-                        <div className="mt-8 md:mt-12 flex flex-col sm:flex-row items-start sm:items-center gap-4 md:gap-6">
-                            <a href="#programs" className="w-full sm:w-auto group flex items-center justify-center gap-3 bg-brand-blue text-white px-8 py-4 rounded-xl font-semibold hover:bg-brand-light transition-all shadow-lg shadow-brand-blue/20">
-                                View Programs
-                                <ArrowDownRight className="group-hover:rotate-[-45deg] transition-transform" size={20} />
-                            </a>
-                            <a href="#about" className="w-full sm:w-auto text-center text-brand-blue font-semibold hover:text-brand-accent transition-colors underline underline-offset-4 decoration-2 decoration-brand-blue/20 hover:decoration-brand-accent py-2">
-                                Discover Our Legacy
-                            </a>
-                        </div>
-                    </motion.div>
+                    <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-brand-gold/10 border border-brand-gold/20 mb-8 self-start backdrop-blur-sm">
+                        <span className="w-2 h-2 rounded-full bg-brand-gold animate-pulse" />
+                        <span className="text-[10px] md:text-xs font-bold text-brand-gold uppercase tracking-widest">Est. 2008 in Jaipur</span>
+                    </div>
+                    
+                    <h1 className="font-display text-5xl md:text-6xl lg:text-[5rem] font-bold text-white leading-[1.05] tracking-tight mb-6">
+                        DESTINIES ARE NOT CREATED <span className="text-brand-gold">ALONE.</span>
+                    </h1>
+                    
+                    <p className="text-lg md:text-xl text-gray-300 font-light leading-relaxed max-w-xl border-l-4 border-brand-gold pl-5">
+                        {HERO_DATA.subheadline}
+                    </p>
                 </motion.div>
 
+                {/* Right: Direct Lead Capture Form (High Conversion) */}
                 <motion.div 
-                    className="lg:col-span-5 relative h-[40vh] sm:h-[50vh] lg:h-[75vh] w-full rounded-2xl md:rounded-[2rem] overflow-hidden shadow-2xl"
-                    initial={{ opacity: 0, scale: 0.9 }}
+                    initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 1, delay: 0.2 }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                    className="w-full max-w-md ml-auto bg-white rounded-2xl p-8 shadow-2xl shadow-black/50"
                 >
-                    <motion.div className="absolute inset-0 w-full h-[120%]" style={{ y: yImage }}>
-                        <Image 
-                            src={HERO_DATA.image} 
-                            alt="Students"
-                            fill
-                            priority
-                            sizes="(max-width: 1024px) 100vw, 40vw"
-                            className="object-cover"
-                        />
-                        <div className="absolute inset-0 bg-brand-blue/5" />
-                    </motion.div>
+                    <h3 className="font-display text-2xl font-bold text-brand-navy mb-2">Request a Call Back</h3>
+                    <p className="text-sm text-gray-500 mb-8">Get expert counselling for college admissions and programs.</p>
+                    
+                    <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
+                        <div>
+                            <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Full Name</label>
+                            <input type="text" className="w-full border-b-2 border-gray-200 py-2 focus:outline-none focus:border-brand-gold transition-colors text-brand-navy font-medium" placeholder="Student Name" required />
+                        </div>
+                        <div>
+                            <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Mobile Number</label>
+                            <input type="tel" className="w-full border-b-2 border-gray-200 py-2 focus:outline-none focus:border-brand-gold transition-colors text-brand-navy font-medium" placeholder="+91" required />
+                        </div>
+                        <div>
+                            <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Course of Interest</label>
+                            <select className="w-full border-b-2 border-gray-200 py-2 focus:outline-none focus:border-brand-gold transition-colors text-brand-navy font-medium bg-transparent cursor-pointer">
+                                <option>Admission Counselling</option>
+                                <option>UG / PG Programs</option>
+                                <option>Industry Training (ISTP)</option>
+                                <option>Distance Education</option>
+                            </select>
+                        </div>
+                        <button className="w-full mt-6 bg-brand-navy text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-brand-light transition-colors group">
+                            Submit Inquiry <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                        </button>
+                    </form>
                 </motion.div>
             </div>
         </section>

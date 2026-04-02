@@ -4,6 +4,7 @@ import { TESTIMONIALS } from '@/lib/data';
 import Image from 'next/image';
 
 export const Testimonials = () => {
+    // We duplicate the array here to create that seamless, infinite scrolling marquee effect
     const extendedTestimonials =[...TESTIMONIALS, ...TESTIMONIALS];
 
     return (
@@ -34,7 +35,7 @@ export const Testimonials = () => {
                                         src={t.image} 
                                         alt={t.name} 
                                         fill 
-                                        sizes="56px" // FIXED SIZES WARNING
+                                        sizes="56px" 
                                         className="object-cover" 
                                     />
                                 </div>
