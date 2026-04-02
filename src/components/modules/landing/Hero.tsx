@@ -1,86 +1,106 @@
 "use client";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
 import { HERO_DATA } from "@/lib/data";
-import { ArrowDownRight } from "lucide-react";
+
+// High-end editorial imagery
+const HERO_IMAGES =[
+  "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=2000&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=2000&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2000&auto=format&fit=crop"
+];
+
+const AUTOPLAY_DURATION = 5000; // 5 seconds per slide
 
 export const Hero = () => {
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
+
+  // Parallax the text apart on scroll
+  const y1 = useTransform(scrollYProgress,[0, 1], [0, -300]);
+  const y2 = useTransform(scrollYProgress,[0, 1], [0, 300]);
+  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+
+  // Carousel Logic
+  const[currentImage, setCurrentImage] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % HERO_IMAGES.length);
+    }, AUTOPLAY_DURATION);
+    return () => clearInterval(timer);
+  },[]);
+
   return (
-    <section className="relative h-[100svh] min-h-[800px] w-full flex items-center justify-center overflow-hidden bg-background pt-20">
-      <motion.div 
-        initial={{ scale: 1.1, opacity: 0 }}
-        animate={{ scale: 1, opacity: 0.3 }}
-        transition={{ duration: 1.5, ease: "easeOut" }}
-        className="absolute inset-0 z-0"
-      >
-        <img 
-          src={HERO_DATA.image} 
-          alt="Students learning" 
-          className="w-full h-full object-cover mix-blend-overlay opacity-60"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background/50" />
+    <section ref={containerRef} className="relative h-[110vh] w-full flex flex-col items-center justify-center overflow-hidden bg-background">
+      
+      {/* Cinematic Background Carousel */}
+      <div className="absolute inset-0 z-0">
+        <AnimatePresence mode="popLayout">
+          <motion.img
+            key={currentImage}
+            src={HERO_IMAGES[currentImage]}
+            initial={{ opacity: 0, scale: 1.1 }}
+            animate={{ opacity: 0.35, scale: 1 }} // 0.35 opacity keeps the text highly legible
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
+            className="absolute inset-0 w-full h-full object-cover grayscale mix-blend-luminosity"
+          />
+        </AnimatePresence>
+        
+        {/* Gradients to blend the edges into the next section */}
+        <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background" />
+      </div>
+
+      {/* Main Content */}
+      <motion.div style={{ opacity }} className="relative z-10 w-full px-6 flex flex-col items-center text-center">
+        
+        <p className="font-sans text-accent tracking-[0.3em] uppercase text-xs md:text-sm mb-8 font-bold">
+          EST. 2008 • JAIPUR
+        </p>
+
+        <h1 className="text-[12vw] leading-[0.8] font-serif font-black tracking-tighter uppercase w-full flex flex-col items-center drop-shadow-2xl">
+          <motion.span style={{ y: y1 }} className="block">
+            {HERO_DATA.headline.split(" ")[0]}
+          </motion.span>
+          <motion.span style={{ y: y2 }} className="block text-outline font-sans italic">
+            {HERO_DATA.headline.split(" ")[1]}
+          </motion.span>
+        </h1>
+
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 1 }}
+          className="absolute bottom-20 flex flex-col items-center gap-4"
+        >
+          <p className="font-sans text-sm uppercase tracking-widest text-foreground max-w-sm text-center drop-shadow-md">
+            Destinies are not created alone. They are nurtured.
+          </p>
+          <div className="w-[1px] h-16 bg-accent mt-4" />
+        </motion.div>
+
       </motion.div>
 
-      <div className="relative z-10 w-full max-w-[1400px] px-6">
-        <div className="flex flex-col items-start">
-          <motion.div
-            initial={{ x: -50, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex items-center gap-4 mb-6 md:mb-8"
-          >
-            <div className="h-[2px] w-8 md:w-16 bg-accent" />
-            <span className="text-accent font-bold tracking-[0.2em] md:tracking-[0.3em] text-xs md:text-sm uppercase">
-              {HERO_DATA.est} • Jaipur
-            </span>
-          </motion.div>
-
-          <h1 className="text-[14vw] md:text-[10vw] leading-[0.9] font-black tracking-tighter uppercase overflow-hidden font-display">
-            <motion.span
-              initial={{ y: "100%" }}
-              animate={{ y: 0 }}
-              transition={{ duration: 0.8, ease:[0.33, 1, 0.68, 1] }}
-              className="block text-white"
-            >
-              EDUCATION
-            </motion.span>
-            <motion.span
-              initial={{ y: "100%" }}
-              animate={{ y: 0 }}
-              transition={{ duration: 0.8, delay: 0.1, ease:[0.33, 1, 0.68, 1] }}
-              className="block text-stroke"
-            >
-              CENTRE
-            </motion.span>
-            <motion.span
-              initial={{ y: "100%" }}
-              animate={{ y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2, ease:[0.33, 1, 0.68, 1] }}
-              className="block text-accent text-[8vw] md:text-[6vw] italic mt-2 md:mt-4"
-            >
-              {HERO_DATA.subheadline}
-            </motion.span>
-          </h1>
-
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.8 }}
-            className="mt-12 md:mt-16 flex flex-col md:flex-row items-start md:items-end gap-8 md:gap-12 w-full justify-between"
-          >
-            <p className="max-w-md text-muted text-base md:text-lg font-light leading-relaxed">
-              <strong className="text-white font-medium">Destinies are not created alone.</strong> They are nurtured with the right ambience and guidance. Join Jaipur's premier institution for holistic development.
-            </p>
-            
-            <a href="#about" className="group relative flex items-center gap-4 text-white hover:text-accent transition-colors">
-              <span className="text-2xl md:text-3xl font-display font-bold uppercase tracking-wide">Explore</span>
-              <div className="w-12 h-12 md:w-16 md:h-16 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-accent group-hover:border-accent transition-all duration-300">
-                <ArrowDownRight className="text-white transition-colors" />
-              </div>
-            </a>
-          </motion.div>
-        </div>
+      {/* Premium Pagination Indicators */}
+      <div className="absolute bottom-12 left-6 md:left-12 flex gap-3 z-20">
+        {HERO_IMAGES.map((_, i) => (
+          <div key={i} className="h-[2px] w-12 bg-foreground/20 overflow-hidden relative">
+            {i === currentImage && (
+              <motion.div 
+                className="absolute inset-0 bg-accent origin-left"
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: AUTOPLAY_DURATION / 1000, ease: "linear" }}
+              />
+            )}
+          </div>
+        ))}
       </div>
+
     </section>
   );
 };

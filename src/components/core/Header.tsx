@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { NAV_LINKS } from '@/lib/data';
 
 export const Header = () => {
-  const [scrolled, setScrolled] = useState(false);
+  const[scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -13,29 +13,28 @@ export const Header = () => {
   },[]);
 
   return (
-    <header className={`fixed top-0 left-0 w-full z-[100] transition-all duration-500 ${scrolled ? "py-4" : "py-6 md:py-8"}`}>
-      <div className="max-w-[1400px] mx-auto px-4 md:px-6">
-        <nav className="glass-card rounded-2xl md:rounded-full px-6 py-4 flex items-center justify-between shadow-2xl shadow-accent/5">
-          <Link href="/" className="font-display font-black text-lg md:text-xl tracking-tighter text-white">
-            EDU<span className="text-accent">CENTRE</span>
-          </Link>
-          
-          <div className="hidden lg:flex items-center gap-10">
-            {NAV_LINKS.map(link => (
-              <Link 
-                key={link.href} 
-                href={link.href} 
-                className="text-xs font-bold uppercase tracking-[0.2em] text-muted hover:text-accent transition-colors"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
-
-          <a href="#contact" className="bg-accent text-white px-5 md:px-7 py-2.5 rounded-full text-xs font-black uppercase tracking-widest hover:bg-white hover:text-black transition-all shadow-lg shadow-accent/20">
-            Contact Us
-          </a>
+    <header className={`fixed top-0 left-0 w-full z-[100] transition-all duration-500 ${scrolled ? "py-4 bg-background/80 backdrop-blur-md border-b border-foreground/10" : "py-8 bg-transparent"}`}>
+      <div className="max-w-[1600px] mx-auto px-6 flex items-center justify-between">
+        <Link href="/" className="font-serif font-black text-2xl tracking-tighter text-foreground uppercase flex items-center gap-2">
+          Edu<span className="font-sans font-light italic text-accent">Centre</span>
+        </Link>
+        
+        <nav className="hidden lg:flex items-center gap-12">
+          {NAV_LINKS.map(link => (
+            <Link 
+              key={link.href} 
+              href={link.href} 
+              className="font-sans text-[11px] font-bold uppercase tracking-[0.2em] text-foreground/70 hover:text-accent transition-colors"
+            >
+              {link.label}
+            </Link>
+          ))}
         </nav>
+
+        <a href="#contact" className="relative group overflow-hidden bg-foreground text-background px-8 py-3 rounded-full font-sans text-[11px] font-black uppercase tracking-[0.2em]">
+          <span className="relative z-10 group-hover:text-white transition-colors duration-300">Inquire</span>
+          <div className="absolute inset-0 h-full w-full bg-accent transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-0" />
+        </a>
       </div>
     </header>
   );

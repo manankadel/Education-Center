@@ -1,21 +1,21 @@
 import { Header } from "@/components/core/Header";
 import { Hero } from "@/components/modules/landing/Hero";
-import { About } from "@/components/modules/landing/About";
-import { Services } from "@/components/modules/landing/Services";
-import { Programs } from "@/components/modules/landing/Programs";
-import { Testimonials } from "@/components/modules/landing/Testimonials";
-import { Contact } from "@/components/modules/landing/Contact";
+import { AboutEditorial } from "@/components/modules/landing/AboutEditorial";
+import { ServiceGallery } from "@/components/modules/landing/ServiceGallery";
+import { ProgramsList } from "@/components/modules/landing/ProgramsList";
+import { ManifestoQuote } from "@/components/modules/landing/ManifestoQuote";
+import { ContactBrutal } from "@/components/modules/landing/ContactBrutal";
 
 export default function Home() {
   return (
-    <main className="flex flex-col min-h-screen">
+    <main className="flex flex-col min-h-screen selection:bg-foreground selection:text-background">
       <Header />
       <Hero />
-      <About />
-      <Services />
-      <Programs />
-      <Testimonials />
-      <Contact />
+      <AboutEditorial />
+      <ServiceGallery />
+      <ProgramsList />
+      <ManifestoQuote />
+      <ContactBrutal />
     </main>
   );
 }

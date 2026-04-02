@@ -9,20 +9,15 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "#030712", // Deep slate/black
-        foreground: "#f8fafc",
-        accent: "#0066FF", // Premium Electric Blue
-        "accent-dark": "#0047b3",
-        muted: "#94a3b8",
-        glass: "rgba(255, 255, 255, 0.03)",
+        background: "#0c0c0c", 
+        foreground: "#EAE8E3", // Premium off-white/bone
+        accent: "#2563EB", // Electric Royal Blue
+        muted: "#6b7280",
       },
       fontFamily: {
-        sans: ["var(--font-inter)", "sans-serif"],
-        display: ["var(--font-syne)", "sans-serif"],
+        sans:["var(--font-manrope)", "sans-serif"],
+        serif: ["var(--font-playfair)", "serif"],
       },
-      animation: {
-        'spin-slow': 'spin 8s linear infinite',
-      }
     },
   },
   plugins:[],
