@@ -1,4 +1,3 @@
-/* src/app/layout.tsx */
 import type { Metadata } from "next";
 import "./globals.css";
 import { fontInter, fontSyne } from "./fonts";
@@ -6,14 +5,18 @@ import { SmoothScroller } from "@/components/core/SmoothScroller";
 import { CustomCursor } from "@/components/core/CustomCursor";
 
 export const metadata: Metadata = {
-  title: "Education Centre | Beyond Ordinary Coaching",
-  description: "Jaipur's premier institute for industry-ready professionals.",
+  title: "Education Centre Jaipur | Thinks Beyond",
+  description: "Since 2008. Coaching, Consultancy, Training, and Placements in Jaipur.",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en" className={`${fontInter.variable} ${fontSyne.variable}`}>
-      <body className="bg-background text-foreground antialiased selection:bg-accent selection:text-black">
+    <html lang="en" className={`${fontInter.variable} ${fontSyne.variable} scroll-smooth`}>
+      <body className="bg-background text-foreground selection:bg-accent selection:text-white">
         <CustomCursor />
         <SmoothScroller>
           {children}
